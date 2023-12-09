@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import 'normalize.css';
+@import 'colors';
+@import 'form';
+@import 'vars';
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+#root {
+  height: 100%;
+  padding: $size-common;
+}
+
+a {
+  text-decoration: none;
+}
+
+p {
+  margin: 0;
+}
+
+h1 {
+  margin: 0;
+}
+
+.no-data {
+  display: flex;
+  justify-content: center;
+  margin-top: $size-m;
+  padding: $size-m;
+  border-radius: $size-m;
+  background: white;
+}
