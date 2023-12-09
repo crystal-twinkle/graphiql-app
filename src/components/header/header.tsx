@@ -4,7 +4,7 @@ import { RouterPage } from '../../router';
 import { useAppSelector } from '../../store/store';
 
 export function Header() {
-  const user = useAppSelector((state) => state.user.data);
+  const user = useAppSelector((state) => state.user.data.current);
 
   return (
     <header className={classes.header}>

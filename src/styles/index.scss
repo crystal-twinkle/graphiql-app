@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 @import 'normalize.css';
 @import 'colors';
 @import 'form';
@@ -13,6 +16,7 @@ body {
 }
 
 #root {
+  height: 100%;
   padding: $size-common;
 }
 

@@ -1,3 +1,3 @@
 export function GqlPage() {
-  return <div>GQL page</div>;
+  return <div className="bg-pink-400">GQL page</div>;
 }
