@@ -1,16 +1,18 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import MainPage from './components/Pages/MainPage';
+import WelcomePage from './components/Pages/WelcomePage';
 
 function App() {
   return (
-    <Layout>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Layout>
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="/welcome" element={<WelcomePage />} />
         </Routes>
-      </BrowserRouter>
-    </Layout>
+      </Layout>
+    </BrowserRouter>
   );
 }
 
