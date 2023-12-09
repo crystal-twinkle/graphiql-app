@@ -1,17 +1,17 @@
 interface FooterLinkProps {
-  icon: string;
+  iconLink: string;
   text?: string;
   url: string;
 }
 
-function FooterLink({ icon, text, url }: FooterLinkProps) {
+function FooterLink({ iconLink, text, url }: FooterLinkProps) {
   return (
     <a
       href={url}
-      className="flex items-center gap-1 hover:brightness-125 ransition-all duration-300 ease-in-out"
+      className="flex items-center gap-1 hover:brightness-125 hover:scale-[1.05] ransition-all duration-300 ease-in-out"
     >
-      <img src={icon} alt="RS-School-React" />
-      <span>{text}</span>
+      <img src={iconLink} alt="RS-School-React" className="object-cover" />
+      <span className="leading-tight">{text}</span>
     </a>
   );
 }

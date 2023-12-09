@@ -9,7 +9,7 @@ function HeaderButton({ icon, text, onclick }: HeaderButtonProps) {
     <button
       type="button"
       onClick={onclick}
-      className="flex items-center gap-1 hover:brightness-125 transition-all duration-200 ease-in-out"
+      className="flex items-center gap-1 hover:brightness-125 hover:scale-[1.05] transition-all duration-200 ease-in-out"
     >
       <img src={icon} alt="local-icon" className="w-8 h-8" />
       {text}
