@@ -1,4 +1,4 @@
-import FooterLink from './FooterLink';
+import FooterLink from '../UI/FooterLink';
 import giHubLogo from '../../assets/icons/github-logo.svg';
 interface DeveloperCardProps {
   name: string;
