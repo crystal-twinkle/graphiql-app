@@ -13,14 +13,14 @@ export function WelcomePage() {
     <div className="flex flex-col mx-auto">
       <nav className="flex gap-5 self-end">
         <Link
-          to="/"
+          to={RouterPage.SIGN_IN}
           className="flex items-center gap-1 hover:brightness-125 hover:scale-[1.02] transition-all duration-200 ease-in-out"
         >
           <img src={signInIcon} alt="local-icon" className="w-8 h-8" />
           Sign in
         </Link>
         <Link
-          to="/"
+          to={RouterPage.SIGN_UP}
           className="flex items-center gap-1 hover:brightness-125 hover:scale-[1.02] transition-all duration-200 ease-in-out"
         >
           <img src={signUpIcon} alt="local-icon" className="w-8 h-8" />
