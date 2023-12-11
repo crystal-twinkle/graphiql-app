@@ -1,0 +1,25 @@
+@import 'colors';
+@import 'vars';
+
+.form {
+  &-submit {
+    position: relative;
+    width: 100%;
+    padding: $size-s;
+    color: white;
+    margin-top: $size-m;
+    border: none;
+    border-radius: $size-s;
+    cursor: pointer;
+    transition: all $transition-duration ease;
+
+    &:hover {
+    }
+
+    &.disabled {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+  }
+}
+

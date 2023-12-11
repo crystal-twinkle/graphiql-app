@@ -8,7 +8,7 @@ import gqlIcon from '../assets/icons/graphql-icon.svg';
 import { Link } from 'react-router-dom';
 import { RouterPage } from '../router';
 
-function WelcomePage() {
+export function WelcomePage() {
   return (
     <div className="flex flex-col mx-auto">
       <nav className="flex gap-5 self-end">
@@ -84,5 +84,3 @@ function WelcomePage() {
     </div>
   );
 }
-
-export default WelcomePage;

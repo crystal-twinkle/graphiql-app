@@ -1,7 +1,7 @@
 import QueryEditor from '../components/QueryEditor/QueryEditor';
 import ResponseSection from '../components/ResponseSection/ResponseSection';
 
-function GqlPage() {
+export function GqlPage() {
   return (
     <div className="flex w-[95vw] p-2 bg-light rounded-md">
       <QueryEditor />
@@ -9,5 +9,3 @@ function GqlPage() {
     </div>
   );
 }
-
-export default GqlPage;

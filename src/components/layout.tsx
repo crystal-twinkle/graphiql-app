@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router-dom';
-import Header from './Header/Header';
 import Footer from './Footer/Footer';
+import Header from './Header/header';
 
-function Layout() {
+export function Layout() {
   return (
     <div className="flex flex-col min-h-screen text-text bg-medium">
       <Header />
@@ -13,5 +13,3 @@ function Layout() {
     </div>
   );
 }
-
-export default Layout;
