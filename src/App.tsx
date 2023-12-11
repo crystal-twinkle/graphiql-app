@@ -1,7 +1,7 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
-import WelcomePage from './components/Pages/WelcomePage';
-import MainPage from './components/Pages/MainPage';
+import WelcomePage from './Pages/WelcomePage';
+import GqlPage from './Pages/gql.page';
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/welcome" element={<WelcomePage />} />
-          <Route path="/main" element={<MainPage />} />
+          <Route path="/gql" element={<GqlPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

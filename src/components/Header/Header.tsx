@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import graphQLLogo from '../../assets/icons/graphql-icon.svg';
 import signOutIcon from '../../assets/icons/sign-out-icon.svg';
 import localIcon from '../../assets/icons/local-icon.svg';
-import HeaderButton from '../UI/HeaderButton';
+import Button from '../UI/Button';
 import { useEffect, useState } from 'react';
 
 function Header() {
@@ -25,17 +25,17 @@ function Header() {
       <div className="max-w-screen-xl mx-auto flex justify-between items-center">
         <div className="flex items-center gap-2">
           <img src={graphQLLogo} alt="App Logo" />
-          <h1 className="font-semibold text-3xl align-middle">GrafiQL</h1>
+          <h1 className="font-semibold text-3xl align-middle">GraphiQL</h1>
         </div>
         <Link
           to="/welcome"
-          className="hover:brightness-125 hover:scale-[1.05] transition-all duration-200 ease-in-out"
+          className="hover:brightness-125 hover:scale-[1.02] transition-all duration-200 ease-in-out"
         >
           Welcome page
         </Link>
         <div className="flex gap-5">
-          <HeaderButton icon={localIcon} text={'EN'} onclick={() => {}}></HeaderButton>
-          <HeaderButton icon={signOutIcon} text="Sign out" onclick={() => {}}></HeaderButton>
+          <Button icon={localIcon} text={'EN'} onclick={() => {}} />
+          <Button icon={signOutIcon} text="Sign out" onclick={() => {}} />
         </div>
       </div>
     </header>

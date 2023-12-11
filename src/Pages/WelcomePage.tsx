@@ -1,25 +1,25 @@
-import DeveloperCard from '../DeveloperCard/DeveloperCard';
-import avatar1 from '../../assets/images/Avatar_1.jpg';
-import avatar2 from '../../assets/images/Avatar_2.jpg';
-import avatar3 from '../../assets/images/Avatar_3.jpg';
-import signInIcon from '../../assets/icons/sign-in-icon.svg';
-import signUpIcon from '../../assets/icons/sign-up-icon.svg';
+import DeveloperCard from '../components/DeveloperCard/DeveloperCard';
+import avatar1 from '../assets/images/Avatar_1.jpg';
+import avatar2 from '../assets/images/Avatar_2.jpg';
+import avatar3 from '../assets/images/Avatar_3.jpg';
+import signInIcon from '../assets/icons/sign-in-icon.svg';
+import signUpIcon from '../assets/icons/sign-up-icon.svg';
 import { Link } from 'react-router-dom';
 
 function WelcomePage() {
   return (
-    <div className="flex flex-col max-w-screen-xl mx-auto py-5">
+    <div className="flex flex-col mx-auto">
       <nav className="flex gap-5 self-end">
         <Link
-          to="/main"
-          className="flex items-center gap-1 hover:brightness-125 hover:scale-[1.05] transition-all duration-200 ease-in-out"
+          to="/"
+          className="flex items-center gap-1 hover:brightness-125 hover:scale-[1.02] transition-all duration-200 ease-in-out"
         >
           <img src={signInIcon} alt="local-icon" className="w-8 h-8" />
           Sign in
         </Link>
         <Link
-          to="/main"
-          className="flex items-center gap-1 hover:brightness-125 hover:scale-[1.05] transition-all duration-200 ease-in-out"
+          to="/gql"
+          className="flex items-center gap-1 hover:brightness-125 hover:scale-[1.02] transition-all duration-200 ease-in-out"
         >
           <img src={signUpIcon} alt="local-icon" className="w-8 h-8" />
           Sign up
@@ -36,7 +36,7 @@ function WelcomePage() {
       </section>
       <section className="py-7">
         <h2 className="text-2xl font-semibold py-4">Development Team</h2>
-        <div className="flex justify-between flex-wrap gap-5">
+        <div className="flex justify-between flex-wrap">
           <DeveloperCard
             name="Roman"
             avatarLink={avatar1}
