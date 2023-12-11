@@ -4,7 +4,9 @@ import avatar2 from '../assets/images/Avatar_2.jpg';
 import avatar3 from '../assets/images/Avatar_3.jpg';
 import signInIcon from '../assets/icons/sign-in-icon.svg';
 import signUpIcon from '../assets/icons/sign-up-icon.svg';
+import gqlIcon from '../assets/icons/graphql-icon.svg';
 import { Link } from 'react-router-dom';
+import { RouterPage } from '../router';
 
 function WelcomePage() {
   return (
@@ -18,11 +20,18 @@ function WelcomePage() {
           Sign in
         </Link>
         <Link
-          to="/gql"
+          to="/"
           className="flex items-center gap-1 hover:brightness-125 hover:scale-[1.02] transition-all duration-200 ease-in-out"
         >
           <img src={signUpIcon} alt="local-icon" className="w-8 h-8" />
           Sign up
+        </Link>
+        <Link
+          to={RouterPage.GQL}
+          className="flex items-center gap-1 hover:brightness-125 hover:scale-[1.02] transition-all duration-200 ease-in-out"
+        >
+          <img src={gqlIcon} alt="local-icon" className="w-8 h-8" />
+          Main page
         </Link>
       </nav>
       <section className="py-7">

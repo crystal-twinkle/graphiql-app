@@ -4,6 +4,7 @@ import signOutIcon from '../../assets/icons/sign-out-icon.svg';
 import localIcon from '../../assets/icons/local-icon.svg';
 import Button from '../UI/Button';
 import { useEffect, useState } from 'react';
+import { RouterPage } from '../../router';
 
 function Header() {
   const [isPageScrolled, setIsPageScrolled] = useState(false);
@@ -28,7 +29,7 @@ function Header() {
           <h1 className="font-semibold text-3xl align-middle">GraphiQL</h1>
         </div>
         <Link
-          to="/welcome"
+          to={RouterPage.WELCOME}
           className="hover:brightness-125 hover:scale-[1.02] transition-all duration-200 ease-in-out"
         >
           Welcome page
