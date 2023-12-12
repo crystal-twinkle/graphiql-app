@@ -1,5 +1,8 @@
 {
   "name": "react-wizards",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "preview": "vite preview",
@@ -12,8 +15,7 @@
   "lint-staged": {
     "*.{ts,tsx}": [
       "npm run format:fix",
-      "npm run lint",
-      "git add"
+      "npm run lint"
     ]
   },
   "dependencies": {

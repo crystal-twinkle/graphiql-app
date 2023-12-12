@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { setupStore } from './store/store';
 import { routes } from './router';
-import './styles/index.scss';
+import './index.css';
 
 const store = setupStore();
 const router = createBrowserRouter(routes);

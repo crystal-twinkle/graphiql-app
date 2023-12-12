@@ -1,3 +1,11 @@
+import QueryEditor from '../components/QueryEditor/QueryEditor';
+import ResponseSection from '../components/ResponseSection/ResponseSection';
+
 export function GqlPage() {
-  return <div className="bg-pink-400">GQL page</div>;
+  return (
+    <div className="flex w-[95vw] p-2 bg-light rounded-md">
+      <QueryEditor />
+      <ResponseSection />
+    </div>
+  );
 }
