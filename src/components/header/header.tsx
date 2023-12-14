@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import graphQLLogo from '../../assets/icons/graphql-icon.svg';
 import signOutIcon from '../../assets/icons/sign-out-icon.svg';
-import localIcon from '../../assets/icons/local-icon.svg';
 import Button from '../UI/Button';
 import { useEffect, useState } from 'react';
 import { RouterPage } from '../../router';
+import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 
 function Header() {
   const [isPageScrolled, setIsPageScrolled] = useState(false);
@@ -35,7 +35,7 @@ function Header() {
           Welcome page
         </Link>
         <div className="flex gap-5">
-          <Button icon={localIcon} text={'EN'} onclick={() => {}} />
+          <LanguageSwitcher />
           <Button icon={signOutIcon} text="Sign out" onclick={() => {}} />
         </div>
       </div>
