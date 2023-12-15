@@ -1,6 +1,5 @@
 import React, { createContext, useState, PropsWithChildren, useContext } from 'react';
-import {I18nContextType, i18n, Language} from '../models/i18n';
-
+import { I18nContextType, i18n, Language } from '../models/i18n';
 
 const LocalizationContext = createContext<I18nContextType>({
   language: 'EN',
@@ -9,10 +8,9 @@ const LocalizationContext = createContext<I18nContextType>({
 });
 
 export const LocalizationProvider = ({ children }: PropsWithChildren) => {
+  const navigatorLang = navigator.language.slice(0, 2).toUpperCase();
   const [language, changeLanguage] = useState<Language>(
-    (['EN', 'RU'].includes(navigator.language.slice(0, 2))
-      ? navigator.language.slice(0, 2)
-      : 'EN') as Language
+    (['EN', 'RU'].includes(navigatorLang) ? navigatorLang : 'EN') as Language
   );
 
   return (
