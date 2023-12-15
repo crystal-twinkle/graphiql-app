@@ -37,9 +37,9 @@ export function WelcomePage() {
         </Link>
       </nav>
       <section className="py-7">
-        <h2 className="text-2xl font-semibold py-4">{i18n[language].mainPage.head}</h2>
+        <h2 className="text-2xl font-semibold py-4">{i18n[language].welcome.head}</h2>
         <p>
-          {i18n[language].mainPage.desc}
+          {i18n[language].welcome.desc}
         </p>
       </section>
       <section className="py-7">
@@ -69,9 +69,9 @@ export function WelcomePage() {
         </div>
       </section>
       <section className="py-7">
-        <h2 className="text-2xl font-semibold py-4">{i18n[language].mainPage.aboutHead}</h2>
+        <h2 className="text-2xl font-semibold py-4">{i18n[language].welcome.aboutHead}</h2>
         <p>
-          {i18n[language].mainPage.aboutDesc}
+          {i18n[language].welcome.aboutDesc}
         </p>
       </section>
     </div>

@@ -12,8 +12,9 @@ export interface I18nContextType {
       signIn: string;
       signUp: string;
       signOut: string;
+      welcomePageText: string;
       mainPageText: string;
-      mainPage: {
+      welcome: {
         head: string;
         desc: string;
         aboutHead: string;
@@ -42,7 +43,8 @@ export const i18n: I18nContextType['i18n'] = {
     signUp: 'Sign up',
     signOut: 'Sign out',
     mainPageText: 'Main page',
-    mainPage: {
+    welcomePageText: 'Welcome page',
+    welcome: {
       head: 'A query language for your API',
       desc: 'GraphiQL is a query language for APIs and a runtime for fulfilling those queries with your existing data. GraphiQL provides a complete and understandable description of the data in your API, gives clients the power to ask for exactly what they need and nothing more, makes it easier to evolve APIs over time, and enables powerful developer tools.',
       aboutHead: 'About the course',
@@ -71,7 +73,8 @@ export const i18n: I18nContextType['i18n'] = {
     signUp: 'Зарегистрироваться',
     signOut: 'Выход',
     mainPageText: 'Главная страница',
-    mainPage: {
+    welcomePageText: 'Страница приветствия',
+    welcome: {
       head: 'Язык запросов для вашего API',
       desc: 'GraphiQL — это язык запросов для API и среда выполнения для выполнения этих запросов с существующими данными. GraphiQL обеспечивает полное и понятное описание данных в вашем API, дает клиентам возможность запрашивать именно то, что им нужно и не более, упрощает постепенное развитие API и предоставляет мощные инструменты разработчика',
       aboutHead: 'О курсе',

@@ -5,9 +5,11 @@ import Button from '../UI/Button';
 import { useEffect, useState } from 'react';
 import { RouterPage } from '../../router';
 import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
+import {useLocalization} from '../../context/localization-context';
 
 function Header() {
   const [isPageScrolled, setIsPageScrolled] = useState(false);
+  const {i18n, language} = useLocalization();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,11 +34,11 @@ function Header() {
           to={RouterPage.WELCOME}
           className="hover:brightness-125 hover:scale-[1.02] transition-all duration-200 ease-in-out"
         >
-          Welcome page
+          {i18n[language].welcomePageText}
         </Link>
         <div className="flex gap-5">
           <LanguageSwitcher />
-          <Button icon={signOutIcon} text="Sign out" onclick={() => {}} />
+          <Button icon={signOutIcon} text={i18n[language].signOut} onclick={() => {}} />
         </div>
       </div>
     </header>
