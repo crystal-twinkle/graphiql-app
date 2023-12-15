@@ -2,10 +2,10 @@ export function prettify(value: string) {
   function countSpacesAfterCursor(value: string, cursorPosition: number): number {
     let count = 0;
 
-    for (let i = cursorPosition; i < value.length; i++) {
+    for (let i = cursorPosition; i < value.length; i += 1) {
       const char = value[i];
       if (char === ' ') {
-        count++;
+        count += 1;
       } else {
         break;
       }
@@ -14,24 +14,28 @@ export function prettify(value: string) {
     return count;
   }
 
-  function plaseIndents(value: string) {
-    let openBracketsCount = 0;
-    const res = value.split('');
-    for (let i = 0; i < res.length; i += 1) {
-      if (res[i] === '{') {
-        openBracketsCount += 1;
+  function placeIndents(value: string) {
+    let lines = value.split('\n');
+    lines = lines.map((line) => line.trim());
+    value = lines.join('\n');
+
+    let requiredIndent = 0;
+    const char = value.split('');
+    for (let i = 0; i < char.length; i += 1) {
+      if (char[i] === '{') {
+        requiredIndent += 1;
       }
-      if (res[i + 1] === '}') {
-        openBracketsCount -= 1;
+      if (char[i + 1] === '}') {
+        requiredIndent -= 1;
       }
-      if (res[i] === '\n') {
+      if (char[i] === '\n') {
         const spaces = countSpacesAfterCursor(value, i);
-        if (spaces / 2 !== openBracketsCount) {
-          res[i] = '\n' + '  '.repeat(openBracketsCount);
+        if (spaces / 2 !== requiredIndent) {
+          char[i] = '\n' + '  '.repeat(requiredIndent);
         }
       }
     }
-    return res.join('');
+    return char.join('');
   }
 
   value = value
@@ -39,14 +43,17 @@ export function prettify(value: string) {
     .replace(/ \(/g, '(')
     .replace(/\( /g, '(')
     .replace(/ \)/g, ')')
+    .replace(/\) /g, ')')
     .replace(/ :/, ':')
     .replace(/([^ ]):([^ ])/g, '$1: $2')
-    .replace(/{/g, ' {\n')
+    .replace(/{/g, '{\n')
+    .replace(/(?<!\s){/g, ' {')
     .replace(/}/g, '\n}')
     .replace(/\n+/g, '\n')
-    .replace(/ +\n/g, '');
+    .replace(/ +\n/g, '')
+    .trim();
 
-  return plaseIndents(value);
+  return placeIndents(value);
 }
 
 export function handleEnterPress(
