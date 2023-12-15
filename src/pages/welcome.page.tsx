@@ -7,10 +7,10 @@ import signUpIcon from '../assets/icons/sign-up-icon.svg';
 import gqlIcon from '../assets/icons/graphql-icon.svg';
 import { Link } from 'react-router-dom';
 import { RouterPage } from '../router';
-import {useLocalization} from '../context/localization-context';
+import { useLocalization } from '../context/localization-context';
 
 export function WelcomePage() {
-  const {i18n, language} = useLocalization();
+  const { i18n, language } = useLocalization();
 
   return (
     <div className="flex flex-col mx-auto p-5">
@@ -33,14 +33,13 @@ export function WelcomePage() {
           to={RouterPage.GQL}
           className="flex items-center gap-1 hover:brightness-125 hover:scale-[1.02] transition-all duration-200 ease-in-out"
         >
+          <img src={gqlIcon} alt="local-icon" className="w-8 h-8" />
           {i18n[language].mainPageText}
         </Link>
       </nav>
       <section className="py-7">
         <h2 className="text-2xl font-semibold py-4">{i18n[language].welcome.head}</h2>
-        <p>
-          {i18n[language].welcome.desc}
-        </p>
+        <p>{i18n[language].welcome.desc}</p>
       </section>
       <section className="py-7">
         <h2 className="text-2xl font-semibold py-4">{i18n[language].team.text}</h2>
@@ -70,9 +69,7 @@ export function WelcomePage() {
       </section>
       <section className="py-7">
         <h2 className="text-2xl font-semibold py-4">{i18n[language].welcome.aboutHead}</h2>
-        <p>
-          {i18n[language].welcome.aboutDesc}
-        </p>
+        <p>{i18n[language].welcome.aboutDesc}</p>
       </section>
     </div>
   );
