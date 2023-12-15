@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import Button from '../UI/Button';
 import localIcon from '../../assets/icons/local-icon.svg';
 import { useLocalization } from '../../context/localization-context';
-import { Language } from '../../models/i18n';
+import { Language } from '../../models/localizationt';
 
 const LanguageSwitcher = () => {
-  const { i18n, language, changeLanguage } = useLocalization();
+  const { dataLang, language, changeLanguage } = useLocalization();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -18,9 +18,9 @@ const LanguageSwitcher = () => {
   };
 
   const languages = [
-    { code: 'EN', label: i18n[language].switchLang.en },
-    { code: 'RU', label: i18n[language].switchLang.ru },
-    { code: 'BE', label: i18n[language].switchLang.be },
+    { code: 'EN', label: dataLang[language].switchLang.en },
+    { code: 'RU', label: dataLang[language].switchLang.ru },
+    { code: 'BE', label: dataLang[language].switchLang.be },
   ];
 
   return (

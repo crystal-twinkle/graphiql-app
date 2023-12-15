@@ -1,40 +1,6 @@
-export type Language = 'EN' | 'RU' | 'BE';
+import { ILocalizationContext } from '../models/localizationt';
 
-export interface I18nContextType {
-  language: Language;
-  changeLanguage: (language: Language) => void;
-  i18n: {
-    [key in Language]: {
-      switchLang: {
-        en: string;
-        ru: string;
-        be: string;
-      };
-      signIn: string;
-      signUp: string;
-      signOut: string;
-      welcomePageText: string;
-      mainPageText: string;
-      welcome: {
-        head: string;
-        desc: string;
-        aboutHead: string;
-        aboutDesc: string;
-      };
-      team: {
-        text: string;
-        Roman: string;
-        Kristina: string;
-        Sergey: string;
-        RomanDesc: string;
-        KristinaDesc: string;
-        SergeyDesc: string;
-      };
-    };
-  };
-}
-
-export const i18n: I18nContextType['i18n'] = {
+export const dataLang: ILocalizationContext['dataLang'] = {
   EN: {
     switchLang: {
       en: 'English',
