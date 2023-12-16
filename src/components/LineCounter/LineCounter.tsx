@@ -8,7 +8,7 @@ function LineCounter({ value }: LineCounterProps) {
   return (
     <div className="pl-2">
       {Array.from({ length: linesAmount }, (_, i) => (
-        <p className="w-7 text-right" key={i}>
+        <p className="w-7 text-right brightness-50" key={i}>
           {i + 1}
         </p>
       ))}
