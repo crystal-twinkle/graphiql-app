@@ -22,10 +22,10 @@ export function prettify(value: string) {
     let requiredIndent = 0;
     const char = value.split('');
     for (let i = 0; i < char.length; i += 1) {
-      if (char[i] === '{' || char[i] === '[') {
+      if (char[i] === '{' || char[i] === '[' || char[i] === '(') {
         requiredIndent += 1;
       }
-      if (char[i + 1] === '}' || char[i] === ']') {
+      if (char[i + 1] === '}' || char[i + 1] === ']' || char[i + 1] === ')') {
         requiredIndent = Math.max(0, requiredIndent - 1);
       }
       if (char[i] === '\n') {
@@ -44,6 +44,10 @@ export function prettify(value: string) {
     .replace(/ \(/g, '(')
     .replace(/\( /g, '(')
     .replace(/ \)/g, ')')
+    .replace(/ "/g, '"')
+    .replace(/" /g, '"')
+    .replace(/ '/g, "'")
+    .replace(/' /g, "'")
     .replace(/ }/g, '}')
     .replace(/ ]/g, ']')
     .replace(/\) /g, ')')
@@ -53,7 +57,7 @@ export function prettify(value: string) {
     .replace(/(?<!\s){/g, ' {')
     .replace(/}/g, '\n}')
     .replace(/]/g, '\n]')
-    .replace(/\b[a-zA-Z_]+\b(?![ ]*[,:({[])/g, (match) => `${match}\n`)
+    .replace(/\b[a-zA-Z_]+\b(?![ ]*[-,:'"({[])/g, (match) => `${match}\n`)
     .replace(/\n+/g, '\n')
     .replace(/ +\n/g, '');
 
