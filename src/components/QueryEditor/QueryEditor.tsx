@@ -4,12 +4,8 @@ import { useState } from 'react';
 import Button from '../UI/Button';
 import LineCounter from '../LineCounter/LineCounter';
 import VariableHeaderEditor from '../VariableHeaderEditor/VariableHeaderEditor';
-import {
-  completeBrackets,
-  handleEnterPress,
-  handleTabPress,
-  prettify,
-} from '../../utils/prettifier';
+import { manageCursor } from '../../utils/manageCursor';
+import { prettify } from '../../utils/prettifier';
 
 function QueryEditor() {
   const [value, setValue] = useState('');
@@ -28,11 +24,7 @@ function QueryEditor() {
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           onChange={handleChange}
-          onKeyDown={(event) => [
-            handleTabPress(event, isFocused, setValue),
-            handleEnterPress(event, setValue),
-            completeBrackets(event, setValue),
-          ]}
+          onKeyDown={(event) => manageCursor(event, isFocused, setValue)}
           name="editor"
           value={value}
           className="grow px-2 bg-medium outline-none resize-none"
