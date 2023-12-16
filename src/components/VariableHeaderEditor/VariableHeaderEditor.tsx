@@ -24,7 +24,7 @@ function VariableHeaderEditor() {
 
   return (
     <>
-      <div className="flex justify-between gap-10 px-5 pt-2 pb-0 border-t-2 border-light">
+      <div className="relative z-10 flex justify-between gap-10 px-5 pt-2 pb-0 border-t-2 bg-medium border-light">
         <div className="flex items-center gap-5">
           <div className={`${currentTab === 'variables' && 'underline'}`}>
             <Button onclick={() => setCurrentTab(Tabs.VARIABLES)} text="Variables" />
@@ -46,15 +46,13 @@ function VariableHeaderEditor() {
         </div>
       </div>
       <div
-        className={`flex h-0 px-2 transition-all duration-1000 ease-in-out ${
-          // className={`flex -my-6 scale-y-0 p-0 transition-all duration-[2s] ease-in-out ${
-          currentTab !== Tabs.NONE && 'h-10'
-        } ${headersValue || variablesValue ? 'h-max' : 'h-0'}`}
+        className={`flex -my-6 scale-y-0 p-0 transition-scale duration-500 ease-in-out overflow-hidden ${
+          currentTab !== Tabs.NONE && '-my-0 scale-y-100'
+        }`}
       >
-        {currentTab !== Tabs.NONE && (
+        <div className={`${currentTab === Tabs.NONE && 'h-0'}`}>
           <LineCounter value={currentTab === Tabs.HEADERS ? headersValue : variablesValue} />
-        )}
-
+        </div>
         <textarea
           autoFocus
           onChange={currentTab === Tabs.HEADERS ? handleHeadersChange : handleVariablesChange}
@@ -69,4 +67,3 @@ function VariableHeaderEditor() {
 }
 
 export default VariableHeaderEditor;
-// className={`flex -my-6 scale-y-0 p-0 transition-all duration-[2s] ease-in-out ${
