@@ -22,19 +22,20 @@ export function prettify(value: string) {
     let requiredIndent = 0;
     const char = value.split('');
     for (let i = 0; i < char.length; i += 1) {
-      if (char[i] === '{') {
+      if (char[i] === '{' || char[i] === '[') {
         requiredIndent += 1;
       }
-      if (char[i + 1] === '}') {
-        requiredIndent -= 1;
+      if (char[i + 1] === '}' || char[i] === ']') {
+        requiredIndent = Math.max(0, requiredIndent - 1);
       }
       if (char[i] === '\n') {
         const spaces = countSpacesAfterCursor(value, i);
-        if (spaces / 2 !== requiredIndent) {
+        if (spaces !== requiredIndent * 2) {
           char[i] = '\n' + '  '.repeat(requiredIndent);
         }
       }
     }
+
     return char.join('');
   }
 
@@ -43,19 +44,21 @@ export function prettify(value: string) {
     .replace(/ \(/g, '(')
     .replace(/\( /g, '(')
     .replace(/ \)/g, ')')
+    .replace(/ }/g, '}')
+    .replace(/ ]/g, ']')
     .replace(/\) /g, ')')
     .replace(/ :/, ':')
     .replace(/([^ ]):([^ ])/g, '$1: $2')
     .replace(/{/g, '{\n')
     .replace(/(?<!\s){/g, ' {')
     .replace(/}/g, '\n}')
+    .replace(/]/g, '\n]')
+    .replace(/\b[a-zA-Z_]+\b(?![ ]*[,:({[])/g, (match) => `${match}\n`)
     .replace(/\n+/g, '\n')
-    .replace(/ +\n/g, '')
-    .trim();
+    .replace(/ +\n/g, '');
 
   return placeIndents(value);
 }
-
 export function handleEnterPress(
   event: React.KeyboardEvent<HTMLTextAreaElement>,
   stateCallback: React.Dispatch<React.SetStateAction<string>>
@@ -132,9 +135,10 @@ export function completeBrackets(
 
 export function handleTabPress(
   event: React.KeyboardEvent<HTMLTextAreaElement>,
+  isFocused: boolean,
   stateCallback: React.Dispatch<React.SetStateAction<string>>
 ) {
-  if (event.key === 'Tab') {
+  if (event.key === 'Tab' && isFocused) {
     event.preventDefault();
     const cursorPosition = event.currentTarget.selectionStart;
 

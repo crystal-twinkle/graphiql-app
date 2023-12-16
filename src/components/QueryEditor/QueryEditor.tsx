@@ -13,6 +13,7 @@ import {
 
 function QueryEditor() {
   const [value, setValue] = useState('');
+  const [isFocused, setIsFocused] = useState(true);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
@@ -24,17 +25,19 @@ function QueryEditor() {
         <LineCounter value={value} />
         <textarea
           autoFocus
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
           onChange={handleChange}
           onKeyDown={(event) => [
-            handleTabPress(event, setValue),
+            handleTabPress(event, isFocused, setValue),
             handleEnterPress(event, setValue),
             completeBrackets(event, setValue),
           ]}
           name="editor"
           value={value}
-          className="grow px-2 bg-medium outline-none resize-none tab"
+          className="grow px-2 bg-medium outline-none resize-none"
         ></textarea>
-        <div className="flex flex-col gap-5 items-center pr-5">
+        <div className="fixed right-1/2 flex flex-col gap-5 items-center pr-5">
           <Button icon={playIcon} onclick={() => {}} />
           <Button icon={prettifyIcon} onclick={() => setValue(prettify(value))} />
         </div>
