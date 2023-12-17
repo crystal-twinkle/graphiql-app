@@ -6,6 +6,7 @@ import LineCounter from '../LineCounter/LineCounter';
 import VariableHeaderEditor from '../VariableHeaderEditor/VariableHeaderEditor';
 import { manageCursor } from '../../utils/manageCursor';
 import { prettify } from '../../utils/prettifier';
+import { EndpointInput } from '../EndpointInput/EndpointInput';
 
 function QueryEditor() {
   const [value, setValue] = useState('');
@@ -16,8 +17,15 @@ function QueryEditor() {
   };
 
   return (
-    <section className="flex flex-col grow w1/2 pt-5 pb-2 bg-medium rounded-md">
-      <div className="flex grow justify-between">
+    <section className="relative flex flex-col grow w1/2 pb-2 bg-medium rounded-md">
+      <div className="sticky top-[58px] z-10 flex gap-6 p-3 justify-between items-center bg-medium rounded-t-md border-b-2 border-light">
+        <EndpointInput />
+        <div className="flex gap-5 items-center">
+          <Button icon={playIcon} onclick={() => {}} />
+          <Button icon={prettifyIcon} onclick={() => setValue(prettify(value))} />
+        </div>
+      </div>
+      <div className="flex grow justify-between pt-2">
         <LineCounter value={value} />
         <textarea
           autoFocus
@@ -29,10 +37,6 @@ function QueryEditor() {
           value={value}
           className="grow px-2 bg-medium outline-none resize-none"
         ></textarea>
-        <div className="fixed right-1/2 flex flex-col gap-5 items-center pr-5">
-          <Button icon={playIcon} onclick={() => {}} />
-          <Button icon={prettifyIcon} onclick={() => setValue(prettify(value))} />
-        </div>
       </div>
       <VariableHeaderEditor />
     </section>

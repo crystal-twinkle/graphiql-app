@@ -1,4 +1,4 @@
-export function prettify(value: string) {
+export function prettify(value: string, isResponse: boolean = false) {
   value = value
     .replace(/ +/g, ' ')
     .replace(/ \(/g, '(')
@@ -14,10 +14,17 @@ export function prettify(value: string) {
     .replace(/ :/, ':')
     .replace(/([^ ]):([^ ])/g, '$1: $2')
     .replace(/{/g, '{\n')
+    .replace(/\[/g, '[\n')
     .replace(/(?<!\s){/g, ' {')
-    .replace(/}/g, '\n}')
+    .replace(/},/g, '},\n')
+    .replace(/",/g, '",\n')
     .replace(/]/g, '\n]')
-    .replace(/\b[a-zA-Z_]+\b(?![ ]*[-,:'"({[])/g, (match) => `${match}\n`)
+    .replace(/\b[a-zA-Z_]+\b(?![ ]*[-:'"({[])/g, (match) => {
+      if (isResponse) {
+        return match;
+      }
+      return `${match}\n`;
+    })
     .replace(/\n+/g, '\n')
     .replace(/ +\n/g, '');
 
