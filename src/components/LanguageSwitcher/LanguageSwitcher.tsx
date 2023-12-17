@@ -5,42 +5,42 @@ import { useLocalization } from '../../context/localization-context';
 import { Language } from '../../models/localizationt';
 
 const LanguageSwitcher = () => {
-  const { dataLang, language, changeLanguage } = useLocalization();
+  const { translate, language, changeLanguage } = useLocalization();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const handleLanguageClick = (event: React.MouseEvent<HTMLElement>) => {
-    const target = event.target as HTMLElement;
-    if (target.tagName === 'LI') {
-      const languageCode = target.dataset.code as Language;
-      changeLanguage(languageCode);
-      toggleDropdown();
-    }
+  const handleLanguage = (languageCode: Language) => {
+    changeLanguage(languageCode);
+    toggleDropdown();
   };
 
   const languages = [
-    { code: 'EN', label: dataLang[language].switchLang.en },
-    { code: 'RU', label: dataLang[language].switchLang.ru },
-    { code: 'BE', label: dataLang[language].switchLang.be },
+    { code: 'EN', label: translate.switchLang.en },
+    { code: 'RU', label: translate.switchLang.ru },
+    { code: 'BE', label: translate.switchLang.be },
   ];
 
   return (
     <div className="relative">
       <Button icon={localIcon} text={language} onclick={toggleDropdown} />
-      {isDropdownOpen && (
-        <div className="absolute bg-light p-2 cursor-default">
-          <ul className="flex flex-col items-center gap-2" onClick={handleLanguageClick}>
+      {isDropdownOpen ? (
+        <div className="absolute z-10 bg-light p-2 cursor-default">
+          <ul className="flex flex-col items-start gap-2 max-w-[150px] overflow-hidden">
             {languages.map((language) => (
-              <li className="cursor-pointer" key={language.code} data-code={language.code}>
+              <li
+                className="cursor-pointer truncate w-full"
+                key={language.code}
+                onClick={() => handleLanguage(language.code as Language)}
+              >
                 {language.label}
               </li>
             ))}
           </ul>
         </div>
-      )}
+      ) : null}
     </div>
   );
 };

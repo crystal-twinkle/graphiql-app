@@ -65,7 +65,7 @@ export const dataLang: ILocalizationContext['dataLang'] = {
   },
   BE: {
     switchLang: {
-      en: 'Английскиі',
+      en: 'Ангельская',
       ru: 'Рускі',
       be: 'Беларускі',
     },

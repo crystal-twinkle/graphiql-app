@@ -1,3 +1,5 @@
+import { dataLang } from '../data/data-lang';
+
 export type Language = 'EN' | 'RU' | 'BE';
 
 export interface ILocalizationContext {
@@ -32,4 +34,5 @@ export interface ILocalizationContext {
       };
     };
   };
+  translate: (typeof dataLang)[Language];
 }
