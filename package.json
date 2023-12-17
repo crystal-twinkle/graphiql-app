@@ -19,12 +19,16 @@
     ]
   },
   "dependencies": {
+    "firebase": "^10.7.1",
+    "js-cookie": "^3.0.5",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-firebase-hooks": "^5.1.1",
     "react-hook-form": "^7.48.2",
     "react-redux": "^8.1.3",
-    "react-router-dom": "^6.20.1",
+    "react-router-dom": "^6.21.0",
+    "tasty-cookies": "^1.0.1",
     "typescript": "^5.3.2",
     "uuid": "^9.0.0",
     "vite": "^5.0.5",

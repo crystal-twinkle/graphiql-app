@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import { RouterPage } from '../../router';
 import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 import { useLocalization } from '../../context/localization-context';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../main';
 
 function Header() {
   const [isPageScrolled, setIsPageScrolled] = useState(false);
@@ -18,6 +20,10 @@ function Header() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const logout = () => {
+    signOut(auth);
+  };
 
   return (
     <header
@@ -38,7 +44,7 @@ function Header() {
         </Link>
         <div className="flex gap-5">
           <LanguageSwitcher />
-          <Button icon={signOutIcon} text={i18n[language].signOut} onclick={() => {}} />
+          <Button icon={signOutIcon} text={i18n[language].signOut} onclick={logout} />
         </div>
       </div>
     </header>

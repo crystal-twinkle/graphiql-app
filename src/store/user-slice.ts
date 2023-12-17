@@ -1,24 +1,11 @@
 import { createSlice, PayloadAction, SliceCaseReducers } from '@reduxjs/toolkit';
 import { IUserState, IUser } from '../models/common.model';
 
-export const userSlice = createSlice<IUserState, SliceCaseReducers<IUserState>>({
+export const userSlice = createSlice<IUserState | null, SliceCaseReducers<IUserState | null>>({
   name: 'userSlice',
-  initialState: {
-    data: {
-      current: null,
-      all: [
-        {
-          id: '1',
-          firstName: 'Aa',
-          lastName: 'Bb',
-          email: 'aa@bb.ru',
-          password: 'aA1!',
-        },
-      ],
-    },
-  },
+  initialState: null,
   reducers: {
-    setCurrentUser(state, action: PayloadAction<IUser>) {
+    setUser(state, action: PayloadAction<IUser>) {
       state.data.current = action.payload;
     },
     addUser(state, action: PayloadAction<IUser>) {
@@ -27,4 +14,4 @@ export const userSlice = createSlice<IUserState, SliceCaseReducers<IUserState>>(
   },
 });
 
-export const { setCurrentUser, addUser } = userSlice.reducer;
+export const { setUser, addUser } = userSlice.reducer;

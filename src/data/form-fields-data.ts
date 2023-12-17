@@ -6,7 +6,7 @@ export const FormFieldsData: Record<string, Omit<FieldProps, 'register'>> = {
     name: FormKeys.FIRST_NAME,
     formKey: FormKeys.FIRST_NAME,
     type: 'text',
-    label: 'Name',
+    label: 'First Name',
     placeholder: 'Enter the name',
   },
   lastName: {
@@ -14,7 +14,7 @@ export const FormFieldsData: Record<string, Omit<FieldProps, 'register'>> = {
     name: FormKeys.LAST_NAME,
     formKey: FormKeys.LAST_NAME,
     type: 'text',
-    label: 'Name',
+    label: 'Last Name',
     placeholder: 'Enter the name',
   },
   email: {

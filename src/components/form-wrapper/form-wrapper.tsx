@@ -7,7 +7,7 @@ export interface FormWrapperProps extends CommonReactProps {
 export function FormWrapper({ children, title }: FormWrapperProps) {
   return (
     <div className="flex justify-center items-center">
-      <div className="w-6/12 p-4 border-2 border-pink-500 rounded-2xl mt-4">
+      <div className="p-4 border-2 border-solid rounded-2xl border-sky-500 mt-4 w-[320px]">
         <span className="block w-full text-center font-bold text-2xl">{title}</span>
         {children}
       </div>

@@ -5,6 +5,14 @@ export interface I18nContextType {
   changeLanguage: (language: Language) => void;
   i18n: {
     [key in Language]: {
+      passwordValidHint: string;
+      passwordMustMatch: string;
+      fieldRequired: string;
+      fieldInvalid: string;
+      invalidEmailOrPassword: string;
+      somethingWentWrong: string;
+      submit: string;
+      forgotPassword: string;
       switchLang: {
         en: string;
         ru: string;
@@ -36,6 +44,15 @@ export interface I18nContextType {
 
 export const i18n: I18nContextType['i18n'] = {
   EN: {
+    somethingWentWrong: 'Something went wrong. Try again',
+    passwordValidHint:
+      'Password must contain at least 1 number, 1 uppercase letter, 1 lowercase letter, 1 special character and have to be minimum 6 letters length',
+    passwordMustMatch: 'Passwords must match',
+    fieldRequired: 'Field is required',
+    fieldInvalid: 'Field is invalid',
+    invalidEmailOrPassword: 'Invalid email or password',
+    submit: 'Submit',
+    forgotPassword: 'Forgot Password?',
     switchLang: {
       en: 'English',
       ru: 'Russian',
@@ -67,6 +84,15 @@ export const i18n: I18nContextType['i18n'] = {
     },
   },
   RU: {
+    somethingWentWrong: 'Что-то пошло не так. Попробуйте еще раз',
+    passwordValidHint:
+      'Пароль должен содержать как минимум 1 цифру, 1 заглавную букву, 1 строчную букву, 1 специальный символ и иметь длину не менее 6 букв',
+    passwordMustMatch: 'Пароль должен совпадать',
+    fieldRequired: 'Обязательное поле',
+    fieldInvalid: 'Невалидное поле',
+    invalidEmailOrPassword: 'Неправильный email или пароль',
+    submit: 'Отправить',
+    forgotPassword: 'Забыли пароль?',
     switchLang: {
       en: 'Английский',
       ru: 'Русский',
@@ -98,6 +124,15 @@ export const i18n: I18nContextType['i18n'] = {
     },
   },
   BE: {
+    somethingWentWrong: 'Нешта пайшло не так. Паспрабуйце яшчэ раз',
+    passwordValidHint:
+      'Пароль павінен змяшчаць не менш за 1 лічбу, 1 вялікую літару, 1 малую літару, 1 спецыяльны сімвал і не менш за 6 літар',
+    passwordMustMatch: 'Пароль павінен супадаць',
+    fieldRequired: 'Абавязковае поле',
+    fieldInvalid: 'Неваліднае поле',
+    invalidEmailOrPassword: 'Няправільны email або пароль',
+    submit: 'адправіць',
+    forgotPassword: 'Забыліся пароль?',
     switchLang: {
       en: 'Английскиі',
       ru: 'Рускі',

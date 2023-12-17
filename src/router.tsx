@@ -6,12 +6,14 @@ import { SignInPage } from './pages/sign-in.page';
 import { NotFoundPage } from './pages/not-found.page';
 import { SignUpPage } from './pages/sign-up.page';
 import { Layout } from './components/layout';
+import { ResetPage } from './pages/reset.page';
 
 export enum RouterPage {
   WELCOME = '/',
   GQL = '/gql',
   SIGN_IN = '/sign-in',
   SIGN_UP = '/sign-up',
+  RESET = '/reset',
 }
 
 export const routes: RouteObject[] = [
@@ -34,6 +36,10 @@ export const routes: RouteObject[] = [
       {
         path: RouterPage.SIGN_UP,
         element: <SignUpPage />,
+      },
+      {
+        path: RouterPage.RESET,
+        element: <ResetPage />,
       },
       {
         path: '*',
