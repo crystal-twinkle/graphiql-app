@@ -9,7 +9,7 @@ import { useLocalization } from '../../context/localization-context';
 
 function Header() {
   const [isPageScrolled, setIsPageScrolled] = useState(false);
-  const { i18n, language } = useLocalization();
+  const { translate } = useLocalization();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,11 +34,11 @@ function Header() {
           to={RouterPage.WELCOME}
           className="hover:brightness-125 hover:scale-[1.02] transition-all duration-200 ease-in-out"
         >
-          {i18n[language].welcomePageText}
+          {translate.welcomePageText}
         </Link>
         <div className="flex gap-5">
           <LanguageSwitcher />
-          <Button icon={signOutIcon} text={i18n[language].signOut} onclick={() => {}} />
+          <Button icon={signOutIcon} text={translate.signOut} onclick={() => {}} />
         </div>
       </div>
     </header>

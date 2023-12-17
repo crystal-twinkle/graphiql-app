@@ -10,7 +10,7 @@ import { RouterPage } from '../router';
 import { useLocalization } from '../context/localization-context';
 
 export function WelcomePage() {
-  const { i18n, language } = useLocalization();
+  const { translate } = useLocalization();
 
   return (
     <div className="flex flex-col mx-auto p-5">
@@ -20,56 +20,56 @@ export function WelcomePage() {
           className="flex items-center gap-1 hover:brightness-125 hover:scale-[1.02] transition-all duration-200 ease-in-out"
         >
           <img src={signInIcon} alt="local-icon" className="w-8 h-8" />
-          {i18n[language].signIn}
+          {translate.signIn}
         </Link>
         <Link
           to={RouterPage.SIGN_UP}
           className="flex items-center gap-1 hover:brightness-125 hover:scale-[1.02] transition-all duration-200 ease-in-out"
         >
           <img src={signUpIcon} alt="local-icon" className="w-8 h-8" />
-          {i18n[language].signUp}
+          {translate.signUp}
         </Link>
         <Link
           to={RouterPage.GQL}
           className="flex items-center gap-1 hover:brightness-125 hover:scale-[1.02] transition-all duration-200 ease-in-out"
         >
           <img src={gqlIcon} alt="local-icon" className="w-8 h-8" />
-          {i18n[language].mainPageText}
+          {translate.mainPageText}
         </Link>
       </nav>
       <section className="py-7">
-        <h2 className="text-2xl font-semibold py-4">{i18n[language].welcome.head}</h2>
-        <p>{i18n[language].welcome.desc}</p>
+        <h2 className="text-2xl font-semibold py-4">{translate.welcome.head}</h2>
+        <p>{translate.welcome.desc}</p>
       </section>
       <section className="py-7">
-        <h2 className="text-2xl font-semibold py-4">{i18n[language].team.text}</h2>
+        <h2 className="text-2xl font-semibold py-4">{translate.team.text}</h2>
         <div className="flex justify-evenly flex-wrap gap-5">
           <DeveloperCard
-            name={i18n[language].team.Roman}
+            name={translate.team.Roman}
             avatarLink={avatar1}
-            description={i18n[language].team.RomanDesc}
+            description={translate.team.RomanDesc}
             url="https://github.com/gemer31"
             text="gemer31"
           ></DeveloperCard>
           <DeveloperCard
-            name={i18n[language].team.Kristina}
+            name={translate.team.Kristina}
             avatarLink={avatar2}
-            description={i18n[language].team.KristinaDesc}
+            description={translate.team.KristinaDesc}
             url="https://github.com/crystal-twinkle"
             text="crystal-twinkle"
           ></DeveloperCard>
           <DeveloperCard
-            name={i18n[language].team.Sergey}
+            name={translate.team.Sergey}
             avatarLink={avatar3}
-            description={i18n[language].team.SergeyDesc}
+            description={translate.team.SergeyDesc}
             url="https://github.com/SadJoeBright"
             text="sadJoeBright"
           ></DeveloperCard>
         </div>
       </section>
       <section className="py-7">
-        <h2 className="text-2xl font-semibold py-4">{i18n[language].welcome.aboutHead}</h2>
-        <p>{i18n[language].welcome.aboutDesc}</p>
+        <h2 className="text-2xl font-semibold py-4">{translate.welcome.aboutHead}</h2>
+        <p>{translate.welcome.aboutDesc}</p>
       </section>
     </div>
   );
