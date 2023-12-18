@@ -15,7 +15,7 @@ export function FormInput({ type, id, label, placeholder, formKey, error, regist
         </label>
         <input
           id={id}
-          className={`p-2 border-2 ${error ? 'border-red-600 ' : 'border-black'}`}
+          className={`p-2 border-2 rounded-md ${error ? 'border-red-600 ' : 'border-black'}`}
           type={type}
           autoComplete="on"
           placeholder={translate[placeholder] as string}

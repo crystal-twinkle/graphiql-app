@@ -10,7 +10,6 @@ import { auth } from '../main';
 import React, { useState } from 'react';
 import { RouterPage } from '../router';
 import { useLocalization } from '../context/localization-context';
-import { Loader } from '../components/Loader/Loader';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
 export function SignInPage() {
@@ -43,29 +42,18 @@ export function SignInPage() {
   };
 
   return (
-    <FormWrapper title={translate.signIn}>
-      <form className="form" autoComplete="on" onSubmit={handleSubmit(onSubmitForm)}>
-        <FormInput {...FormFieldsData.email} register={register} error={errors.email} />
-        <FormInput {...FormFieldsData.password} register={register} error={errors.password} />
-        <p
-          title={translate.invalidEmailOrPassword}
-          className={
-            'text-center text-xs max-w-2xl text-ellipsis overflow-hidden whitespace-nowrap font-bold text-red-500 ' +
-            (credentialErrorVisible ? '' : 'invisible')
-          }
-        >
-          {credentialErrorVisible ? translate.invalidEmailOrPassword : 'error'}
-        </p>
-        <button
-          type="submit"
-          className={
-            'hover:brightness-125 hover:scale-[1.02] border-sky-500 transition-all duration-200 ease-in-out w-full py-2 border-2 rounded-md form-submit ' +
-            (loading ? 'disabled' : '')
-          }
-        >
-          {loading ? <Loader className="w-4 h-4" /> : translate.submit}
-        </button>
-      </form>
+    <FormWrapper title={translate.signIn} loading={loading} onSubmit={handleSubmit(onSubmitForm)}>
+      <FormInput {...FormFieldsData.email} register={register} error={errors.email} />
+      <FormInput {...FormFieldsData.password} register={register} error={errors.password} />
+      <p
+        title={translate.invalidEmailOrPassword}
+        className={
+          'text-center text-xs max-w-2xl text-ellipsis overflow-hidden whitespace-nowrap font-bold text-red-500 ' +
+          (credentialErrorVisible ? '' : 'invisible')
+        }
+      >
+        {credentialErrorVisible ? translate.invalidEmailOrPassword : 'error'}
+      </p>
     </FormWrapper>
   );
 }

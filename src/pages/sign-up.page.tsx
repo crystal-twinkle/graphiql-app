@@ -11,7 +11,6 @@ import { addDoc, collection } from 'firebase/firestore';
 import { useLocalization } from '../context/localization-context';
 import { UserCredential } from '@firebase/auth';
 import React, { useState } from 'react';
-import { Loader } from '../components/Loader/Loader';
 import { RouterPage } from '../router';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 
@@ -57,35 +56,25 @@ export function SignUpPage() {
   };
 
   return (
-    <FormWrapper title={translate.signUp}>
-      <form autoComplete="on" onSubmit={handleSubmit(onSubmitForm)}>
-        <FormInput {...FormFieldsData.firstName} register={register} error={errors.firstName} />
-        <FormInput {...FormFieldsData.lastName} register={register} error={errors.lastName} />
-        <FormInput {...FormFieldsData.email} register={register} error={errors.email} />
-        <FormInput {...FormFieldsData.password} register={register} error={errors.password} />
-        <FormInput
-          {...FormFieldsData.passwordRepeat}
-          register={register}
-          error={errors.passwordRepeat}
-        />
-        <p
-          title={translate.somethingWentWrong}
-          className={
-            'text-center text-xs max-w-2xl text-ellipsis overflow-hidden whitespace-nowrap font-bold ' +
-            (somethingWentWrongVisible ? '' : 'invisible')
-          }
-        >
-          {somethingWentWrongVisible ? translate.somethingWentWrong : 'error'}
-        </p>
-        <button
-          type="submit"
-          className={`hover:brightness-125 hover:scale-[1.02] border-sky-500 transition-all duration-200 ease-in-out w-full py-2 border-2 rounded-2xl form-submit ${
-            loading ? 'disabled' : ''
-          }`}
-        >
-          {loading ? <Loader className="w-4 h-4" /> : translate.submit}
-        </button>
-      </form>
+    <FormWrapper title={translate.signUp} loading={loading} onSubmit={handleSubmit(onSubmitForm)}>
+      <FormInput {...FormFieldsData.firstName} register={register} error={errors.firstName} />
+      <FormInput {...FormFieldsData.lastName} register={register} error={errors.lastName} />
+      <FormInput {...FormFieldsData.email} register={register} error={errors.email} />
+      <FormInput {...FormFieldsData.password} register={register} error={errors.password} />
+      <FormInput
+        {...FormFieldsData.passwordRepeat}
+        register={register}
+        error={errors.passwordRepeat}
+      />
+      <p
+        title={translate.somethingWentWrong}
+        className={
+          'text-center text-xs max-w-2xl text-ellipsis overflow-hidden whitespace-nowrap font-bold ' +
+          (somethingWentWrongVisible ? '' : 'invisible')
+        }
+      >
+        {somethingWentWrongVisible ? translate.somethingWentWrong : 'error'}
+      </p>
     </FormWrapper>
   );
 }
