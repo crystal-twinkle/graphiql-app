@@ -4,24 +4,24 @@ export function prettify(value: string, isResponse: boolean = false) {
     .replace(/ \(/g, '(')
     .replace(/\( /g, '(')
     .replace(/ \)/g, ')')
-    .replace(/ "/g, '"')
-    .replace(/" /g, '"')
-    .replace(/ '/g, "'")
-    .replace(/' /g, "'")
     .replace(/ }/g, '}')
     .replace(/ ]/g, ']')
     .replace(/\) /g, ')')
     .replace(/ :/, ':')
-    .replace(/([^ ]):([^ ])/g, '$1: $2')
     .replace(/{/g, '{\n')
     .replace(/\[/g, '[\n')
     .replace(/(?<!\s){/g, ' {')
     .replace(/},/g, '},\n')
     .replace(/",/g, '",\n')
-    .replace(/,/g, ', ')
+    .replace(/,/g, ',\n')
     .replace(/}/g, '\n}')
     .replace(/]/g, '\n]')
-    .replace(/\b[a-zA-Z_]+\b(?![ ]*[-:'({[])/g, (match) => {
+    .replace(/ "/g, '"')
+    .replace(/" /g, '"')
+    .replace(/ '/g, "'")
+    .replace(/' /g, "'")
+    .replace(/([^ ]):([^ ])/g, '$1: $2')
+    .replace(/\b[a-zA-Z_]+\b(?![ ]*[-:'(){[])/g, (match) => {
       if (isResponse) {
         return match;
       }

@@ -3,6 +3,9 @@ import LineCounter from '../LineCounter/LineCounter';
 import Button from '../UI/Button';
 import chevronIcon from '../../assets/icons/chevron-icon.svg';
 import { manageCursor } from '../../utils/manageCursor';
+import { AppDispatch } from '../../store/store';
+import { useDispatch } from 'react-redux';
+import { setVariables } from '../../store/variables-slice';
 
 function VariableHeaderEditor() {
   enum Tabs {
@@ -12,16 +15,30 @@ function VariableHeaderEditor() {
   }
 
   const [headersValue, setHeadersValue] = useState('');
-  const [variablesValue, setVariablesValue] = useState('');
+  const [variablesCurrentValue, setVariablesCurrentValue] = useState('');
   const [activeTab, setActiveTab] = useState(Tabs.NONE);
   const [isFocused, setIsFocused] = useState(true);
+
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleHeadersChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setHeadersValue(event.target.value);
   };
 
   const handleVariablesChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setVariablesValue(event.target.value);
+    const currentValue = event.target.value;
+
+    if (currentValue.trim() !== '') {
+      try {
+        dispatch(setVariables(JSON.parse(currentValue)));
+      } catch (error) {
+        console.error('Error parsing JSON:', error);
+      }
+    } else {
+      dispatch(setVariables({}));
+    }
+
+    setVariablesCurrentValue(currentValue);
   };
 
   return (
@@ -53,7 +70,7 @@ function VariableHeaderEditor() {
         }`}
       >
         <div className={`${activeTab === Tabs.NONE && 'h-0 overflow-hidden'}`}>
-          <LineCounter value={activeTab === Tabs.HEADERS ? headersValue : variablesValue} />
+          <LineCounter value={activeTab === Tabs.HEADERS ? headersValue : variablesCurrentValue} />
         </div>
         <textarea
           autoFocus
@@ -64,11 +81,11 @@ function VariableHeaderEditor() {
             manageCursor(
               event,
               isFocused,
-              activeTab === Tabs.HEADERS ? setHeadersValue : setVariablesValue
+              activeTab === Tabs.HEADERS ? setHeadersValue : setVariablesCurrentValue
             )
           }
           name="editor"
-          value={activeTab === Tabs.HEADERS ? headersValue : variablesValue}
+          value={activeTab === Tabs.HEADERS ? headersValue : variablesCurrentValue}
           className="w-full px-2 overflow-hidden bg-medium outline-none resize-none"
         ></textarea>
       </div>

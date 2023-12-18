@@ -18,7 +18,9 @@ function QueryEditor() {
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setQuery(e.target.value);
   };
+
   const endpoint = useSelector((state: RootState) => state.endpoint.endpoint);
+  const variables = useSelector((state: RootState) => state.variables.variables);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -28,7 +30,7 @@ function QueryEditor() {
       headers: {
         'Content-type': 'application/json',
       },
-      body: JSON.stringify({ query }),
+      body: JSON.stringify({ query, variables }),
     });
 
     const res = await response.json();
