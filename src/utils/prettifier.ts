@@ -18,8 +18,10 @@ export function prettify(value: string, isResponse: boolean = false) {
     .replace(/(?<!\s){/g, ' {')
     .replace(/},/g, '},\n')
     .replace(/",/g, '",\n')
+    .replace(/,/g, ', ')
+    .replace(/}/g, '\n}')
     .replace(/]/g, '\n]')
-    .replace(/\b[a-zA-Z_]+\b(?![ ]*[-:'"({[])/g, (match) => {
+    .replace(/\b[a-zA-Z_]+\b(?![ ]*[-:'({[])/g, (match) => {
       if (isResponse) {
         return match;
       }

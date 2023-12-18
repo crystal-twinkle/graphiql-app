@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../store/store';
+import { setEndpoint } from '../../store/endpoint-slice';
 import Button from '../UI/Button';
-// import { useDispatch } from 'react-redux';
-// import { AppDispatch } from '../../store/store';
+import applyIcon from '../../assets/icons/apply-icon.svg';
 
 export function EndpointInput() {
   const [value, setValue] = useState('');
@@ -11,15 +13,15 @@ export function EndpointInput() {
     setValue(value);
   };
 
-  // const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>();
 
-  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   setEndpoint(event.currentTarget.val);
-  // };
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    dispatch(setEndpoint(value));
+  };
 
   return (
-    <form className="flex shrink-0 w-2/3 gap-3 items-center">
+    <form onSubmit={handleSubmit} className="flex shrink-0 w-2/3 gap-3 items-center">
       <input
         type="text"
         placeholder="Enter GraphQL endpoint"
@@ -27,7 +29,7 @@ export function EndpointInput() {
         onChange={handleChange}
         className="w-full bg-light outline-none rounded py-1 px-2"
       />
-      <Button type="submit" text="Apply"></Button>
+      <Button type="submit" text="Apply" icon={applyIcon}></Button>
     </form>
   );
 }
