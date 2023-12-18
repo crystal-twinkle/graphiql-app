@@ -12,7 +12,7 @@ export function Avatar({ user }: { user: User }) {
       className="rounded-full px-2.5 py-1 bg-amber-400 border-sky-500 border-2"
       style={{ background: generateColor() }}
     >
-      {user.email?.charAt(0).toUpperCase()}
+      <span className="inline-block w-3 text-center">{user.email?.charAt(0).toUpperCase()}</span>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { signUpValidationSchema } from '../utils/validation.util';
+import { validationSchema } from '../utils/validation.util';
 import { FormInput } from '../components/FormInput';
 import { FormFieldsData } from '../data/form-fields-data';
 import { AppFields } from '../models/common.model';
@@ -24,10 +24,10 @@ export function SignUpPage() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm({
     mode: 'onChange',
-    resolver: yupResolver(signUpValidationSchema),
+    resolver: yupResolver(validationSchema(true)),
   });
 
   const onSubmitForm = async (formData: AppFields) => {

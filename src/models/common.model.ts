@@ -1,3 +1,4 @@
+import React from 'react';
 import { FieldError, RegisterOptions, UseFormRegisterReturn } from 'react-hook-form';
 
 export type CommonReactProps = {
@@ -22,11 +23,11 @@ export interface FieldProps extends CommonFieldProps {
 }
 
 export type AppFields = {
-  firstName: string;
-  lastName: string;
+  firstName?: string;
+  lastName?: string;
   email: string;
   password: string;
-  passwordRepeat: string;
+  passwordRepeat?: string;
 };
 
 export enum FormKeys {

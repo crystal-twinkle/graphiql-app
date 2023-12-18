@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { signInValidationSchema } from '../utils/validation.util';
+import { validationSchema } from '../utils/validation.util';
 import { FormInput } from '../components/FormInput';
 import { FormFieldsData } from '../data/form-fields-data';
 import { FormWrapper } from '../components/FormWrapper';
@@ -24,7 +24,7 @@ export function SignInPage() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(signInValidationSchema),
+    resolver: yupResolver(validationSchema()),
   });
 
   const onSubmitForm = async (formData: AppFields) => {
