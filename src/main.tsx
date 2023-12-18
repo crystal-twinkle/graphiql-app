@@ -7,7 +7,7 @@ import { routes } from './router';
 import './index.css';
 import { LocalizationProvider } from './context/localization-context';
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 export const firebaseConfig = {
@@ -25,7 +25,6 @@ const router = createBrowserRouter(routes);
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
-export const googleProvider = new GoogleAuthProvider();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

@@ -6,14 +6,14 @@ import { SignInPage } from './pages/sign-in.page';
 import { NotFoundPage } from './pages/not-found.page';
 import { SignUpPage } from './pages/sign-up.page';
 import { Layout } from './components/layout';
-import { ResetPage } from './pages/reset.page';
+import { PrivateOnlyPageWrapper } from './components/PrivateOnlyPageWrapper';
+import { AnonymousOnlyPageWrapper } from './components/AnonymousOnlyPageWrapper';
 
 export enum RouterPage {
   WELCOME = '/',
   GQL = '/gql',
   SIGN_IN = '/sign-in',
   SIGN_UP = '/sign-up',
-  RESET = '/reset',
 }
 
 export const routes: RouteObject[] = [
@@ -27,19 +27,27 @@ export const routes: RouteObject[] = [
       },
       {
         path: RouterPage.GQL,
-        element: <GqlPage />,
+        element: (
+          <PrivateOnlyPageWrapper>
+            <GqlPage />
+          </PrivateOnlyPageWrapper>
+        ),
       },
       {
         path: RouterPage.SIGN_IN,
-        element: <SignInPage />,
+        element: (
+          <AnonymousOnlyPageWrapper>
+            <SignInPage />
+          </AnonymousOnlyPageWrapper>
+        ),
       },
       {
         path: RouterPage.SIGN_UP,
-        element: <SignUpPage />,
-      },
-      {
-        path: RouterPage.RESET,
-        element: <ResetPage />,
+        element: (
+          <AnonymousOnlyPageWrapper>
+            <SignUpPage />
+          </AnonymousOnlyPageWrapper>
+        ),
       },
       {
         path: '*',

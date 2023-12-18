@@ -1,14 +1,16 @@
 import { FieldProps } from '../../models/common.model';
 import { useLocalization } from '../../context/localization-context';
-import './form-input.css';
 
 export function FormInput({ type, id, label, placeholder, formKey, error, register }: FieldProps) {
-  const { i18n, language } = useLocalization();
+  const { translate } = useLocalization();
 
   return (
     <div className="relative mb-2">
       <div className="flex flex-col">
-        <label className="text-base cursor-pointer input-label" htmlFor={id}>
+        <label
+          className="text-base cursor-pointer after:content-['*'] after:ml-0.5 after:text-red-500 after:font-bold after:text-base"
+          htmlFor={id}
+        >
           {label}
         </label>
         <input
@@ -23,11 +25,11 @@ export function FormInput({ type, id, label, placeholder, formKey, error, regist
       <p
         title={error?.message}
         className={
-          'text-xs max-w-2xl text-ellipsis overflow-hidden whitespace-nowrap font-bold text-red-600 ' +
+          'text-xs max-w-2xl text-ellipsis overflow-hidden whitespace-nowrap font-bold text-red-500 ' +
           (error?.message ? '' : 'invisible')
         }
       >
-        {i18n[language]?.[error?.message] || 'error'}
+        {error?.message ? (translate[error.message] as string) : 'error'}
       </p>
     </div>
   );

@@ -5,3 +5,18 @@
 html {
   overflow-y: scroll;
 }
+
+.form-submit {
+  position: relative;
+  width: 100%;
+  padding: 8px;
+  color: white;
+  margin-top: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.form-submit.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}

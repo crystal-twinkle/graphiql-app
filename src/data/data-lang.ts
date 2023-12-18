@@ -1,52 +1,11 @@
-export type Language = 'EN' | 'RU' | 'BE';
+import { ILocalizationContext } from '../models/localization';
 
-export interface I18nContextType {
-  language: Language;
-  changeLanguage: (language: Language) => void;
-  i18n: {
-    [key in Language]: {
-      passwordValidHint: string;
-      passwordMustMatch: string;
-      fieldRequired: string;
-      fieldInvalid: string;
-      invalidEmailOrPassword: string;
-      somethingWentWrong: string;
-      submit: string;
-      forgotPassword: string;
-      switchLang: {
-        en: string;
-        ru: string;
-        be: string;
-      };
-      signIn: string;
-      signUp: string;
-      signOut: string;
-      welcomePageText: string;
-      mainPageText: string;
-      welcome: {
-        head: string;
-        desc: string;
-        aboutHead: string;
-        aboutDesc: string;
-      };
-      team: {
-        text: string;
-        Roman: string;
-        Kristina: string;
-        Sergey: string;
-        RomanDesc: string;
-        KristinaDesc: string;
-        SergeyDesc: string;
-      };
-    };
-  };
-}
-
-export const i18n: I18nContextType['i18n'] = {
+export const dataLang: ILocalizationContext['dataLang'] = {
   EN: {
+    noSuchPage: 'No such page',
     somethingWentWrong: 'Something went wrong. Try again',
     passwordValidHint:
-      'Password must contain at least 1 number, 1 uppercase letter, 1 lowercase letter, 1 special character and have to be minimum 6 letters length',
+      'Password must contain at least 1 number, 1 uppercase letter, 1 lowercase letter, 1 special character and have to be minimum 8 letters length',
     passwordMustMatch: 'Passwords must match',
     fieldRequired: 'Field is required',
     fieldInvalid: 'Field is invalid',
@@ -84,9 +43,10 @@ export const i18n: I18nContextType['i18n'] = {
     },
   },
   RU: {
+    noSuchPage: 'Нет такой страницы',
     somethingWentWrong: 'Что-то пошло не так. Попробуйте еще раз',
     passwordValidHint:
-      'Пароль должен содержать как минимум 1 цифру, 1 заглавную букву, 1 строчную букву, 1 специальный символ и иметь длину не менее 6 букв',
+      'Пароль должен содержать как минимум 1 цифру, 1 заглавную букву, 1 строчную букву, 1 специальный символ и иметь длину не менее 8 букв',
     passwordMustMatch: 'Пароль должен совпадать',
     fieldRequired: 'Обязательное поле',
     fieldInvalid: 'Невалидное поле',
@@ -124,9 +84,10 @@ export const i18n: I18nContextType['i18n'] = {
     },
   },
   BE: {
+    noSuchPage: 'Няма такой старонкі',
     somethingWentWrong: 'Нешта пайшло не так. Паспрабуйце яшчэ раз',
     passwordValidHint:
-      'Пароль павінен змяшчаць не менш за 1 лічбу, 1 вялікую літару, 1 малую літару, 1 спецыяльны сімвал і не менш за 6 літар',
+      'Пароль павінен змяшчаць не менш за 1 лічбу, 1 вялікую літару, 1 малую літару, 1 спецыяльны сімвал і не менш за 8 літар',
     passwordMustMatch: 'Пароль павінен супадаць',
     fieldRequired: 'Абавязковае поле',
     fieldInvalid: 'Неваліднае поле',
@@ -134,7 +95,7 @@ export const i18n: I18nContextType['i18n'] = {
     submit: 'адправіць',
     forgotPassword: 'Забыліся пароль?',
     switchLang: {
-      en: 'Английскиі',
+      en: 'Ангельская',
       ru: 'Рускі',
       be: 'Беларускі',
     },
