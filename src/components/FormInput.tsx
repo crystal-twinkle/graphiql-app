@@ -1,5 +1,5 @@
-import { FieldProps } from '../../models/common.model';
-import { useLocalization } from '../../context/localization-context';
+import { FieldProps } from '../models/common.model';
+import { useLocalization } from '../context/localization-context';
 
 export function FormInput({ type, id, label, placeholder, formKey, error, register }: FieldProps) {
   const { translate } = useLocalization();
@@ -11,14 +11,14 @@ export function FormInput({ type, id, label, placeholder, formKey, error, regist
           className="text-base cursor-pointer after:content-['*'] after:ml-0.5 after:text-red-500 after:font-bold after:text-base"
           htmlFor={id}
         >
-          {label}
+          {translate[label] as string}
         </label>
         <input
           id={id}
           className={`p-2 border-2 ${error ? 'border-red-600 ' : 'border-black'}`}
           type={type}
           autoComplete="on"
-          placeholder={placeholder}
+          placeholder={translate[placeholder] as string}
           {...register(formKey)}
         />
       </div>

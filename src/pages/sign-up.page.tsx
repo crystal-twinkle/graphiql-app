@@ -1,13 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../store/store';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signUpValidationSchema } from '../utils/validation.util';
-import { FormInput } from '../components/FormInput/FormInput';
+import { FormInput } from '../components/FormInput';
 import { FormFieldsData } from '../data/form-fields-data';
 import { AppFields } from '../models/common.model';
-import { FormWrapper } from '../components/FormWrapper/FormWrapper';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { FormWrapper } from '../components/FormWrapper';
 import { auth, db } from '../main';
 import { addDoc, collection } from 'firebase/firestore';
 import { useLocalization } from '../context/localization-context';
@@ -15,10 +13,10 @@ import { UserCredential } from '@firebase/auth';
 import React, { useState } from 'react';
 import { Loader } from '../components/Loader/Loader';
 import { RouterPage } from '../router';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 export function SignUpPage() {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const [somethingWentWrongVisible, setSomethingWentWrongVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const { translate } = useLocalization();

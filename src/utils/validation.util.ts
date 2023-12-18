@@ -4,7 +4,7 @@ export const signInValidationSchema = yup.object().shape({
   email: yup.string().required('fieldRequired').email('fieldInvalid'),
   password: yup
     .string()
-    .matches(/^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*]).{6,}$/, 'passwordValidHint')
+    .matches(/^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*]).{8,}$/, 'passwordValidHint')
     .required('fieldRequired'),
 });
 
@@ -14,7 +14,7 @@ export const signUpValidationSchema = yup.object().shape({
   email: yup.string().required('fieldRequired').email('fieldInvalid'),
   password: yup
     .string()
-    .matches(/^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*]).{6,}$/, 'passwordValidHint')
+    .matches(/^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*]).{8,}$/, 'passwordValidHint')
     .required('fieldRequired'),
   passwordRepeat: yup
     .string()

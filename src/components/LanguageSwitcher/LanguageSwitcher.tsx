@@ -27,7 +27,7 @@ const LanguageSwitcher = () => {
     <div className="relative">
       <Button icon={localIcon} text={language} onclick={toggleDropdown} />
       {isDropdownOpen ? (
-        <div className="absolute z-10 bg-light p-2 cursor-default">
+        <div className="absolute z-10 bg-light p-2 cursor-default right-0">
           <ul className="flex flex-col items-start gap-2 max-w-[150px] overflow-hidden">
             {languages.map((language) => (
               <li

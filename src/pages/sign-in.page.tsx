@@ -1,10 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signInValidationSchema } from '../utils/validation.util';
-import { FormInput } from '../components/FormInput/FormInput';
+import { FormInput } from '../components/FormInput';
 import { FormFieldsData } from '../data/form-fields-data';
-import { FormWrapper } from '../components/FormWrapper/FormWrapper';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { FormWrapper } from '../components/FormWrapper';
 import { AppFields } from '../models/common.model';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../main';
@@ -12,10 +11,10 @@ import React, { useState } from 'react';
 import { RouterPage } from '../router';
 import { useLocalization } from '../context/localization-context';
 import { Loader } from '../components/Loader/Loader';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 export function SignInPage() {
   const navigate = useNavigate();
-
   const { translate } = useLocalization();
   const [credentialErrorVisible, setCredentialErrorVisible] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -60,7 +59,7 @@ export function SignInPage() {
         <button
           type="submit"
           className={
-            'hover:brightness-125 hover:scale-[1.02] border-sky-500 transition-all duration-200 ease-in-out w-full py-2 border-2 rounded-2xl form-submit ' +
+            'hover:brightness-125 hover:scale-[1.02] border-sky-500 transition-all duration-200 ease-in-out w-full py-2 border-2 rounded-md form-submit ' +
             (loading ? 'disabled' : '')
           }
         >

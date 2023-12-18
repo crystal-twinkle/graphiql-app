@@ -16,6 +16,16 @@ export interface ILocalizationContext {
       invalidEmailOrPassword: string;
       submit: string;
       forgotPassword: string;
+      password: string;
+      passwordRepeat: string;
+      email: string;
+      firstName: string;
+      lastName: string;
+      enterFirstName: string;
+      enterLastName: string;
+      enterEmail: string;
+      createPassword: string;
+      repeatPassword: string;
       switchLang: {
         en: string;
         ru: string;
