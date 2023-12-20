@@ -1,3 +1,4 @@
+import React from 'react';
 import { FieldError, RegisterOptions, UseFormRegisterReturn } from 'react-hook-form';
 
 export type CommonReactProps = {
@@ -22,23 +23,12 @@ export interface FieldProps extends CommonFieldProps {
 }
 
 export type AppFields = {
-  firstName: string;
-  lastName: string;
+  firstName?: string;
+  lastName?: string;
   email: string;
   password: string;
-  passwordRepeat: string;
+  passwordRepeat?: string;
 };
-
-export interface SignUpAppFields extends SignInAppFields {
-  firstName: string;
-  lastName: string;
-  passwordRepeat: string;
-}
-
-export interface SignInAppFields {
-  email: string;
-  password: string;
-}
 
 export enum FormKeys {
   FIRST_NAME = 'firstName',
@@ -46,22 +36,4 @@ export enum FormKeys {
   EMAIL = 'email',
   PASSWORD = 'password',
   PASSWORD_REPEAT = 'passwordRepeat',
-}
-
-export interface ISignInModel {
-  email: string;
-  password: string;
-}
-
-export interface IUser extends ISignInModel {
-  id: string;
-  firstName: string;
-  lastName: string;
-}
-
-export interface IUserState {
-  data: {
-    current: IUser | null;
-    all: IUser[];
-  };
 }
