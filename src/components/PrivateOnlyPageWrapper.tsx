@@ -1,6 +1,5 @@
-import React, { ReactNode } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Navigate, Route } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { auth } from '../main';
 import { RouterPage } from '../router';
 import { CommonReactProps } from '../models/common.model';

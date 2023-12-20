@@ -1,5 +1,5 @@
 import FooterLink from '../UI/FooterLink';
-import giHubLogo from '../../assets/icons/github-logo.svg';
+import gitHubLogo from '../../assets/icons/github-logo.svg';
 interface DeveloperCardProps {
   name: string;
   avatarLink: string;
@@ -17,7 +17,7 @@ function DeveloperCard({ name, avatarLink, description, url, text }: DeveloperCa
         <p className="p-3">{description}</p>
       </div>
       <div className="flex justify-center items-center w-full h-[44px] border-t">
-        <FooterLink iconLink={giHubLogo} url={url} text={text}></FooterLink>
+        <FooterLink iconLink={gitHubLogo} url={url} text={text}></FooterLink>
       </div>
     </div>
   );

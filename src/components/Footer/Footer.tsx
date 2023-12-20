@@ -25,7 +25,7 @@ function Footer() {
           <FooterLink
             url="https://github.com/SadJoeBright"
             iconLink={giHubLogo}
-            text="sadJoeBright"
+            text="SadJoeBright"
           ></FooterLink>
         </div>
         <span>&copy; 2023</span>

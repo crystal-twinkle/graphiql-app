@@ -74,7 +74,7 @@ export function WelcomePage() {
             avatarLink={avatar3}
             description={translate.team.SergeyDesc}
             url="https://github.com/SadJoeBright"
-            text="sadJoeBright"
+            text="SadJoeBright"
           ></DeveloperCard>
         </div>
       </section>

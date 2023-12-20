@@ -1,13 +1,14 @@
 interface ButtonProps {
+  type?: 'button' | 'submit' | 'reset';
   icon?: string;
   text?: string;
-  onclick: () => void;
+  onclick?: () => void;
 }
 
-function Button({ icon, text, onclick }: ButtonProps) {
+function Button({ type = 'button', icon, text, onclick }: ButtonProps) {
   return (
     <button
-      type="button"
+      type={type}
       onClick={onclick}
       className="flex items-center gap-1 hover:brightness-125 hover:scale-[1.02] transition-all duration-200 ease-in-out active:scale-100"
     >

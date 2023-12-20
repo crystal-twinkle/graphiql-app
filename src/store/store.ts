@@ -1,7 +1,16 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { endpointReducer } from './endpoint-slice';
+import { resultReducer } from './result-slice';
+import { variablesReducer } from './variables-slice';
+import { headersReducer } from './headers-slice';
 
-export const rootReducer = combineReducers({});
+export const rootReducer = combineReducers({
+  endpoint: endpointReducer,
+  result: resultReducer,
+  variables: variablesReducer,
+  headers: headersReducer,
+});
 
 export const setupStore = () => {
   return configureStore({
