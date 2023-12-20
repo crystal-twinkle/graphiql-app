@@ -1,10 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import { userSlice } from './user-slice';
 
-export const rootReducer = combineReducers({
-  user: userSlice.reducer,
-});
+export const rootReducer = combineReducers({});
 
 export const setupStore = () => {
   return configureStore({

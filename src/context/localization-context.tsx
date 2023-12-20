@@ -1,6 +1,6 @@
 import React, { createContext, useState, PropsWithChildren, useContext } from 'react';
 import { dataLang } from '../data/data-lang';
-import { ILocalizationContext, Language } from '../models/localizationt';
+import { ILocalizationContext, Language } from '../models/localization';
 
 const LANGUAGES: Array<Language> = ['EN', 'RU'];
 

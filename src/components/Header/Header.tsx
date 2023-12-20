@@ -6,9 +6,15 @@ import { useEffect, useState } from 'react';
 import { RouterPage } from '../../router';
 import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 import { useLocalization } from '../../context/localization-context';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../main';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { Avatar } from '../Avatar';
+import { Loader } from '../Loader/Loader';
 
 function Header() {
   const [isPageScrolled, setIsPageScrolled] = useState(false);
+  const [user, loading] = useAuthState(auth);
   const { translate } = useLocalization();
 
   useEffect(() => {
@@ -18,6 +24,10 @@ function Header() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const logout = () => {
+    signOut(auth);
+  };
 
   return (
     <header
@@ -36,9 +46,18 @@ function Header() {
         >
           {translate.welcomePageText}
         </Link>
-        <div className="flex gap-5">
+        <div className="flex items-center gap-5">
           <LanguageSwitcher />
-          <Button icon={signOutIcon} text={translate.signOut} onclick={() => {}} />
+          {loading ? (
+            <Loader className="w-8 h-8" />
+          ) : user ? (
+            <>
+              <Avatar user={user} />
+              <Button icon={signOutIcon} text={translate.signOut} onclick={logout} />
+            </>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </header>

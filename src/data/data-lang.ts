@@ -1,7 +1,27 @@
-import { ILocalizationContext } from '../models/localizationt';
+import { ILocalizationContext } from '../models/localization';
 
 export const dataLang: ILocalizationContext['dataLang'] = {
   EN: {
+    noSuchPage: 'No such page',
+    somethingWentWrong: 'Something went wrong. Try again',
+    passwordValidHint:
+      'Password must contain at least 1 number, 1 uppercase letter, 1 lowercase letter, 1 special character and have to be minimum 8 letters length',
+    passwordMustMatch: 'Passwords must match',
+    fieldRequired: 'Field is required',
+    fieldInvalid: 'Field is invalid',
+    invalidEmailOrPassword: 'Invalid email or password',
+    submit: 'Submit',
+    forgotPassword: 'Forgot Password?',
+    password: 'Password',
+    passwordRepeat: 'Confirm password',
+    email: 'E-mail',
+    firstName: 'First name',
+    lastName: 'Last name',
+    enterFirstName: 'Enter first name',
+    enterLastName: 'Enter last name',
+    enterEmail: 'Enter email',
+    createPassword: 'Create password',
+    repeatPassword: 'Repeat password',
     switchLang: {
       en: 'English',
       ru: 'Russian',
@@ -33,6 +53,26 @@ export const dataLang: ILocalizationContext['dataLang'] = {
     },
   },
   RU: {
+    noSuchPage: 'Нет такой страницы',
+    somethingWentWrong: 'Что-то пошло не так. Попробуйте еще раз',
+    passwordValidHint:
+      'Пароль должен содержать как минимум 1 цифру, 1 заглавную букву, 1 строчную букву, 1 специальный символ и иметь длину не менее 8 букв',
+    passwordMustMatch: 'Пароль должен совпадать',
+    fieldRequired: 'Обязательное поле',
+    fieldInvalid: 'Невалидное поле',
+    invalidEmailOrPassword: 'Неправильный email или пароль',
+    submit: 'Отправить',
+    forgotPassword: 'Забыли пароль?',
+    password: 'Пароль',
+    passwordRepeat: 'Повторите пароль',
+    email: 'E-mail',
+    firstName: 'Имя',
+    lastName: 'Фамилия',
+    enterFirstName: 'Введите имя',
+    enterLastName: 'Введите фамилию',
+    enterEmail: 'Введите email',
+    createPassword: 'Создайте пароль',
+    repeatPassword: 'Повторите пароль',
     switchLang: {
       en: 'Английский',
       ru: 'Русский',
@@ -64,6 +104,26 @@ export const dataLang: ILocalizationContext['dataLang'] = {
     },
   },
   BE: {
+    noSuchPage: 'Няма такой старонкі',
+    somethingWentWrong: 'Нешта пайшло не так. Паспрабуйце яшчэ раз',
+    passwordValidHint:
+      'Пароль павінен змяшчаць не менш за 1 лічбу, 1 вялікую літару, 1 малую літару, 1 спецыяльны сімвал і не менш за 8 літар',
+    passwordMustMatch: 'Пароль павінен супадаць',
+    fieldRequired: 'Абавязковае поле',
+    fieldInvalid: 'Неваліднае поле',
+    invalidEmailOrPassword: 'Няправільны email або пароль',
+    submit: 'адправіць',
+    forgotPassword: 'Забыліся пароль?',
+    password: 'Пароль',
+    passwordRepeat: 'Паўтарыце пароль',
+    email: 'E-mail',
+    firstName: 'Імя',
+    lastName: 'Прозвішча',
+    enterFirstName: 'Увядзіце імя',
+    enterLastName: 'Увядзіце прозвішча',
+    enterEmail: 'Увядзіце email',
+    createPassword: 'Стварыце пароль',
+    repeatPassword: 'Паўтарыце пароль',
     switchLang: {
       en: 'Ангельская',
       ru: 'Рускі',
