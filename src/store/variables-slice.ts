@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState = {
-  variables: {},
+  variables: window.localStorage.getItem('variables') || '',
 };
 
 const variablesSlice = createSlice({
   name: 'variables',
   initialState,
   reducers: {
-    setVariables(state, action: PayloadAction<object>) {
+    setVariables(state, action: PayloadAction<string>) {
       state.variables = action.payload;
     },
   },

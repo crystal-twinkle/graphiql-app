@@ -3,9 +3,10 @@ import LineCounter from '../LineCounter/LineCounter';
 import Button from '../UI/Button';
 import chevronIcon from '../../assets/icons/chevron-icon.svg';
 import { manageCursor } from '../../utils/manageCursor';
-import { AppDispatch } from '../../store/store';
-import { useDispatch } from 'react-redux';
+import { AppDispatch, RootState } from '../../store/store';
+import { useDispatch, useSelector } from 'react-redux';
 import { setVariables } from '../../store/variables-slice';
+import { setHeaders } from '../../store/headers-slice';
 
 function VariableHeaderEditor() {
   enum Tabs {
@@ -14,31 +15,29 @@ function VariableHeaderEditor() {
     HEADERS = 'headers',
   }
 
-  const [headersValue, setHeadersValue] = useState('');
-  const [variablesCurrentValue, setVariablesCurrentValue] = useState('');
+  const headers = useSelector((state: RootState) => state.headers.headers);
+  const [headersCurrentValue, setHeadersCurrentValue] = useState(headers);
+
+  const variables = useSelector((state: RootState) => state.variables.variables);
+  const [variablesCurrentValue, setVariablesCurrentValue] = useState(variables);
+
   const [activeTab, setActiveTab] = useState(Tabs.NONE);
   const [isFocused, setIsFocused] = useState(true);
 
   const dispatch = useDispatch<AppDispatch>();
 
   const handleHeadersChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setHeadersValue(event.target.value);
+    const { value } = event.target;
+    setHeadersCurrentValue(value);
+    dispatch(setHeaders(value));
+    window.localStorage.setItem('headers', value);
   };
 
   const handleVariablesChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const currentValue = event.target.value;
-
-    if (currentValue.trim() !== '') {
-      try {
-        dispatch(setVariables(JSON.parse(currentValue)));
-      } catch (error) {
-        console.error('Error parsing JSON:', error);
-      }
-    } else {
-      dispatch(setVariables({}));
-    }
-
-    setVariablesCurrentValue(currentValue);
+    const { value } = event.target;
+    setVariablesCurrentValue(value);
+    dispatch(setVariables(value));
+    window.localStorage.setItem('variables', value);
   };
 
   return (
@@ -70,7 +69,9 @@ function VariableHeaderEditor() {
         }`}
       >
         <div className={`${activeTab === Tabs.NONE && 'h-0 overflow-hidden'}`}>
-          <LineCounter value={activeTab === Tabs.HEADERS ? headersValue : variablesCurrentValue} />
+          <LineCounter
+            value={activeTab === Tabs.HEADERS ? headersCurrentValue : variablesCurrentValue}
+          />
         </div>
         <textarea
           autoFocus
@@ -81,12 +82,12 @@ function VariableHeaderEditor() {
             manageCursor(
               event,
               isFocused,
-              activeTab === Tabs.HEADERS ? setHeadersValue : setVariablesCurrentValue
+              activeTab === Tabs.HEADERS ? setHeadersCurrentValue : setVariablesCurrentValue
             )
           }
           name="editor"
-          value={activeTab === Tabs.HEADERS ? headersValue : variablesCurrentValue}
-          className="w-full px-2 overflow-hidden bg-medium outline-none resize-none"
+          value={activeTab === Tabs.HEADERS ? headersCurrentValue : variablesCurrentValue}
+          className="w-full px-2 overflow-hidden bg-medium outline-none resize-none font-mono"
         ></textarea>
       </div>
     </>

@@ -1,16 +1,18 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../store/store';
 import { setEndpoint } from '../../store/endpoint-slice';
 import Button from '../UI/Button';
 import applyIcon from '../../assets/icons/apply-icon.svg';
 
 export function EndpointInput() {
-  const [value, setValue] = useState('');
+  const endpoint = useSelector((state: RootState) => state.endpoint.endpoint);
+  const [value, setValue] = useState(endpoint);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setValue(value);
+    window.localStorage.setItem('endpoint', value);
   };
 
   const dispatch = useDispatch<AppDispatch>();

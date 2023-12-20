@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState = {
-  endpoint: '',
+  endpoint: window.localStorage.getItem('endpoint') || '',
 };
 
 const endpointSlice = createSlice({

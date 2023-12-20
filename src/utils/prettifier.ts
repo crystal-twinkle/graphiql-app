@@ -8,6 +8,7 @@ export function prettify(value: string, isResponse: boolean = false) {
     .replace(/ ]/g, ']')
     .replace(/\) /g, ')')
     .replace(/ :/, ':')
+    .replace(';', '')
     .replace(/{/g, '{\n')
     .replace(/\[/g, '[\n')
     .replace(/(?<!\s){/g, ' {')

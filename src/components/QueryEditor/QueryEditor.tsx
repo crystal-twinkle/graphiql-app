@@ -10,32 +10,38 @@ import { EndpointInput } from '../EndpointInput/EndpointInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { setResult } from '../../store/result-slice';
 import { AppDispatch, RootState } from '../../store/store';
+import { safelyParseJson } from '../../utils/safelyParseJson';
 
 function QueryEditor() {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState(window.localStorage.getItem('query') || '');
   const [isFocused, setIsFocused] = useState(true);
 
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setQuery(e.target.value);
+  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { value } = event.target;
+    setQuery(value);
+    window.localStorage.setItem('query', value);
   };
 
   const endpoint = useSelector((state: RootState) => state.endpoint.endpoint);
-  const variables = useSelector((state: RootState) => state.variables.variables);
+  const variables = safelyParseJson(useSelector((state: RootState) => state.variables.variables));
+  const headers = safelyParseJson(useSelector((state: RootState) => state.headers.headers));
 
   const dispatch = useDispatch<AppDispatch>();
 
-  async function sendRequest(endpoint: string, query: string) {
+  async function sendRequest(endpoint: string, query: string, variables: object, headers: object) {
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
+        ...headers,
       },
       body: JSON.stringify({ query, variables }),
     });
 
-    const res = await response.json();
-    const prettified = prettify(JSON.stringify(res), true);
-    dispatch(setResult(prettified));
+    const data = await response.json();
+    const prettifiedData = prettify(JSON.stringify(data), true);
+    dispatch(setResult(prettifiedData));
+    window.localStorage.setItem('result', prettifiedData);
   }
 
   return (
@@ -43,7 +49,10 @@ function QueryEditor() {
       <div className="sticky top-[58px] z-10 flex gap-6 p-3 justify-between items-center bg-medium rounded-t-md border-b-2 border-light">
         <EndpointInput />
         <div className="flex gap-5 items-center">
-          <Button icon={playIcon} onclick={() => sendRequest(endpoint, query)} />
+          <Button
+            icon={playIcon}
+            onclick={() => sendRequest(endpoint, query, variables, headers)}
+          />
           <Button icon={prettifyIcon} onclick={() => setQuery(prettify(query))} />
         </div>
       </div>
@@ -57,7 +66,7 @@ function QueryEditor() {
           onKeyDown={(event) => manageCursor(event, isFocused, setQuery)}
           name="editor"
           value={query}
-          className="grow px-2 bg-medium outline-none resize-none"
+          className="grow px-2 bg-medium outline-none resize-none font-mono"
         ></textarea>
       </div>
       <VariableHeaderEditor />

@@ -4,12 +4,14 @@ import { userSlice } from './user-slice';
 import { endpointReducer } from './endpoint-slice';
 import { resultReducer } from './result-slice';
 import { variablesReducer } from './variables-slice';
+import { headersReducer } from './headers-slice';
 
 export const rootReducer = combineReducers({
   user: userSlice.reducer,
   endpoint: endpointReducer,
   result: resultReducer,
   variables: variablesReducer,
+  headers: headersReducer,
 });
 
 export const setupStore = () => {
