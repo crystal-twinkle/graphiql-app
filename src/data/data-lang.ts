@@ -2,6 +2,9 @@ import { ILocalizationContext } from '../models/localization';
 
 export const dataLang: ILocalizationContext['dataLang'] = {
   EN: {
+    invalidEndpoint: 'Invalid URL to GQL schema. Check it and try again',
+    ok: 'Okey',
+    docs: 'Docs',
     noSuchPage: 'No such page',
     somethingWentWrong: 'Something went wrong. Try again',
     passwordValidHint:
@@ -53,6 +56,9 @@ export const dataLang: ILocalizationContext['dataLang'] = {
     },
   },
   RU: {
+    invalidEndpoint: 'Неверный URL-адрес схемы GQL. Проверьте и попробуйте еще раз',
+    ok: 'Хорошо',
+    docs: 'Документы',
     noSuchPage: 'Нет такой страницы',
     somethingWentWrong: 'Что-то пошло не так. Попробуйте еще раз',
     passwordValidHint:
@@ -104,6 +110,9 @@ export const dataLang: ILocalizationContext['dataLang'] = {
     },
   },
   BE: {
+    invalidEndpoint: 'Няправільны URL-адрас схемы GQL. Праверце і паспрабуйце яшчэ раз',
+    ok: 'Добра',
+    docs: 'Дакументы',
     noSuchPage: 'Няма такой старонкі',
     somethingWentWrong: 'Нешта пайшло не так. Паспрабуйце яшчэ раз',
     passwordValidHint:

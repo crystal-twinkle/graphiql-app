@@ -1,4 +1,4 @@
-import QueryEditor from '../components/QueryEditor/QueryEditor';
+import QueryEditor from '../components/QueryEditor';
 import ResponseSection from '../components/ResponseSection/ResponseSection';
 
 export function GqlPage() {

@@ -7,6 +7,9 @@ export interface ILocalizationContext {
   changeLanguage: (language: Language) => void;
   dataLang: {
     [key in Language]: {
+      invalidEndpoint: string;
+      ok: string;
+      docs: string;
       noSuchPage: string;
       somethingWentWrong: string;
       passwordValidHint: string;
