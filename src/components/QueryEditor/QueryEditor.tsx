@@ -13,8 +13,23 @@ import { AppDispatch, RootState } from '../../store/store';
 import { safelyParseJson } from '../../utils/safelyParseJson';
 
 function QueryEditor() {
-  const [query, setQuery] = useState(window.localStorage.getItem('query') || '');
+  enum Tabs {
+    EDITOR,
+    RESPONSE,
+  }
+
+  const [activeTab, setActiveTab] = useState(
+    Number(window.localStorage.getItem('editorActiveTab')) || Tabs.EDITOR
+  );
   const [isFocused, setIsFocused] = useState(true);
+  const [query, setQuery] = useState(window.localStorage.getItem('query') || '');
+
+  const endpoint = useSelector((state: RootState) => state.endpoint.endpoint);
+  const variables = safelyParseJson(useSelector((state: RootState) => state.variables.variables));
+  const headers = safelyParseJson(useSelector((state: RootState) => state.headers.headers));
+  const result = useSelector((state: RootState) => state.result.result);
+
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = event.target;
@@ -22,54 +37,90 @@ function QueryEditor() {
     window.localStorage.setItem('query', value);
   };
 
-  const endpoint = useSelector((state: RootState) => state.endpoint.endpoint);
-  const variables = safelyParseJson(useSelector((state: RootState) => state.variables.variables));
-  const headers = safelyParseJson(useSelector((state: RootState) => state.headers.headers));
-
-  const dispatch = useDispatch<AppDispatch>();
+  const changeActiveTab = (tab: Tabs) => {
+    window.localStorage.setItem('editorActiveTab', tab.toString());
+    setActiveTab(tab);
+  };
 
   async function sendRequest(endpoint: string, query: string, variables: object, headers: object) {
-    const response = await fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-        ...headers,
-      },
-      body: JSON.stringify({ query, variables }),
-    });
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          ...headers,
+        },
+        body: JSON.stringify({ query, variables }),
+      });
 
-    const data = await response.json();
-    const prettifiedData = prettify(JSON.stringify(data), true);
-    dispatch(setResult(prettifiedData));
-    window.localStorage.setItem('result', prettifiedData);
+      const data = await response.json();
+      const prettifiedData = prettify(JSON.stringify(data), true);
+      dispatch(setResult(prettifiedData));
+      window.localStorage.setItem('result', prettifiedData);
+    } catch (error) {
+      console.error('Error during request:', error);
+    }
   }
 
   return (
-    <section className="relative flex flex-col grow w1/2 pb-2 bg-medium rounded-md">
+    <section className="flex flex-col grow rounded-md">
       <div className="sticky top-[58px] z-10 flex gap-6 p-3 justify-between items-center bg-medium rounded-t-md border-b-2 border-light">
-        <EndpointInput />
-        <div className="flex gap-5 items-center">
-          <Button
-            icon={playIcon}
-            onclick={() => sendRequest(endpoint, query, variables, headers)}
-          />
-          <Button icon={prettifyIcon} onclick={() => setQuery(prettify(query))} />
+        <div className="flex gap-5 w-1/4">
+          <div
+            className={`pb-4 pt-1 -mb-[15px] w-24 flex justify-center items-center ${
+              activeTab === Tabs.EDITOR &&
+              'underline border-2 border-light bg-medium border-b-0 rounded-t'
+            }`}
+          >
+            <Button onclick={() => changeActiveTab(Tabs.EDITOR)} text="Editor" />
+          </div>
+
+          <div
+            className={`pb-4 pt-1 -mb-[15px] w-24 flex justify-center ${
+              activeTab === Tabs.RESPONSE && 'underline bg-light rounded-t'
+            } `}
+          >
+            <Button onclick={() => changeActiveTab(Tabs.RESPONSE)} text="Response" />
+          </div>
+        </div>
+        <div
+          className={`flex justify-between w-3/4 ${
+            activeTab === Tabs.RESPONSE && 'pointer-events-none brightness-75'
+          }`}
+        >
+          <EndpointInput />
+          <div className="flex gap-5 items-center">
+            <Button icon={prettifyIcon} onclick={() => setQuery(prettify(query))} />
+            <Button
+              icon={playIcon}
+              onclick={() => sendRequest(endpoint, query, variables, headers)}
+            />
+          </div>
         </div>
       </div>
-      <div className="flex grow justify-between pt-2">
-        <LineCounter value={query} />
-        <textarea
-          autoFocus
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          onChange={handleChange}
-          onKeyDown={(event) => manageCursor(event, isFocused, setQuery)}
-          name="editor"
-          value={query}
-          className="grow px-2 bg-medium outline-none resize-none font-mono"
-        ></textarea>
-      </div>
-      <VariableHeaderEditor />
+      {activeTab === Tabs.EDITOR && (
+        <div className="flex flex-col grow bg-medium rounded-b-md">
+          <div className="flex grow justify-between pt-2 text-gray-400 font-mono">
+            <LineCounter value={query} />
+            <textarea
+              autoFocus
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+              onChange={handleChange}
+              onKeyDown={(event) => manageCursor(event, isFocused, setQuery)}
+              value={query}
+              className="grow px-2 bg-medium outline-none resize-none"
+            ></textarea>
+          </div>
+          <VariableHeaderEditor />
+        </div>
+      )}
+
+      {activeTab === Tabs.RESPONSE && (
+        <div className="bg-light px-5 py-1 whitespace-pre-wrap text-gray-300 font-mono">
+          {result}
+        </div>
+      )}
     </section>
   );
 }

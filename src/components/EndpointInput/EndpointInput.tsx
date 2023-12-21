@@ -23,10 +23,10 @@ export function EndpointInput() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex shrink-0 w-2/3 gap-3 items-center">
+    <form onSubmit={handleSubmit} className="flex w-2/3 gap-3 items-center">
       <input
         type="text"
-        placeholder="Enter GraphQL endpoint"
+        placeholder="Enter GraphQL endpoint supporting CORS"
         value={value}
         onChange={handleChange}
         className="w-full bg-light outline-none rounded py-1 px-2"
