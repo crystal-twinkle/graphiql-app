@@ -6,11 +6,12 @@ import LineCounter from '../LineCounter/LineCounter';
 import VariableHeaderEditor from '../VariableHeaderEditor/VariableHeaderEditor';
 import { manageCursor } from '../../utils/manageCursor';
 import { prettify } from '../../utils/prettifier';
-import { EndpointInput } from '../EndpointInput/EndpointInput';
+import { EndpointInput } from '../EndpointInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { setResult } from '../../store/result-slice';
 import { AppDispatch, RootState } from '../../store/store';
 import { safelyParseJson } from '../../utils/safelyParseJson';
+import { Docs } from '../Docs';
 
 function QueryEditor() {
   enum Tabs {
@@ -23,6 +24,7 @@ function QueryEditor() {
   );
   const [isFocused, setIsFocused] = useState(true);
   const [query, setQuery] = useState(window.localStorage.getItem('query') || '');
+  const [docsVisible, setDocsVisible] = useState(false);
 
   const endpoint = useSelector((state: RootState) => state.endpoint.endpoint);
   const variables = safelyParseJson(useSelector((state: RootState) => state.variables.variables));
@@ -63,65 +65,68 @@ function QueryEditor() {
   }
 
   return (
-    <section className="flex flex-col grow rounded-md">
-      <div className="sticky top-[58px] z-10 flex gap-6 p-3 justify-between items-center bg-medium rounded-t-md border-b-2 border-light">
-        <div className="flex gap-5 w-1/4">
+    <>
+      {docsVisible ? <Docs /> : <></>}
+      <section className="flex flex-col grow rounded-md">
+        <div className="sticky top-[58px] z-10 flex gap-6 p-3 justify-between items-center bg-medium rounded-t-md border-b-2 border-light">
+          <div className="flex gap-5 w-1/4">
+            <div
+              className={`pb-4 pt-1 -mb-[15px] w-24 flex justify-center items-center ${
+                activeTab === Tabs.EDITOR &&
+                'underline border-2 border-light bg-medium border-b-0 rounded-t'
+              }`}
+            >
+              <Button onclick={() => changeActiveTab(Tabs.EDITOR)} text="Editor" />
+            </div>
+
+            <div
+              className={`pb-4 pt-1 -mb-[15px] w-24 flex justify-center ${
+                activeTab === Tabs.RESPONSE && 'underline bg-light rounded-t'
+              } `}
+            >
+              <Button onclick={() => changeActiveTab(Tabs.RESPONSE)} text="Response" />
+            </div>
+          </div>
           <div
-            className={`pb-4 pt-1 -mb-[15px] w-24 flex justify-center items-center ${
-              activeTab === Tabs.EDITOR &&
-              'underline border-2 border-light bg-medium border-b-0 rounded-t'
+            className={`flex justify-between w-3/4 ${
+              activeTab === Tabs.RESPONSE && 'pointer-events-none brightness-75'
             }`}
           >
-            <Button onclick={() => changeActiveTab(Tabs.EDITOR)} text="Editor" />
+            <EndpointInput docsClick={() => setDocsVisible((prevState) => !prevState)} />
+            <div className="flex gap-5 items-center">
+              <Button icon={prettifyIcon} onclick={() => setQuery(prettify(query))} />
+              <Button
+                icon={playIcon}
+                onclick={() => sendRequest(endpoint, query, variables, headers)}
+              />
+            </div>
           </div>
+        </div>
+        {activeTab === Tabs.EDITOR && (
+          <div className="flex flex-col grow bg-medium rounded-b-md">
+            <div className="flex grow justify-between pt-2 text-gray-400 font-mono">
+              <LineCounter value={query} />
+              <textarea
+                autoFocus
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
+                onChange={handleChange}
+                onKeyDown={(event) => manageCursor(event, isFocused, setQuery)}
+                value={query}
+                className="grow px-2 bg-medium outline-none resize-none"
+              ></textarea>
+            </div>
+            <VariableHeaderEditor />
+          </div>
+        )}
 
-          <div
-            className={`pb-4 pt-1 -mb-[15px] w-24 flex justify-center ${
-              activeTab === Tabs.RESPONSE && 'underline bg-light rounded-t'
-            } `}
-          >
-            <Button onclick={() => changeActiveTab(Tabs.RESPONSE)} text="Response" />
+        {activeTab === Tabs.RESPONSE && (
+          <div className="bg-light px-5 py-1 whitespace-pre-wrap text-gray-300 font-mono">
+            {result}
           </div>
-        </div>
-        <div
-          className={`flex justify-between w-3/4 ${
-            activeTab === Tabs.RESPONSE && 'pointer-events-none brightness-75'
-          }`}
-        >
-          <EndpointInput />
-          <div className="flex gap-5 items-center">
-            <Button icon={prettifyIcon} onclick={() => setQuery(prettify(query))} />
-            <Button
-              icon={playIcon}
-              onclick={() => sendRequest(endpoint, query, variables, headers)}
-            />
-          </div>
-        </div>
-      </div>
-      {activeTab === Tabs.EDITOR && (
-        <div className="flex flex-col grow bg-medium rounded-b-md">
-          <div className="flex grow justify-between pt-2 text-gray-400 font-mono">
-            <LineCounter value={query} />
-            <textarea
-              autoFocus
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
-              onChange={handleChange}
-              onKeyDown={(event) => manageCursor(event, isFocused, setQuery)}
-              value={query}
-              className="grow px-2 bg-medium outline-none resize-none"
-            ></textarea>
-          </div>
-          <VariableHeaderEditor />
-        </div>
-      )}
-
-      {activeTab === Tabs.RESPONSE && (
-        <div className="bg-light px-5 py-1 whitespace-pre-wrap text-gray-300 font-mono">
-          {result}
-        </div>
-      )}
-    </section>
+        )}
+      </section>
+    </>
   );
 }
 
