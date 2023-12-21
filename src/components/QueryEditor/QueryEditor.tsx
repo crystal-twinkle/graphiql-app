@@ -43,27 +43,31 @@ function QueryEditor() {
   };
 
   async function sendRequest(endpoint: string, query: string, variables: object, headers: object) {
-    const response = await fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-        ...headers,
-      },
-      body: JSON.stringify({ query, variables }),
-    });
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          ...headers,
+        },
+        body: JSON.stringify({ query, variables }),
+      });
 
-    const data = await response.json();
-    const prettifiedData = prettify(JSON.stringify(data), true);
-    dispatch(setResult(prettifiedData));
-    window.localStorage.setItem('result', prettifiedData);
+      const data = await response.json();
+      const prettifiedData = prettify(JSON.stringify(data), true);
+      dispatch(setResult(prettifiedData));
+      window.localStorage.setItem('result', prettifiedData);
+    } catch (error) {
+      console.error('Error during request:', error);
+    }
   }
 
   return (
-    <section className="relative flex flex-col grow rounded-md">
+    <section className="flex flex-col grow rounded-md">
       <div className="sticky top-[58px] z-10 flex gap-6 p-3 justify-between items-center bg-medium rounded-t-md border-b-2 border-light">
         <div className="flex gap-5 w-1/4">
           <div
-            className={`pb-4 pt-1 -mb-[13px] w-24 flex justify-center items-center ${
+            className={`pb-4 pt-1 -mb-[15px] w-24 flex justify-center items-center ${
               activeTab === Tabs.EDITOR &&
               'underline border-2 border-light bg-medium border-b-0 rounded-t'
             }`}
@@ -72,7 +76,7 @@ function QueryEditor() {
           </div>
 
           <div
-            className={`pb-4 pt-1 -mb-[13px] w-24 flex justify-center ${
+            className={`pb-4 pt-1 -mb-[15px] w-24 flex justify-center ${
               activeTab === Tabs.RESPONSE && 'underline bg-light rounded-t'
             } `}
           >
@@ -96,7 +100,7 @@ function QueryEditor() {
       </div>
       {activeTab === Tabs.EDITOR && (
         <div className="flex flex-col grow bg-medium rounded-b-md">
-          <div className="flex grow justify-between pt-2">
+          <div className="flex grow justify-between pt-2 text-gray-400 font-mono">
             <LineCounter value={query} />
             <textarea
               autoFocus
@@ -105,7 +109,7 @@ function QueryEditor() {
               onChange={handleChange}
               onKeyDown={(event) => manageCursor(event, isFocused, setQuery)}
               value={query}
-              className="grow px-2 bg-medium outline-none resize-none font-mono"
+              className="grow px-2 bg-medium outline-none resize-none"
             ></textarea>
           </div>
           <VariableHeaderEditor />
@@ -113,7 +117,9 @@ function QueryEditor() {
       )}
 
       {activeTab === Tabs.RESPONSE && (
-        <div className="bg-light px-5 py-1 whitespace-pre-wrap font-mono">{result}</div>
+        <div className="bg-light px-5 py-1 whitespace-pre-wrap text-gray-300 font-mono">
+          {result}
+        </div>
       )}
     </section>
   );

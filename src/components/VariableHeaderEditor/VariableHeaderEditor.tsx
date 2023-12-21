@@ -71,7 +71,7 @@ function VariableHeaderEditor() {
         </div>
       </div>
       <div
-        className={`flex scale-y-0 -my-6 p-0 transition-scale duration-500 ease-in-out overflow-hidden ${
+        className={`flex scale-y-0 -my-6 p-0 transition-scale duration-500 ease-in-out overflow-hidden text-gray-400 font-mono ${
           activeTab !== Tabs.NONE && 'my-0 scale-y-100'
         }`}
       >
