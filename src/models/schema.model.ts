@@ -2,25 +2,14 @@ export interface ISchemaGql {
   types: ISchemaType[];
 }
 
+export interface IName {
+  name: string;
+}
+
 export interface ISchemaType {
   description: string;
   enumValues: unknown;
-  fields: {
-    args: unknown[];
-    deprecationReason: string;
-    description: string;
-    isDeprecated: boolean;
-    name: string;
-    type: {
-      kind: string;
-      name: string;
-      ofType: {
-        kind: string;
-        name: string;
-        ofType: string;
-      };
-    }[];
-  }[];
+  fields: ISchemaField[];
   inputFields: unknown;
   interfaces: {
     kind: string;
@@ -30,4 +19,21 @@ export interface ISchemaType {
   kind: string;
   name: string;
   possibleTypes: unknown;
+}
+
+export interface ISchemaField {
+  args: unknown[];
+  deprecationReason: string;
+  description: string;
+  isDeprecated: boolean;
+  name: string;
+  type: {
+    kind: string;
+    name: string;
+    ofType: {
+      kind: string;
+      name: string;
+      ofType: string;
+    };
+  };
 }

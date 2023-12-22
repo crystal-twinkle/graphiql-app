@@ -66,7 +66,14 @@ function QueryEditor() {
 
   return (
     <>
-      {docsVisible ? <Docs /> : <></>}
+      {docsVisible ? (
+        <section className="w-3/12">
+          <Docs />
+          <div></div>
+        </section>
+      ) : (
+        <></>
+      )}
       <section className="flex flex-col grow rounded-md">
         <div className="sticky top-[58px] z-10 flex gap-6 p-3 justify-between items-center bg-medium rounded-t-md border-b-2 border-light">
           <div className="flex gap-5 w-1/4">
