@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setResult } from '../../store/result-slice';
 import { AppDispatch, RootState } from '../../store/store';
 import { safelyParseJson } from '../../utils/safelyParseJson';
-import { Docs } from '../Docs';
+import { Docs } from '../Docs/Docs';
 
 function QueryEditor() {
   enum Tabs {

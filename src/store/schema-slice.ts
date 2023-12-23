@@ -1,14 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ISchemaGql } from '../models/schema.model';
+import { ISchemaGql, ISchemaType } from '../models/schema.model';
 
 export interface ISchemaState {
-  data: ISchemaGql | null;
+  data: {
+    types: Map<string, ISchemaType> | null;
+  };
 }
 
 const initialState: ISchemaState = {
-  data: window.localStorage.getItem('schema')
-    ? JSON.parse(window.localStorage.getItem('schema') as string)
-    : null,
+  data: {
+    types: null,
+  },
 };
 
 const schemaSlice = createSlice({
@@ -16,7 +18,12 @@ const schemaSlice = createSlice({
   initialState,
   reducers: {
     setSchema(state, action: PayloadAction<ISchemaGql | null>) {
-      state.data = action.payload;
+      const typesMap = new Map<string, ISchemaType>();
+      action.payload?.types.forEach((item) => {
+        typesMap.set(item.name, item);
+      });
+
+      state.data.types = typesMap;
     },
   },
 });

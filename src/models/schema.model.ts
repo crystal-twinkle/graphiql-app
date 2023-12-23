@@ -22,18 +22,33 @@ export interface ISchemaType {
 }
 
 export interface ISchemaField {
-  args: unknown[];
+  args: ISchemaFieldArgument[];
   deprecationReason: string;
   description: string;
   isDeprecated: boolean;
   name: string;
   type: {
-    kind: string;
+    kind: FieldTypeKind;
     name: string;
-    ofType: {
-      kind: string;
-      name: string;
-      ofType: string;
-    };
+    ofType: ISchemaOfType;
   };
+}
+
+export interface ISchemaFieldArgument {
+  name: string;
+  description: string;
+  type: ISchemaOfType;
+  defaultValue: string;
+}
+
+export interface ISchemaOfType {
+  kind: string;
+  name: string;
+  ofType: string;
+}
+
+export enum FieldTypeKind {
+  NON_NULL = 'NON_NULL',
+  SCALAR = 'SCALAR',
+  LIST = 'LIST',
 }
