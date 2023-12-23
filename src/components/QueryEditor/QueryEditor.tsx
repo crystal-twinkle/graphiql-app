@@ -9,16 +9,17 @@ import { prettify } from '../../utils/prettifier';
 import { EndpointInput } from '../EndpointInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { setResult } from '../../store/result-slice';
-import { AppDispatch, RootState } from '../../store/store';
+import { AppDispatch, RootState, useAppSelector } from "../../store/store";
 import { safelyParseJson } from '../../utils/safelyParseJson';
-import { Docs } from '../Docs';
+import { Docs } from '../Docs/Docs';
+import docsIcon from '../../assets/icons/docs-icon.svg';
+
+enum Tabs {
+  EDITOR,
+  RESPONSE,
+}
 
 function QueryEditor() {
-  enum Tabs {
-    EDITOR,
-    RESPONSE,
-  }
-
   const [activeTab, setActiveTab] = useState(
     Number(window.localStorage.getItem('editorActiveTab')) || Tabs.EDITOR
   );
@@ -30,6 +31,7 @@ function QueryEditor() {
   const variables = safelyParseJson(useSelector((state: RootState) => state.variables.variables));
   const headers = safelyParseJson(useSelector((state: RootState) => state.headers.headers));
   const result = useSelector((state: RootState) => state.result.result);
+  const schemaTypes = useAppSelector((state) => state.schema.data?.types);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -66,9 +68,21 @@ function QueryEditor() {
 
   return (
     <>
-      {docsVisible ? <Docs /> : <></>}
+      {docsVisible && schemaTypes?.size ? (
+        <section className="w-3/12">
+          <Docs />
+          <div></div>
+        </section>
+      ) : (
+        <></>
+      )}
       <section className="flex flex-col grow rounded-md">
         <div className="sticky top-[58px] z-10 flex gap-6 p-3 justify-between items-center bg-medium rounded-t-md border-b-2 border-light">
+          <Button
+            disabled={!schemaTypes}
+            type="button"
+            icon={docsIcon} onclick={() => setDocsVisible(prevState => !prevState)}
+          />
           <div className="flex gap-5 w-1/4">
             <div
               className={`pb-4 pt-1 -mb-[15px] w-24 flex justify-center items-center ${
@@ -92,7 +106,7 @@ function QueryEditor() {
               activeTab === Tabs.RESPONSE && 'pointer-events-none brightness-75'
             }`}
           >
-            <EndpointInput docsClick={() => setDocsVisible((prevState) => !prevState)} />
+            <EndpointInput/>
             <div className="flex gap-5 items-center">
               <Button icon={prettifyIcon} onclick={() => setQuery(prettify(query))} />
               <Button
@@ -121,7 +135,7 @@ function QueryEditor() {
         )}
 
         {activeTab === Tabs.RESPONSE && (
-          <div className="bg-light px-5 py-1 whitespace-pre-wrap text-gray-300 font-mono">
+          <div className="border-b-2 border-x-2 h-full rounded-b-md border-medium px-5 pb-1 whitespace-pre-wrap text-gray-300 font-mono">
             {result}
           </div>
         )}
