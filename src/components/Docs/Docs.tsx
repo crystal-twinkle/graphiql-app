@@ -36,7 +36,7 @@ export function Docs() {
     setCurrentStep(newStep);
   };
 
-  const getDocsContent = (contentType?: string): ReactNode => {
+  const getDocsContent = (contentType?: DocsContentType): ReactNode => {
     switch (contentType) {
       case DocsContentType.TYPE: {
         return (
@@ -65,10 +65,13 @@ export function Docs() {
 
   return schemaTypes ? (
     <div className="mr-2 overflow-y-auto overflow-x-hidden sticky top-16">
+
       {prevSteps.length ? (
         <Button
           type="button"
-          text={'< ' + ((prevSteps?.[0]?.value as IName)?.name || translate.docs)}
+          className="overflow-hidden text-ellipsis text-nowrap"
+          prefix="<"
+          text={(prevSteps?.[0]?.value as IName)?.name || translate.docs}
           onclick={prevClick}
         />
       ) : (
@@ -76,7 +79,7 @@ export function Docs() {
       )}
       <DocsTitle title={(currentStep?.value as IName)?.name || translate.docs} />
       <div className="my-4 border-t-2 border-text"></div>
-      <div className="overflow-auto h-[765px]">{getDocsContent(currentStep?.contentType)}</div>
+      <div className="overflow-auto h-[79vh]">{getDocsContent(currentStep?.contentType)}</div>
     </div>
   ) : (
     <></>

@@ -12,9 +12,8 @@ import { useLocalization } from '../context/localization-context';
 import { SCHEMA_QUERY } from '../data/schema-query';
 import { Loader } from './Loader/Loader';
 
-export function EndpointInput({ docsClick }: { docsClick: () => void }) {
+export function EndpointInput() {
   const endpoint = useSelector((state: RootState) => state.endpoint.endpoint);
-  const schemaTypes = useAppSelector((state) => state.schema.data?.types);
   const [value, setValue] = useState(endpoint);
   const { translate } = useLocalization();
   const dispatch = useDispatch<AppDispatch>();
@@ -67,7 +66,6 @@ export function EndpointInput({ docsClick }: { docsClick: () => void }) {
 
   return (
     <form onSubmit={handleSubmit} className="flex w-2/3 gap-3 items-center">
-      <Button disabled={!schemaTypes} type="button" icon={docsIcon} onclick={docsClick} />
       <input
         type="text"
         placeholder="Enter GraphQL endpoint supporting CORS"

@@ -8,7 +8,7 @@ export function Layout() {
     <div className="flex flex-col min-h-screen text-text bg-medium">
       <Popup />
       <Header />
-      <main className="flex grow py-2 px-5 mx-auto">
+      <main className="flex grow px-5 mx-auto">
         <Outlet />
       </main>
       <Footer />

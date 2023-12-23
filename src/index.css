@@ -28,3 +28,7 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: #d0c98b;
 }
+
+.text-nowrap {
+  text-wrap: nowrap;
+}

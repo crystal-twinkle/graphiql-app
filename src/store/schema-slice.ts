@@ -18,12 +18,17 @@ const schemaSlice = createSlice({
   initialState,
   reducers: {
     setSchema(state, action: PayloadAction<ISchemaGql | null>) {
-      const typesMap = new Map<string, ISchemaType>();
-      action.payload?.types.forEach((item) => {
-        typesMap.set(item.name, item);
-      });
-
-      state.data.types = typesMap;
+      if (action.payload) {
+        const typesMap = new Map<string, ISchemaType>();
+        action.payload.types.forEach((item) => {
+          if (!item.name.includes('__')) {
+            typesMap.set(item.name, item);
+            state.data.types = typesMap;
+          }
+        });
+      } else {
+        state.data.types = null;
+      }
     },
   },
 });

@@ -1,7 +1,7 @@
 import { ISchemaField, ISchemaType } from '../../models/schema.model';
 import { DocsContentType, DocStep } from './Docs';
 import Button from '../UI/Button';
-import { valueWrapper } from '../../utils/docsFieldValueWrapper';
+import { FieldValueWrapper } from "./FieldValueWrapper";
 
 interface TypeDocsProps {
   schemaTypes: Map<string, ISchemaType> | null;
@@ -61,18 +61,20 @@ export function TypeDocs({ schemaTypes, data, onClick }: TypeDocsProps) {
                   {fieldValue ? (
                     <div className="inline-flex">
                       <span className="pr-2">:</span>
-                      {valueWrapper(
-                        field.type.kind,
-                        <Button
-                          text={fieldValue}
-                          onclick={() =>
-                            onClick({
-                              contentType: DocsContentType.TYPE,
-                              value: schemaTypes?.get(fieldValue),
-                            })
-                          }
-                        />
-                      )}
+                      {
+
+                        <FieldValueWrapper kind={field.type.kind}>
+                          <Button
+                            text={fieldValue}
+                            onclick={() =>
+                              onClick({
+                                contentType: DocsContentType.TYPE,
+                                value: schemaTypes?.get(fieldValue),
+                              })
+                            }
+                          />
+                        </FieldValueWrapper>
+                       }
                     </div>
                   ) : (
                     <></>
