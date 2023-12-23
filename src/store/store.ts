@@ -12,9 +12,10 @@ export const rootReducer = combineReducers({
   headers: headersReducer,
 });
 
-export const setupStore = () => {
+export const setupStore = (preloadedState?: Partial<RootState>) => {
   return configureStore({
     reducer: rootReducer,
+    preloadedState
   });
 };
 

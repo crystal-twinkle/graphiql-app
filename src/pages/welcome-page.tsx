@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { RouterPage } from '../router';
 import { useLocalization } from '../context/localization-context';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../main';
+import { auth } from '../utils/firebaseModule';
 import { Loader } from '../components/Loader/Loader';
 
 export function WelcomePage() {

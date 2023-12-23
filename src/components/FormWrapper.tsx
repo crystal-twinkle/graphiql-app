@@ -1,4 +1,4 @@
-import { CommonReactProps } from '../models/common.model';
+import { CommonReactProps } from '../models/common';
 import { Loader } from './Loader/Loader';
 import React, { FormEventHandler } from 'react';
 import { useLocalization } from '../context/localization-context';

@@ -7,7 +7,7 @@ import { RouterPage } from '../../router';
 import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 import { useLocalization } from '../../context/localization-context';
 import { signOut } from 'firebase/auth';
-import { auth } from '../../main';
+import { auth } from '../../utils/firebaseModule';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Avatar } from '../Avatar';
 import { Loader } from '../Loader/Loader';
