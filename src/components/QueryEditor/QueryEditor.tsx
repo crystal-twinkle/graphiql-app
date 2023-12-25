@@ -69,16 +69,9 @@ function QueryEditor() {
     if (!response.ok) {
       const errors: IErrorsGQL[] = (data as IErrorsGQLResult).errors;
 
-      const testEr = [
-        ...errors.map((e) => `Status: ${e.status}. ${e.message}`),
-        ...errors.map((e) => `Status: ${e.status}. ${e.message}`),
-        ...errors.map((e) => `Status: ${e.status}. ${e.message}`),
-        ...errors.map((e) => `Status: ${e.status}. ${e.message}`),
-      ];
-
       dispatch(
         setPopupData({
-          messages: testEr,
+          messages: errors.map((e) => `Status: ${e.status}. ${e.message}`),
           submitText: translate.ok,
           submitClick: () => dispatch(setPopupData(null)),
         })
