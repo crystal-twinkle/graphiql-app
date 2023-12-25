@@ -36,17 +36,17 @@ function Header() {
       }`}
     >
       <div className="max-w-screen-xl mx-auto flex justify-between items-center">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center w-1/3 gap-2">
           <img src={graphQLLogo} alt="App Logo" />
           <h1 className="font-semibold text-3xl align-middle">GraphiQL</h1>
         </div>
         <Link
           to={RouterPage.WELCOME}
-          className="hover:brightness-125 hover:scale-[1.02] transition-all duration-200 ease-in-out"
+          className="w-1/3 text-center hover:brightness-125 hover:scale-[1.02] transition-all duration-200 ease-in-out"
         >
           {translate.welcomePageText}
         </Link>
-        <div className="flex items-center gap-5">
+        <div className="flex justify-end w-1/3 items-center gap-5">
           <LanguageSwitcher />
           {loading ? (
             <Loader className="w-8 h-8" />

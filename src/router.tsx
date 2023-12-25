@@ -5,7 +5,7 @@ import { GqlPage } from './pages/gql-page';
 import { SignInPage } from './pages/sign-in-page';
 import { NotFoundPage } from './pages/not-found-page';
 import { SignUpPage } from './pages/sign-up-page';
-import { Layout } from './components/layout';
+import { Layout } from './components/Layout';
 import { PrivateOnlyPageWrapper } from './components/PrivateOnlyPageWrapper';
 import { AnonymousOnlyPageWrapper } from './components/AnonymousOnlyPageWrapper';
 

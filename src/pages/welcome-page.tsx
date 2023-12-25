@@ -17,7 +17,7 @@ export function WelcomePage() {
   const { translate } = useLocalization();
 
   return (
-    <div className="flex flex-col mx-auto p-5">
+    <div className="flex flex-col max-w-screen-xl mx-auto py-5">
       <nav className="flex gap-5 self-end items-center">
         {loading ? (
           <Loader className="w-7 h-7" />

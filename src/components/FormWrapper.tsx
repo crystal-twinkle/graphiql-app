@@ -14,13 +14,13 @@ export function FormWrapper({ children, title, loading, onSubmit }: FormWrapperP
 
   return (
     <div className="flex justify-center items-center">
-      <div className="p-4 border-2 border-solid rounded-md border-sky-500 w-[320px]">
+      <div className="p-4 border-2 border-solid rounded-md border-text w-[320px]">
         <span className="block w-full text-center font-bold text-2xl">{title}</span>
         <form autoComplete="on" onSubmit={onSubmit}>
           {children}
           <button
             type="submit"
-            className={`relative mt-4 p-2 cursor-pointer hover:brightness-125 hover:scale-[1.02] border-sky-500 transition-all duration-200 ease-in-out w-full py-2 border-2 rounded-md ${
+            className={`relative mt-4 p-2 cursor-pointer hover:brightness-125 hover:scale-[1.02] border-text transition-all duration-200 ease-in-out w-full py-2 border-2 rounded-md ${
               loading ? 'pointer-events-none opacity-5' : ''
             }`}
           >

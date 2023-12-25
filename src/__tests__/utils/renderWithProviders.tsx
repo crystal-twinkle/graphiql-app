@@ -5,9 +5,10 @@ import {LocalizationProvider} from '../../context/localization-context';
 import {Provider} from 'react-redux';
 import {setupStore, RootState, AppStore} from '../../store/store';
 import type {RenderOptions} from '@testing-library/react';
+import {PreloadedState} from '@reduxjs/toolkit';
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
-  preloadedState?: Partial<RootState>;
+  preloadedState?: PreloadedState<RootState>;
   store?: AppStore;
 }
 
