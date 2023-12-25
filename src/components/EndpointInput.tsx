@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState, useAppSelector } from '../store/store';
+import { AppDispatch, RootState } from '../store/store';
 import { setEndpoint } from '../store/endpoint-slice';
 import Button from './UI/Button';
 import applyIcon from '../assets/icons/apply-icon.svg';
-import docsIcon from '../assets/icons/docs-icon.svg';
 import { ISchemaGql } from '../models/schema.model';
 import { setSchema } from '../store/schema-slice';
 import { setPopupData } from '../store/popup-slice';
@@ -45,15 +44,12 @@ export function EndpointInput() {
       });
 
       const schemaData: { data: { __schema: ISchemaGql } } = await schemaResponse.json();
-      console.log(schemaData.data.__schema);
-
       dispatch(setSchema(schemaData.data.__schema));
     } catch (e) {
-      console.error(e);
       dispatch(setSchema(null));
       dispatch(
         setPopupData({
-          message: translate.invalidEndpoint,
+          messages: [translate.invalidEndpoint],
           submitText: translate.ok,
           submitClick: () => dispatch(setPopupData(null)),
         })
@@ -75,7 +71,9 @@ export function EndpointInput() {
       />
       <div className="min-w-28 flex items-center justify-center">
         {loading ? (
-          <Loader className="w-6 h-6" />
+          <div className="w-20 flex justify-center items-center">
+            <Loader className="w-6 h-6" />
+          </div>
         ) : (
           <Button type="submit" text={translate.apply} icon={applyIcon} />
         )}

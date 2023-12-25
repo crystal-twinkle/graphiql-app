@@ -1,6 +1,6 @@
 import playIcon from '../../assets/icons/play-icon.svg';
 import prettifyIcon from '../../assets/icons/pretify-icon.svg';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Button from '../UI/Button';
 import LineCounter from '../LineCounter/LineCounter';
 import VariableHeaderEditor from '../VariableHeaderEditor/VariableHeaderEditor';
@@ -9,10 +9,14 @@ import { prettify } from '../../utils/prettifier';
 import { EndpointInput } from '../EndpointInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { setResult } from '../../store/result-slice';
-import { AppDispatch, RootState, useAppSelector } from "../../store/store";
+import { AppDispatch, RootState, useAppSelector } from '../../store/store';
 import { safelyParseJson } from '../../utils/safelyParseJson';
 import { Docs } from '../Docs/Docs';
 import docsIcon from '../../assets/icons/docs-icon.svg';
+import { setPopupData } from '../../store/popup-slice';
+import { useLocalization } from '../../context/localization-context';
+import { IErrorsGQL, IErrorsGQLResult } from '../../models/common.model';
+import { Loader } from '../Loader/Loader';
 
 enum Tabs {
   EDITOR,
@@ -23,9 +27,11 @@ function QueryEditor() {
   const [activeTab, setActiveTab] = useState(
     Number(window.localStorage.getItem('editorActiveTab')) || Tabs.EDITOR
   );
+  const { translate } = useLocalization();
   const [isFocused, setIsFocused] = useState(true);
   const [query, setQuery] = useState(window.localStorage.getItem('query') || '');
   const [docsVisible, setDocsVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const endpoint = useSelector((state: RootState) => state.endpoint.endpoint);
   const variables = safelyParseJson(useSelector((state: RootState) => state.variables.variables));
@@ -47,23 +53,42 @@ function QueryEditor() {
   };
 
   async function sendRequest(endpoint: string, query: string, variables: object, headers: object) {
-    try {
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-          ...headers,
-        },
-        body: JSON.stringify({ query, variables }),
-      });
+    setLoading(true);
 
-      const data = await response.json();
-      const prettifiedData = prettify(JSON.stringify(data), true);
-      dispatch(setResult(prettifiedData));
-      window.localStorage.setItem('result', prettifiedData);
-    } catch (error) {
-      console.error('Error during request:', error);
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        ...headers,
+      },
+      body: JSON.stringify({ query, variables }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      const errors: IErrorsGQL[] = (data as IErrorsGQLResult).errors;
+
+      const testEr = [
+        ...errors.map((e) => `Status: ${e.status}. ${e.message}`),
+        ...errors.map((e) => `Status: ${e.status}. ${e.message}`),
+        ...errors.map((e) => `Status: ${e.status}. ${e.message}`),
+        ...errors.map((e) => `Status: ${e.status}. ${e.message}`),
+      ];
+
+      dispatch(
+        setPopupData({
+          messages: testEr,
+          submitText: translate.ok,
+          submitClick: () => dispatch(setPopupData(null)),
+        })
+      );
     }
+    const prettifiedData = prettify(JSON.stringify(data), true);
+    dispatch(setResult(prettifiedData));
+    window.localStorage.setItem('result', prettifiedData);
+
+    setLoading(false);
   }
 
   return (
@@ -81,7 +106,8 @@ function QueryEditor() {
           <Button
             disabled={!schemaTypes}
             type="button"
-            icon={docsIcon} onclick={() => setDocsVisible(prevState => !prevState)}
+            icon={docsIcon}
+            onclick={() => setDocsVisible((prevState) => !prevState)}
           />
           <div className="flex gap-5 w-1/4">
             <div
@@ -106,13 +132,19 @@ function QueryEditor() {
               activeTab === Tabs.RESPONSE && 'pointer-events-none brightness-75'
             }`}
           >
-            <EndpointInput/>
+            <EndpointInput />
             <div className="flex gap-5 items-center">
               <Button icon={prettifyIcon} onclick={() => setQuery(prettify(query))} />
-              <Button
-                icon={playIcon}
-                onclick={() => sendRequest(endpoint, query, variables, headers)}
-              />
+              {loading ? (
+                <div className="w-9 flex justify-center items-center">
+                  <Loader className="w-6 h-6" />
+                </div>
+              ) : (
+                <Button
+                  icon={playIcon}
+                  onclick={() => sendRequest(endpoint, query, variables, headers)}
+                />
+              )}
             </div>
           </div>
         </div>

@@ -8,7 +8,15 @@ interface ButtonProps {
   onclick?: () => void;
 }
 
-function Button({ type = 'button', icon, text, disabled, className, prefix, onclick }: ButtonProps) {
+function Button({
+  type = 'button',
+  icon,
+  text,
+  disabled,
+  className,
+  prefix,
+  onclick,
+}: ButtonProps) {
   return (
     <button
       title={text}

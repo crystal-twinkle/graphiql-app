@@ -48,7 +48,6 @@ export function SignUpPage() {
       });
       navigate(RouterPage.GQL);
     } catch (e) {
-      console.error(e);
       setSomethingWentWrongVisible(true);
     } finally {
       setLoading(false);
