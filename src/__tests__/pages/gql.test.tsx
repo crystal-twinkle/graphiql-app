@@ -10,6 +10,7 @@ const gqlPageRender = () => {
 };
 
 vi.spyOn(global, 'fetch').mockResolvedValue({
+  ok: true,
   json: vi.fn().mockResolvedValue({ data: {} }),
 });
 

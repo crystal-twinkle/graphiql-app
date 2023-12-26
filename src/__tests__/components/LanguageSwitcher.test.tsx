@@ -7,7 +7,7 @@ describe('variable header editor component', () => {
   it('toggles the dropdown when the button is clicked', () => {
     renderWithProviders(<LanguageSwitcher/>);
 
-    const button = screen.getByText('English');
+    const button = screen.getByText('EN');
     fireEvent.click(button);
 
     expect(screen.getByText('Russian')).toBeInTheDocument();
