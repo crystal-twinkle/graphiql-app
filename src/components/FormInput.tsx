@@ -1,3 +1,4 @@
+import React from 'react';
 import { FieldProps } from '../models/common';
 import { useLocalization } from '../context/localization-context';
 

@@ -72,7 +72,7 @@ export function Docs() {
           prefix="<"
           text={(prevSteps?.[0]?.value as IName)?.name || translate.docs}
           onclick={prevClick}
-          dataTested="prev-button"
+          dataTestid="prev-button"
         />
       ) : (
         <></>

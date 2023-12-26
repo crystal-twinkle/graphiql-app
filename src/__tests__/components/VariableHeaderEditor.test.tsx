@@ -8,8 +8,25 @@ describe('variable header editor component', () => {
     renderWithProviders(<VariableHeaderEditor />);
     const textarea = screen.getByRole('textbox');
 
-    fireEvent.change(textarea, { target: { value: 'New Header' } });
+    fireEvent.change(textarea, { target: { value: 'some string' } });
+    expect(textarea.value).toBe('some string');
+  });
 
-    expect(textarea.value).toBe('New Header');
+  it('check click on Variables', () => {
+    renderWithProviders(<VariableHeaderEditor />);
+    const variablesBtn = screen.getByText('Variables');
+    fireEvent.click(variablesBtn);
+    const textarea = screen.getByRole('textbox');
+    fireEvent.change(textarea, { target: { value: 'New Variables' } });
+    expect(textarea.value).toBe('New Variables');
+  });
+
+  it('check click on Headers', () => {
+    renderWithProviders(<VariableHeaderEditor />);
+    const headersBtn = screen.getByText('Headers');
+    fireEvent.click(headersBtn);
+    const textarea = screen.getByRole('textbox');
+    fireEvent.change(textarea, { target: { value: 'New Headers' } });
+    expect(textarea.value).toBe('New Headers');
   });
 });

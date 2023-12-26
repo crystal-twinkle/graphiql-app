@@ -22,7 +22,6 @@
     "src",
     "vite.config.ts",
     ".eslintrc.cjs",
-    "node_modules/vitest/globals.d.ts"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

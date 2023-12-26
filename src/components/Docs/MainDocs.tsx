@@ -17,6 +17,7 @@ export function MainDocs({ schemaTypes, onClick }: MainDocsProps) {
             className="text-ellipsis max-w-full overflow-hidden block"
             text={item.name}
             onclick={() => onClick({ contentType: DocsContentType.TYPE, value: item })}
+            dataTestid="mainDocs-button"
           />
         );
       })}
