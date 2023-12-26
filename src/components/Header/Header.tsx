@@ -7,7 +7,7 @@ import { RouterPage } from '../../router';
 import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 import { useLocalization } from '../../context/localization-context';
 import { signOut } from 'firebase/auth';
-import { auth } from '../../main';
+import { auth } from '../../utils/firebaseModule';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Avatar } from '../Avatar';
 import { Loader } from '../Loader/Loader';
@@ -88,7 +88,12 @@ function Header() {
             ) : user ? (
               <div className="w-full md:w-auto flex gap-1 border-b-2 border-medium md:border-b-0 py-2 md:py-0">
                 <Avatar user={user} />
-                <Button icon={signOutIcon} text={translate.signOut} onclick={logout} />
+                <Button
+                  icon={signOutIcon}
+                  text={translate.signOut}
+                  onclick={logout}
+                  dataTestid="signOut-button"
+                />
               </div>
             ) : (
               <></>

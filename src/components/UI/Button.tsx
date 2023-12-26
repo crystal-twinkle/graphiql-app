@@ -2,16 +2,29 @@ interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
   icon?: string;
   text?: string;
+  prefix?: string;
   disabled?: boolean;
   className?: string;
   onclick?: () => void;
+  dataTestid?: string;
 }
 
-function Button({ type = 'button', icon, text, disabled, className, onclick }: ButtonProps) {
+function Button({
+  type = 'button',
+  icon,
+  text,
+  disabled,
+  className,
+  prefix,
+  onclick,
+  dataTestid,
+}: ButtonProps) {
   return (
     <button
+      title={text}
       type={type}
       onClick={onclick}
+      data-testid={dataTestid}
       className={
         'flex items-center gap-1 hover:brightness-125 hover:scale-[1.02] transition-all duration-300 ease-in-out active:scale-[0.98] ' +
         (className || '') +
@@ -23,7 +36,8 @@ function Button({ type = 'button', icon, text, disabled, className, onclick }: B
           <img src={icon} alt="local-icon" />
         </div>
       )}
-      {text}
+      {prefix ? <span className="mr-1">{prefix}</span> : <></>}
+      <span>{text}</span>
     </button>
   );
 }

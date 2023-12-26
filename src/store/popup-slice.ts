@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SliceCaseReducers } from '@reduxjs/toolkit/src/createSlice';
 
 export interface IPopupData {
-  message: string;
+  messages: string[];
   submitText: string;
   submitClick: () => void;
 }

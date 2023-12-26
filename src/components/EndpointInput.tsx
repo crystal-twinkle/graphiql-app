@@ -1,20 +1,18 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState, useAppSelector } from '../store/store';
+import { AppDispatch, RootState } from '../store/store';
 import { setEndpoint } from '../store/endpoint-slice';
 import Button from './UI/Button';
 import applyIcon from '../assets/icons/apply-icon.svg';
-import docsIcon from '../assets/icons/docs-icon.svg';
-import { ISchemaGql } from '../models/schema.model';
+import { ISchemaGql } from '../models/schema';
 import { setSchema } from '../store/schema-slice';
 import { setPopupData } from '../store/popup-slice';
 import { useLocalization } from '../context/localization-context';
 import { SCHEMA_QUERY } from '../data/schema-query';
 import { Loader } from './Loader/Loader';
 
-export function EndpointInput({ docsClick }: { docsClick: () => void }) {
+export function EndpointInput() {
   const endpoint = useSelector((state: RootState) => state.endpoint.endpoint);
-  const schema = useAppSelector((state) => state.schema.data);
   const [value, setValue] = useState(endpoint);
   const { translate } = useLocalization();
   const dispatch = useDispatch<AppDispatch>();
@@ -46,15 +44,12 @@ export function EndpointInput({ docsClick }: { docsClick: () => void }) {
       });
 
       const schemaData: { data: { __schema: ISchemaGql } } = await schemaResponse.json();
-      console.log(schemaData.data.__schema);
-
       dispatch(setSchema(schemaData.data.__schema));
     } catch (e) {
-      console.error(e);
       dispatch(setSchema(null));
       dispatch(
         setPopupData({
-          message: translate.invalidEndpoint,
+          messages: [translate.invalidEndpoint],
           submitText: translate.ok,
           submitClick: () => dispatch(setPopupData(null)),
         })
@@ -66,8 +61,11 @@ export function EndpointInput({ docsClick }: { docsClick: () => void }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex w-2/3 gap-3 items-center justify-between">
-      <Button disabled={!schema} type="button" icon={docsIcon} onclick={docsClick} />
+    <form
+      onSubmit={handleSubmit}
+      className="flex w-2/3 gap-3 items-center"
+      data-testid="endpoint-form"
+    >
       <input
         type="text"
         placeholder="Enter GraphQL endpoint supporting CORS"

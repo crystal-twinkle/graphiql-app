@@ -1,4 +1,4 @@
-import { FormKeys, FieldProps } from '../models/common.model';
+import { FormKeys, FieldProps } from '../models/common';
 
 export const FormFieldsData: Record<string, Omit<FieldProps, 'register'>> = {
   firstName: {
