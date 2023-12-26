@@ -1,9 +1,6 @@
 import React from 'react';
-import { screen, fireEvent, waitFor } from '@testing-library/react';
-import {GqlPage} from '../../pages/Gql-page';
+import { screen, fireEvent } from '@testing-library/react';
 import {renderWithProviders} from '../tests-utils/renderWithProviders';
-import {it, vi} from 'vitest';
-import {act} from 'react-dom/test-utils';
 import VariableHeaderEditor from '../../components/VariableHeaderEditor/VariableHeaderEditor';
 
 describe('variable header editor component', () => {
