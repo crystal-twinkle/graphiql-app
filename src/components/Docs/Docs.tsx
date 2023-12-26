@@ -1,6 +1,6 @@
 import { useAppSelector } from '../../store/store';
 import { useLocalization } from '../../context/localization-context';
-import { ReactNode, useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import Button from '../UI/Button';
 import { IName, ISchemaField, ISchemaType } from '../../models/schema.model';
 import { TypeDocs } from './TypeDocs';
@@ -64,23 +64,25 @@ export function Docs() {
   };
 
   return schemaTypes ? (
-    <div className="mr-2 overflow-y-auto overflow-x-hidden sticky top-16">
-
-      {prevSteps.length ? (
-        <Button
-          type="button"
-          className="overflow-hidden text-ellipsis text-nowrap"
-          prefix="<"
-          text={(prevSteps?.[0]?.value as IName)?.name || translate.docs}
-          onclick={prevClick}
-        />
-      ) : (
-        <></>
-      )}
-      <DocsTitle title={(currentStep?.value as IName)?.name || translate.docs} />
-      <div className="my-4 border-t-2 border-text"></div>
-      <div className="overflow-auto h-[79vh]">{getDocsContent(currentStep?.contentType)}</div>
-    </div>
+    <>
+      <div className="mr-2 overflow-y-auto overflow-x-hidden sticky top-16">
+        {prevSteps.length ? (
+          <Button
+            type="button"
+            className="overflow-hidden text-ellipsis text-nowrap"
+            prefix="<"
+            text={(prevSteps?.[0]?.value as IName)?.name || translate.docs}
+            onclick={prevClick}
+          />
+        ) : (
+          <></>
+        )}
+        <DocsTitle title={(currentStep?.value as IName)?.name || translate.docs} />
+        <div className="my-4 border-t-2 border-text"></div>
+        <div className="overflow-auto h-[79vh]">{getDocsContent(currentStep?.contentType)}</div>
+      </div>
+      <div />
+    </>
   ) : (
     <></>
   );

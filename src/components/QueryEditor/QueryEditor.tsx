@@ -1,6 +1,6 @@
 import playIcon from '../../assets/icons/play-icon.svg';
 import prettifyIcon from '../../assets/icons/pretify-icon.svg';
-import React, { useState } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import Button from '../UI/Button';
 import LineCounter from '../LineCounter/LineCounter';
 import VariableHeaderEditor from '../VariableHeaderEditor/VariableHeaderEditor';
@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setResult } from '../../store/result-slice';
 import { AppDispatch, RootState, useAppSelector } from '../../store/store';
 import { safelyParseJson } from '../../utils/safelyParseJson';
-import { Docs } from '../Docs/Docs';
 import docsIcon from '../../assets/icons/docs-icon.svg';
 import { setPopupData } from '../../store/popup-slice';
 import { useLocalization } from '../../context/localization-context';
@@ -22,6 +21,8 @@ enum Tabs {
   EDITOR,
   RESPONSE,
 }
+
+const LazyDocs = lazy(() => import('../Docs/Docs').then(({ Docs }) => ({ default: Docs })));
 
 function QueryEditor() {
   const [activeTab, setActiveTab] = useState(
@@ -88,8 +89,15 @@ function QueryEditor() {
     <>
       {docsVisible && schemaTypes?.size ? (
         <section className="w-3/12">
-          <Docs />
-          <div></div>
+          <Suspense
+            fallback={
+              <div className="h-16 w-full flex justify-center items-center">
+                <Loader className="w-8 h-8" />
+              </div>
+            }
+          >
+            <LazyDocs />
+          </Suspense>
         </section>
       ) : (
         <></>
