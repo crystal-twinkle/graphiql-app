@@ -1,6 +1,6 @@
 import React from 'react';
 import { vi } from 'vitest';
-import {manageCursor} from '../../utils/manageCursor';
+import { manageCursor } from '../../utils/manageCursor';
 
 describe('manageCursor function', () => {
   it('should call handleTabPress on Tab key press', () => {
@@ -41,5 +41,4 @@ describe('manageCursor function', () => {
 
     manageCursor(event as React.KeyboardEvent<HTMLTextAreaElement>, true, vi.fn());
   });
-
 });

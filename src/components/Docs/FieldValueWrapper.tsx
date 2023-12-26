@@ -1,6 +1,6 @@
-import { FieldTypeKind } from "../../models/schema";
-import { ReactNode } from "react";
-import { CommonReactProps } from "../../models/common.model";
+import { FieldTypeKind } from '../../models/schema';
+import { ReactNode } from 'react';
+import { CommonReactProps } from '../../models/common.model';
 
 interface FieldValueWrapperProps extends CommonReactProps {
   kind: FieldTypeKind;

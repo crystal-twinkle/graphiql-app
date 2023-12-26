@@ -1,12 +1,12 @@
 import React from 'react';
-import {screen, fireEvent, waitFor} from '@testing-library/react';
-import {GqlPage} from '../../pages/Gql-page';
-import {renderWithProviders} from '../tests-utils/renderWithProviders';
-import {vi} from 'vitest';
-import {act} from 'react-dom/test-utils';
+import { screen, fireEvent, waitFor } from '@testing-library/react';
+import { GqlPage } from '../../pages/Gql-page';
+import { renderWithProviders } from '../tests-utils/renderWithProviders';
+import { vi } from 'vitest';
+import { act } from 'react-dom/test-utils';
 
 const gqlPageRender = () => {
-  return renderWithProviders(<GqlPage/>);
+  return renderWithProviders(<GqlPage />);
 };
 
 vi.spyOn(global, 'fetch').mockResolvedValue({
@@ -15,7 +15,6 @@ vi.spyOn(global, 'fetch').mockResolvedValue({
 });
 
 describe('gql page', () => {
-
   it('sends request when play button is clicked', async () => {
     gqlPageRender();
     const playButton = screen.getByTestId('play-button');
@@ -40,14 +39,13 @@ describe('gql page', () => {
       const ls = localStorage.getItem('editorActiveTab');
       expect(ls).toBe('0');
     });
-
   });
 
-  it('click on prettify-button', ()=> {
+  it('click on prettify-button', () => {
     gqlPageRender();
     const prettifyButton = screen.getByTestId('prettify-button');
     fireEvent.click(prettifyButton);
-  })
+  });
 
   it('updates textarea editor query state on input change', () => {
     gqlPageRender();
@@ -57,16 +55,15 @@ describe('gql page', () => {
     expect(queryTextarea.value).toBe('New GraphQL Query');
   });
 
-  it('click on prettify-button', ()=> {
+  it('click on prettify-button', () => {
     gqlPageRender();
     const prettifyButton = screen.getByTestId('prettify-button');
     fireEvent.click(prettifyButton);
-  })
+  });
 
   it('displays documentation tab content when button is clicked', () => {
     gqlPageRender();
     const docsButton = screen.getByTestId('docs-button');
     fireEvent.click(docsButton);
   });
-
 });

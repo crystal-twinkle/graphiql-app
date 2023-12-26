@@ -1,4 +1,4 @@
-import {prettify} from '../../utils/prettifier';
+import { prettify } from '../../utils/prettifier';
 
 describe('prettify function', () => {
   it('should prettify the code correctly', () => {

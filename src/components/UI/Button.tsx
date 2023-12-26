@@ -9,7 +9,16 @@ interface ButtonProps {
   dataTestid?: string;
 }
 
-function Button({ type = 'button', icon, text, disabled, className, prefix, onclick, dataTestid }: ButtonProps) {
+function Button({
+  type = 'button',
+  icon,
+  text,
+  disabled,
+  className,
+  prefix,
+  onclick,
+  dataTestid,
+}: ButtonProps) {
   return (
     <button
       title={text}
