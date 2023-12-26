@@ -53,7 +53,12 @@ function Header() {
           ) : user ? (
             <>
               <Avatar user={user} />
-              <Button icon={signOutIcon} text={translate.signOut} onclick={logout} />
+              <Button
+                icon={signOutIcon}
+                text={translate.signOut}
+                onclick={logout}
+                dataTestid="signOut-button"
+              />
             </>
           ) : (
             <></>

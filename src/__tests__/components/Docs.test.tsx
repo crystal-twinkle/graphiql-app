@@ -32,9 +32,19 @@ describe('docs component', () => {
     docsRender();
     const rootInfo = screen.getByText('Root');
     fireEvent.click(rootInfo);
-    const allFilms = screen.getByText('allFilms');
-    fireEvent.click(allFilms);
+
+    const typeArgNameBtns = screen.getAllByTestId('typeArgName-button');
+    fireEvent.click(typeArgNameBtns[0]);
+
     const prevButton = screen.getByTestId('prev-button');
     fireEvent.click(prevButton);
+
+    const typeValueBtns = screen.getAllByTestId('typeValue-button');
+    fireEvent.click(typeValueBtns[0]);
+
+    fireEvent.click(prevButton);
+
+    const allFilms = screen.getByText('allPlanets');
+    fireEvent.click(allFilms);
   });
 });

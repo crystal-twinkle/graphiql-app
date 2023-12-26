@@ -48,6 +48,7 @@ export function TypeDocs({ schemaTypes, data, onClick }: TypeDocsProps) {
                                     value: schemaTypes?.get(arg.type.name),
                                   })
                                 }
+                                dataTestid="typeArgName-button"
                               />
                             </div>
                           );
@@ -71,6 +72,7 @@ export function TypeDocs({ schemaTypes, data, onClick }: TypeDocsProps) {
                                 value: schemaTypes?.get(fieldValue),
                               })
                             }
+                            dataTestid="typeValue-button"
                           />
                         </FieldValueWrapper>
                       }

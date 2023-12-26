@@ -12,5 +12,6 @@ describe('variable header editor component', () => {
 
     expect(screen.getByText('Russian')).toBeInTheDocument();
     expect(screen.getByText('Belarusian')).toBeInTheDocument();
+    fireEvent.click(screen.getByText('Belarusian'));
   });
 });

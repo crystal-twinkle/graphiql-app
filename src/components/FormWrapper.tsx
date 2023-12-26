@@ -7,16 +7,17 @@ export interface FormWrapperProps extends CommonReactProps {
   title: string;
   loading: boolean;
   onSubmit: FormEventHandler<HTMLFormElement>;
+  dataTestid: string;
 }
 
-export function FormWrapper({ children, title, loading, onSubmit }: FormWrapperProps) {
+export function FormWrapper({ children, title, loading, onSubmit, dataTestid }: FormWrapperProps) {
   const { translate } = useLocalization();
 
   return (
     <div className="flex justify-center items-center">
       <div className="p-4 border-2 border-solid rounded-md border-text w-[320px]">
         <span className="block w-full text-center font-bold text-2xl">{title}</span>
-        <form autoComplete="on" onSubmit={onSubmit}>
+        <form autoComplete="on" onSubmit={onSubmit} data-testid={dataTestid}>
           {children}
           <button
             type="submit"

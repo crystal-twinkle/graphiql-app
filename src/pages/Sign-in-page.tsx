@@ -41,7 +41,12 @@ export function SignInPage() {
   };
 
   return (
-    <FormWrapper title={translate.signIn} loading={loading} onSubmit={handleSubmit(onSubmitForm)}>
+    <FormWrapper
+      title={translate.signIn}
+      loading={loading}
+      onSubmit={handleSubmit(onSubmitForm)}
+      dataTestid="signIn-form"
+    >
       <FormInput {...FormFieldsData.email} register={register} error={errors.email} />
       <FormInput {...FormFieldsData.password} register={register} error={errors.password} />
       <p
