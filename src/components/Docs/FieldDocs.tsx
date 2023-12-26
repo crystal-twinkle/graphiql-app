@@ -1,7 +1,7 @@
-import { ISchemaField, ISchemaType } from '../../models/schema.model';
+import { ISchemaField, ISchemaType } from '../../models/schema';
 import { DocsContentType, DocStep } from './Docs';
 import Button from '../UI/Button';
-import { FieldValueWrapper } from "./FieldValueWrapper";
+import { FieldValueWrapper } from './FieldValueWrapper';
 
 interface FieldDocsProps {
   schemaTypes: Map<string, ISchemaType> | null;
@@ -24,7 +24,7 @@ export function FieldDocs({ schemaTypes, data, onClick }: FieldDocsProps) {
             }
           />
         </FieldValueWrapper>
-       }
+      }
     </div>
   );
 }

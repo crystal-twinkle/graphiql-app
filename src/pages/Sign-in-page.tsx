@@ -4,9 +4,9 @@ import { validationSchema } from '../utils/validation.util';
 import { FormInput } from '../components/FormInput';
 import { FormFieldsData } from '../data/form-fields-data';
 import { FormWrapper } from '../components/FormWrapper';
-import { AppFields } from '../models/common.model';
+import { AppFields } from '../models/common';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../main';
+import { auth } from '../utils/firebaseModule';
 import React, { useState } from 'react';
 import { RouterPage } from '../router';
 import { useLocalization } from '../context/localization-context';
@@ -41,7 +41,12 @@ export function SignInPage() {
   };
 
   return (
-    <FormWrapper title={translate.signIn} loading={loading} onSubmit={handleSubmit(onSubmitForm)}>
+    <FormWrapper
+      title={translate.signIn}
+      loading={loading}
+      onSubmit={handleSubmit(onSubmitForm)}
+      dataTestid="signIn-form"
+    >
       <FormInput {...FormFieldsData.email} register={register} error={errors.email} />
       <FormInput {...FormFieldsData.password} register={register} error={errors.password} />
       <p

@@ -4,9 +4,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { validationSchema } from '../utils/validation.util';
 import { FormInput } from '../components/FormInput';
 import { FormFieldsData } from '../data/form-fields-data';
-import { AppFields } from '../models/common.model';
+import { AppFields } from '../models/common';
 import { FormWrapper } from '../components/FormWrapper';
-import { auth, db } from '../main';
+import { auth, db } from '../utils/firebaseModule';
 import { addDoc, collection } from 'firebase/firestore';
 import { useLocalization } from '../context/localization-context';
 import { UserCredential } from '@firebase/auth';
@@ -55,7 +55,12 @@ export function SignUpPage() {
   };
 
   return (
-    <FormWrapper title={translate.signUp} loading={loading} onSubmit={handleSubmit(onSubmitForm)}>
+    <FormWrapper
+      title={translate.signUp}
+      loading={loading}
+      onSubmit={handleSubmit(onSubmitForm)}
+      dataTestid={'signUp-form'}
+    >
       <FormInput {...FormFieldsData.firstName} register={register} error={errors.firstName} />
       <FormInput {...FormFieldsData.lastName} register={register} error={errors.lastName} />
       <FormInput {...FormFieldsData.email} register={register} error={errors.email} />

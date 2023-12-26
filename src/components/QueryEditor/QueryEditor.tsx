@@ -14,7 +14,7 @@ import { safelyParseJson } from '../../utils/safelyParseJson';
 import docsIcon from '../../assets/icons/docs-icon.svg';
 import { setPopupData } from '../../store/popup-slice';
 import { useLocalization } from '../../context/localization-context';
-import { IErrorsGQL, IErrorsGQLResult } from '../../models/common.model';
+import { IErrorsGQL, IErrorsGQLResult } from '../../models/common';
 import { Loader } from '../Loader/Loader';
 
 enum Tabs {
@@ -109,6 +109,7 @@ function QueryEditor() {
             type="button"
             icon={docsIcon}
             onclick={() => setDocsVisible((prevState) => !prevState)}
+            dataTestid="docs-button"
           />
           <div className="flex gap-5 w-1/4">
             <div
@@ -135,7 +136,11 @@ function QueryEditor() {
           >
             <EndpointInput />
             <div className="flex gap-5 items-center">
-              <Button icon={prettifyIcon} onclick={() => setQuery(prettify(query))} />
+              <Button
+                icon={prettifyIcon}
+                onclick={() => setQuery(prettify(query))}
+                dataTestid="prettify-button"
+              />
               {loading ? (
                 <div className="w-9 flex justify-center items-center">
                   <Loader className="w-6 h-6" />
@@ -144,6 +149,7 @@ function QueryEditor() {
                 <Button
                   icon={playIcon}
                   onclick={() => sendRequest(endpoint, query, variables, headers)}
+                  dataTestid="play-button"
                 />
               )}
             </div>
@@ -161,6 +167,7 @@ function QueryEditor() {
                 onKeyDown={(event) => manageCursor(event, isFocused, setQuery)}
                 value={query}
                 className="grow px-2 bg-medium outline-none resize-none"
+                data-testid="textarea-query"
               ></textarea>
             </div>
             <VariableHeaderEditor />

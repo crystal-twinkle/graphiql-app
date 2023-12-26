@@ -1,4 +1,5 @@
-import { FieldProps } from '../models/common.model';
+import React from 'react';
+import { FieldProps } from '../models/common';
 import { useLocalization } from '../context/localization-context';
 
 export function FormInput({ type, id, label, placeholder, formKey, error, register }: FieldProps) {

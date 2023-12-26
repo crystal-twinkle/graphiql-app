@@ -4,7 +4,7 @@ import { AppDispatch, RootState } from '../store/store';
 import { setEndpoint } from '../store/endpoint-slice';
 import Button from './UI/Button';
 import applyIcon from '../assets/icons/apply-icon.svg';
-import { ISchemaGql } from '../models/schema.model';
+import { ISchemaGql } from '../models/schema';
 import { setSchema } from '../store/schema-slice';
 import { setPopupData } from '../store/popup-slice';
 import { useLocalization } from '../context/localization-context';
@@ -61,7 +61,11 @@ export function EndpointInput() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex w-2/3 gap-3 items-center">
+    <form
+      onSubmit={handleSubmit}
+      className="flex w-2/3 gap-3 items-center"
+      data-testid="endpoint-form"
+    >
       <input
         type="text"
         placeholder="Enter GraphQL endpoint supporting CORS"
