@@ -5,6 +5,15 @@ export type CommonReactProps = {
   children: React.ReactNode;
 };
 
+export interface IErrorsGQLResult {
+  errors: IErrorsGQL[];
+}
+
+export interface IErrorsGQL {
+  message: string;
+  status: string;
+}
+
 export interface CommonFieldProps {
   id: string;
   name: string;
