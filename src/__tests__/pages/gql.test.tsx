@@ -12,6 +12,29 @@ const gqlPageRender = () => {
 vi.spyOn(global, 'fetch').mockResolvedValue({
   ok: true,
   json: vi.fn().mockResolvedValue({ data: {} }),
+  headers: new Headers(),
+  redirected: false,
+  status: 0,
+  statusText: '',
+  type: 'error',
+  url: '',
+  clone: function (): Response {
+    throw new Error('Function not implemented.');
+  },
+  body: null,
+  bodyUsed: false,
+  arrayBuffer: function (): Promise<ArrayBuffer> {
+    throw new Error('Function not implemented.');
+  },
+  blob: function (): Promise<Blob> {
+    throw new Error('Function not implemented.');
+  },
+  formData: function (): Promise<FormData> {
+    throw new Error('Function not implemented.');
+  },
+  text: function (): Promise<string> {
+    throw new Error('Function not implemented.');
+  },
 });
 
 describe('gql page', () => {
@@ -25,7 +48,6 @@ describe('gql page', () => {
 
   it('check function changes active tab on button click', async () => {
     gqlPageRender();
-    const ls = localStorage.getItem('editorActiveTab');
     act(() => {
       const responseButton = screen.getByText('Response');
       fireEvent.click(responseButton);
@@ -49,7 +71,7 @@ describe('gql page', () => {
 
   it('updates textarea editor query state on input change', () => {
     gqlPageRender();
-    const queryTextarea = screen.getByTestId('textarea-query');
+    const queryTextarea: HTMLTextAreaElement = screen.getByTestId('textarea-query');
     fireEvent.change(queryTextarea, { target: { value: 'New GraphQL Query' } });
 
     expect(queryTextarea.value).toBe('New GraphQL Query');

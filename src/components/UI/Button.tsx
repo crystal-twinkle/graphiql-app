@@ -26,7 +26,7 @@ function Button({
       onClick={onclick}
       data-testid={dataTestid}
       className={
-        'flex items-center gap-1 hover:brightness-125 hover:scale-[1.02] transition-all duration-200 ease-in-out active:scale-100 ' +
+        'flex items-center gap-1 hover:brightness-125 hover:scale-[1.02] transition-all duration-300 ease-in-out active:scale-[0.98] ' +
         (className || '') +
         (disabled ? 'pointer-events-none opacity-50' : '')
       }

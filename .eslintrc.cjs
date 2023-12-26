@@ -7,7 +7,7 @@ module.exports = {
     "plugin:react-hooks/recommended",
     "plugin:prettier/recommended",
   ],
-  ignorePatterns: ["dist", ".eslintrc.cjs", "*.config.*"],
+  ignorePatterns: ["dist", ".eslintrc.cjs", "*.config.*", "setupTests.ts"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     project: ["./tsconfig.json", "./tsconfig.node.json"],

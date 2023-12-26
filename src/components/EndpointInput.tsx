@@ -71,13 +71,11 @@ export function EndpointInput() {
         placeholder="Enter GraphQL endpoint supporting CORS"
         value={value}
         onChange={handleChange}
-        className="w-full bg-light outline-none rounded py-1 px-2"
+        className="w-10/12 bg-light outline-none rounded py-1 px-2"
       />
-      <div className="min-w-28 flex items-center justify-center">
+      <div className="w-2/12 flex items-center">
         {loading ? (
-          <div className="w-20 flex justify-center items-center">
-            <Loader className="w-6 h-6" />
-          </div>
+          <Loader className="w-8 h-8 p-2" />
         ) : (
           <Button type="submit" text={translate.apply} icon={applyIcon} />
         )}
