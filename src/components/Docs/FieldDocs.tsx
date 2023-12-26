@@ -1,4 +1,4 @@
-import { ISchemaField, ISchemaType } from '../../models/schema.model';
+import { ISchemaField, ISchemaType } from '../../models/schema';
 import { DocsContentType, DocStep } from './Docs';
 import Button from '../UI/Button';
 import { FieldValueWrapper } from "./FieldValueWrapper";

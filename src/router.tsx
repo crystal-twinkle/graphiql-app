@@ -1,10 +1,10 @@
 import React from 'react';
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
-import { WelcomePage } from './pages/welcome-page';
-import { GqlPage } from './pages/gql-page';
-import { SignInPage } from './pages/sign-in-page';
-import { NotFoundPage } from './pages/not-found-page';
-import { SignUpPage } from './pages/sign-up-page';
+import { WelcomePage } from './pages/Welcome-page';
+import { GqlPage } from './pages/Gql-page';
+import { SignInPage } from './pages/Sign-in-page';
+import { NotFoundPage } from './pages/Not-found-page';
+import { SignUpPage } from './pages/Sign-up-page';
 import { Layout } from './components/Layout';
 import { PrivateOnlyPageWrapper } from './components/PrivateOnlyPageWrapper';
 import { AnonymousOnlyPageWrapper } from './components/AnonymousOnlyPageWrapper';

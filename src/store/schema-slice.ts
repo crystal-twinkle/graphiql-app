@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ISchemaGql, ISchemaType } from '../models/schema.model';
+import { ISchemaGql, ISchemaType } from '../models/schema';
 
 export interface ISchemaState {
   data: {

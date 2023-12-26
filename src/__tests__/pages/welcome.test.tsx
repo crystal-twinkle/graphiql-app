@@ -1,6 +1,6 @@
 import React from 'react';
-import {renderWithProviders} from '../utils/renderWithProviders';
-import {WelcomePage} from '../../pages/welcome-page';
+import {renderWithProviders} from '../tests-utils/renderWithProviders';
+import {WelcomePage} from '../../pages/Welcome-page';
 
 describe('Sign Up page test', () => {
   it('Render Sign Up component', () => {

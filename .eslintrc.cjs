@@ -28,5 +28,6 @@ module.exports = {
     "@typescript-eslint/no-var-requires": "off",
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
+    "no-console": ["warn", { "allow": ["error"] }]
   },
 };

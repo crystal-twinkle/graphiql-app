@@ -6,14 +6,16 @@ interface ButtonProps {
   disabled?: boolean;
   className?: string;
   onclick?: () => void;
+  dataTested?: string;
 }
 
-function Button({ type = 'button', icon, text, disabled, className, prefix, onclick }: ButtonProps) {
+function Button({ type = 'button', icon, text, disabled, className, prefix, onclick, dataTested }: ButtonProps) {
   return (
     <button
       title={text}
       type={type}
       onClick={onclick}
+      data-testid={dataTested}
       className={
         'flex items-center gap-1 hover:brightness-125 hover:scale-[1.02] transition-all duration-200 ease-in-out active:scale-100 ' +
         (className || '') +

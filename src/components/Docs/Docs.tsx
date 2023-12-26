@@ -2,7 +2,7 @@ import { useAppSelector } from '../../store/store';
 import { useLocalization } from '../../context/localization-context';
 import { ReactNode, useState } from 'react';
 import Button from '../UI/Button';
-import { IName, ISchemaField, ISchemaType } from '../../models/schema.model';
+import { IName, ISchemaField, ISchemaType } from '../../models/schema';
 import { TypeDocs } from './TypeDocs';
 import { FieldDocs } from './FieldDocs';
 import { MainDocs } from './MainDocs';
@@ -65,7 +65,6 @@ export function Docs() {
 
   return schemaTypes ? (
     <div className="mr-2 overflow-y-auto overflow-x-hidden sticky top-16">
-
       {prevSteps.length ? (
         <Button
           type="button"
@@ -73,6 +72,7 @@ export function Docs() {
           prefix="<"
           text={(prevSteps?.[0]?.value as IName)?.name || translate.docs}
           onclick={prevClick}
+          dataTested="prev-button"
         />
       ) : (
         <></>

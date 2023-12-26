@@ -1,4 +1,4 @@
-import { FieldTypeKind } from "../../models/schema.model";
+import { FieldTypeKind } from "../../models/schema";
 import { ReactNode } from "react";
 import { CommonReactProps } from "../../models/common.model";
 

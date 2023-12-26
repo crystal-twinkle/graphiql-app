@@ -82,6 +82,7 @@ function QueryEditor() {
             disabled={!schemaTypes}
             type="button"
             icon={docsIcon} onclick={() => setDocsVisible(prevState => !prevState)}
+            dataTested="docs-button"
           />
           <div className="flex gap-5 w-1/4">
             <div
@@ -108,10 +109,11 @@ function QueryEditor() {
           >
             <EndpointInput/>
             <div className="flex gap-5 items-center">
-              <Button icon={prettifyIcon} onclick={() => setQuery(prettify(query))} />
+              <Button icon={prettifyIcon} onclick={() => setQuery(prettify(query))} dataTested='prettify-button' />
               <Button
                 icon={playIcon}
                 onclick={() => sendRequest(endpoint, query, variables, headers)}
+                dataTested="play-button"
               />
             </div>
           </div>
@@ -128,6 +130,7 @@ function QueryEditor() {
                 onKeyDown={(event) => manageCursor(event, isFocused, setQuery)}
                 value={query}
                 className="grow px-2 bg-medium outline-none resize-none"
+                data-testid="textarea-query"
               ></textarea>
             </div>
             <VariableHeaderEditor />

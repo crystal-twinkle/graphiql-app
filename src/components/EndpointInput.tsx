@@ -5,7 +5,7 @@ import { setEndpoint } from '../store/endpoint-slice';
 import Button from './UI/Button';
 import applyIcon from '../assets/icons/apply-icon.svg';
 import docsIcon from '../assets/icons/docs-icon.svg';
-import { ISchemaGql } from '../models/schema.model';
+import { ISchemaGql } from '../models/schema';
 import { setSchema } from '../store/schema-slice';
 import { setPopupData } from '../store/popup-slice';
 import { useLocalization } from '../context/localization-context';
