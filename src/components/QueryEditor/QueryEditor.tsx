@@ -113,7 +113,7 @@ function QueryEditor() {
                 onChange={handleChange}
                 onKeyDown={(event) => manageCursor(event, isFocused, setQuery)}
                 value={query}
-                className="grow px-2 bg-medium outline-none resize-none"
+                className="grow px-2 bg-medium outline-none whitespace-pre-wrap resize-none"
               ></textarea>
             </div>
             <VariableHeaderEditor />

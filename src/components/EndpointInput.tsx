@@ -9,8 +9,8 @@ import { ISchemaGql } from '../models/schema.model';
 import { setSchema } from '../store/schema-slice';
 import { setPopupData } from '../store/popup-slice';
 import { useLocalization } from '../context/localization-context';
-import { SCHEMA_QUERY } from "../data/schema-query";
-import { Loader } from "./Loader/Loader";
+import { SCHEMA_QUERY } from '../data/schema-query';
+import { Loader } from './Loader/Loader';
 
 export function EndpointInput({ docsClick }: { docsClick: () => void }) {
   const endpoint = useSelector((state: RootState) => state.endpoint.endpoint);
@@ -66,18 +66,18 @@ export function EndpointInput({ docsClick }: { docsClick: () => void }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex w-2/3 gap-3 items-center">
+    <form onSubmit={handleSubmit} className="flex w-2/3 gap-3 items-center justify-between">
       <Button disabled={!schema} type="button" icon={docsIcon} onclick={docsClick} />
       <input
         type="text"
         placeholder="Enter GraphQL endpoint supporting CORS"
         value={value}
         onChange={handleChange}
-        className="w-full bg-light outline-none rounded py-1 px-2"
+        className="w-10/12 bg-light outline-none rounded py-1 px-2"
       />
-      <div className="min-w-28 flex items-center justify-center">
+      <div className="w-2/12 flex items-center">
         {loading ? (
-          <Loader className="w-6 h-6" />
+          <Loader className="w-8 h-8 p-2" />
         ) : (
           <Button type="submit" text={translate.apply} icon={applyIcon} />
         )}
