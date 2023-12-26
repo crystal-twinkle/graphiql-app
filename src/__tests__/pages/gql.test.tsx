@@ -14,9 +14,13 @@ vi.spyOn(global, 'fetch').mockResolvedValue({
 });
 
 describe('gql page', () => {
-  it('renders correctly', async () => {
+
+  it('sends request when play button is clicked', async () => {
     gqlPageRender();
-    expect(screen.getByText('Editor')).toBeInTheDocument();
+    const playButton = screen.getByTestId('play-button');
+    fireEvent.click(playButton);
+
+    await waitFor(() => expect(global.fetch).toHaveBeenCalled());
   });
 
   it('check function changes active tab on button click', async () => {
@@ -36,14 +40,6 @@ describe('gql page', () => {
       expect(ls).toBe('0');
     });
 
-  });
-
-  it('sends request when play button is clicked', async () => {
-    gqlPageRender();
-    const playButton = screen.getByTestId('play-button');
-    fireEvent.click(playButton);
-
-    await waitFor(() => expect(global.fetch).toHaveBeenCalled());
   });
 
   it('click on prettify-button', ()=> {

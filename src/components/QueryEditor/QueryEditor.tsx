@@ -101,7 +101,7 @@ function QueryEditor() {
             type="button"
             icon={docsIcon}
             onclick={() => setDocsVisible((prevState) => !prevState)}
-            dataTested="docs-button"
+            dataTestid="docs-button"
           />
           <div className="flex gap-5 w-1/4">
             <div
@@ -128,7 +128,7 @@ function QueryEditor() {
           >
             <EndpointInput />
             <div className="flex gap-5 items-center">
-              <Button icon={prettifyIcon} onclick={() => setQuery(prettify(query))} dataTested="play-button"/>
+              <Button icon={prettifyIcon} onclick={() => setQuery(prettify(query))} dataTestid="prettify-button"/>
               {loading ? (
                 <div className="w-9 flex justify-center items-center">
                   <Loader className="w-6 h-6" />
@@ -137,6 +137,7 @@ function QueryEditor() {
                 <Button
                   icon={playIcon}
                   onclick={() => sendRequest(endpoint, query, variables, headers)}
+                  dataTestid="play-button"
                 />
               )}
             </div>

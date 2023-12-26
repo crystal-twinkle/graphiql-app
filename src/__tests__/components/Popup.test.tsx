@@ -9,7 +9,7 @@ describe('popup component', () => {
     const initialSearchState = {
       popup: {
         data: {
-          message: 'error',
+          messages: ['error', 'errrrror'],
           submitText: 'ok',
           submitClick: vi.fn()
         }

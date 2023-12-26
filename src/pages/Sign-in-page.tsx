@@ -34,7 +34,6 @@ export function SignInPage() {
       await signInWithEmailAndPassword(auth, formData.email, formData.password);
       navigate(RouterPage.GQL);
     } catch (err) {
-      console.error(err);
       setCredentialErrorVisible(true);
     } finally {
       setLoading(false);
