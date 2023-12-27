@@ -32,6 +32,7 @@ function QueryEditor() {
   const [isFocused, setIsFocused] = useState(true);
   const [query, setQuery] = useState(window.localStorage.getItem('query') || '');
   const [docsVisible, setDocsVisible] = useState(false);
+  const [docsStyles, setDocsStyles] = useState('w-0');
   const [loading, setLoading] = useState(false);
 
   const endpoint = useSelector((state: RootState) => state.endpoint.endpoint);
@@ -51,6 +52,20 @@ function QueryEditor() {
   const changeActiveTab = (tab: Tabs) => {
     window.localStorage.setItem('editorActiveTab', tab.toString());
     setActiveTab(tab);
+  };
+
+  const toggleDocs = () => {
+    if (!docsVisible) {
+      setDocsVisible(true);
+      setTimeout(() => {
+        setDocsStyles('w-3/12');
+      });
+    } else {
+      setDocsStyles('w-0');
+      setTimeout(() => {
+        setDocsVisible(false);
+      }, 500);
+    }
   };
 
   async function sendRequest(endpoint: string, query: string, variables: object, headers: object) {
@@ -88,7 +103,7 @@ function QueryEditor() {
   return (
     <>
       {docsVisible && schemaTypes?.size ? (
-        <section className="w-3/12">
+        <section className={`transition-all ease-out duration-500 ${docsStyles}`}>
           <Suspense
             fallback={
               <div className="h-16 w-full flex justify-center items-center">
@@ -108,7 +123,7 @@ function QueryEditor() {
             disabled={!schemaTypes}
             type="button"
             icon={docsIcon}
-            onclick={() => setDocsVisible((prevState) => !prevState)}
+            onclick={toggleDocs}
             dataTestid="docs-button"
           />
           <div className="flex gap-5 w-1/4">
@@ -175,7 +190,11 @@ function QueryEditor() {
         )}
 
         {activeTab === Tabs.RESPONSE && (
-          <div className="border-b-2 border-x-2 h-full rounded-b-md border-medium px-5 pb-1 whitespace-pre-wrap text-gray-300 font-mono">
+          <div
+            className={`${
+              docsVisible && 'border-l-2 border-medium'
+            } px-5 -my-3 py-3 whitespace-pre-wrap text-gray-300 font-mono`}
+          >
             {result}
           </div>
         )}
