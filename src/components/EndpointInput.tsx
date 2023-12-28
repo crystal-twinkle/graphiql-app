@@ -63,7 +63,7 @@ export function EndpointInput() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex w-2/3 gap-3 items-center"
+      className="flex gap-5 justify-between w-full min-[990px]:w-1/2 order-1 min-[990px]:order-2 items-center"
       data-testid="endpoint-form"
     >
       <input
@@ -71,13 +71,15 @@ export function EndpointInput() {
         placeholder="Enter GraphQL endpoint supporting CORS"
         value={value}
         onChange={handleChange}
-        className="w-10/12 bg-light outline-none rounded py-1 px-2"
+        className="grow bg-light outline-none rounded py-1 px-2"
       />
-      <div className="w-2/12 flex items-center">
+      <div className="flex justify-end items-center">
         {loading ? (
           <Loader className="w-8 h-8 p-2" />
         ) : (
-          <Button type="submit" text={translate.apply} icon={applyIcon} />
+          <div className="w-8 sm:w-auto overflow-hidden sm:overflow-visible">
+            <Button type="submit" text={translate.apply} icon={applyIcon} />
+          </div>
         )}
       </div>
     </form>

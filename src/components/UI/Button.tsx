@@ -32,7 +32,7 @@ function Button({
       }
     >
       {icon && (
-        <div className="w-[32px] h-[32px]">
+        <div className="w-[28px] h-[28px] sm:w-[32px] sm:h-[32px]">
           <img src={icon} alt="local-icon" />
         </div>
       )}

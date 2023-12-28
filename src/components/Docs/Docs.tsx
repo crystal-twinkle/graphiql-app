@@ -65,7 +65,7 @@ export function Docs() {
 
   return schemaTypes ? (
     <>
-      <div className="mr-2 overflow-y-auto overflow-x-hidden sticky top-16">
+      <div className="mr-2 overflow-y-auto overflow-x-hidden sticky">
         {prevSteps.length ? (
           <Button
             type="button"

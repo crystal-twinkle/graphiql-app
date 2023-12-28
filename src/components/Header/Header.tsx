@@ -56,8 +56,8 @@ function Header() {
     >
       <div className="max-w-screen-xl mx-auto flex justify-between items-center bg-inherit">
         <div className="flex items-center w-1/2 md:w-1/3 gap-2">
-          <img src={graphQLLogo} alt="App Logo" />
-          <h1 className="font-semibold text-3xl align-middle">GraphiQL</h1>
+          <img src={graphQLLogo} alt="App Logo" className="w-8 sm:w-10 h-8 sm:h-10" />
+          <h1 className="font-semibold text-2xl sm:text-3xl align-middle">GraphiQL</h1>
         </div>
         <BurgerButton
           onClick={() => setIsBurgerOpened(!isBurgerOpened)}
@@ -66,7 +66,7 @@ function Header() {
         />
         <div
           onClick={() => setIsBurgerOpened(false)}
-          className={`w-1/2 md:w-0 fixed top-0 left-0 right-0 bottom-0 bg-dark-50 transition-all ease-out duration-700 ${
+          className={`w-1/2 md:w-0 fixed top-0 left-0 right-0 bottom-0 bg-dark-50 transition-all ease-in-out duration-500 ${
             isBurgerOpened ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
           }`}
         ></div>
@@ -74,7 +74,7 @@ function Header() {
         <div
           className={`fixed ${
             isBurgerOpened ? 'right-0' : '-right-96'
-          } top-0 py-14 md:py-0 md:static flex md:flex-row flex-col justify-start md:justify-between items-end md:items-center w-1/2 md:w-2/3 h-full px-3 md:px-0 bg-inherit transition-[right] ease-in-out duration-700`}
+          } top-0 py-14 md:py-0 md:static flex md:flex-row flex-col justify-start md:justify-between items-end md:items-center w-1/2 md:w-2/3 h-full px-3 md:px-0 bg-inherit transition-[right] ease-in-out duration-500`}
         >
           <Link
             to={RouterPage.WELCOME}

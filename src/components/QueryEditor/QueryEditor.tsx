@@ -119,11 +119,11 @@ function QueryEditor() {
       )}
       <section className="w-auto sm:w-2/3 md:w-3/4 flex flex-col grow rounded-md">
         <div
-          className={`sticky top-[58px] z-10 flex flex-wrap md:flex-nowrap gap-6 p-3 justify-between items-center bg-medium rounded-t-md ${
+          className={`sticky top-[58px] z-10 flex flex-wrap min-[990px]:flex-nowrap gap-6 p-3 justify-between items-center bg-medium rounded-t-md ${
             activeTab === Tabs.EDITOR && 'border-b-2 border-light'
           }`}
         >
-          <div className="flex order-2 md:order-1 gap-5 w-1/4">
+          <div className="flex w-1/4 sm:w-auto order-2 min-[990px]:order-1 justify-start gap-2">
             <Button
               disabled={!schemaTypes}
               type="button"
@@ -132,28 +132,29 @@ function QueryEditor() {
               dataTestid="docs-button"
             />
             <div
-              className={`pb-4 pt-1 -mb-[15px] w-24 flex justify-center items-center ${
+              className={`pb-4 pt-1 px-1 -mb-[14px] w-24 flex justify-center items-center ${
                 activeTab === Tabs.EDITOR &&
                 'underline border-2 border-light bg-medium border-b-0 rounded-t'
               }`}
             >
               <Button onclick={() => changeActiveTab(Tabs.EDITOR)} text="Editor" />
             </div>
-
             <div
-              className={`pb-4 pt-1 -mb-[15px] w-24 flex justify-center ${
+              className={`pb-4 pt-1 px-1 -mb-[14px] w-24 flex justify-center ${
                 activeTab === Tabs.RESPONSE && 'underline bg-light rounded-t'
               } `}
             >
               <Button onclick={() => changeActiveTab(Tabs.RESPONSE)} text="Response" />
             </div>
           </div>
+
+          <EndpointInput />
+
           <div
-            className={`flex justify-between w-full md:w-3/4 order-1 md:order-2 ${
+            className={`flex justify-end order-3 ${
               activeTab === Tabs.RESPONSE && 'pointer-events-none brightness-75'
             }`}
           >
-            <EndpointInput />
             <div className="flex gap-5 items-center">
               <Button
                 icon={prettifyIcon}
