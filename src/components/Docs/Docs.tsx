@@ -80,7 +80,9 @@ export function Docs() {
         )}
         <DocsTitle title={(currentStep?.value as IName)?.name || translate.docs} />
         <div className="my-4 border-t-2 border-text"></div>
-        <div className="overflow-auto h-[79vh]">{getDocsContent(currentStep?.contentType)}</div>
+        <div className="overflow-auto h-[30vh] sm:h-[79vh]">
+          {getDocsContent(currentStep?.contentType)}
+        </div>
       </div>
       <div />
     </>

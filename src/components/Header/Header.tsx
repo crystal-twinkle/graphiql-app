@@ -73,8 +73,8 @@ function Header() {
 
         <div
           className={`fixed ${
-            isBurgerOpened ? 'right-0 z-20' : '-right-96'
-          } top-14 md:static flex md:flex-row flex-col justify-start md:justify-between items-end md:items-center w-1/2 md:w-2/3 h-full px-3 md:px-0 bg-inherit transition-[right] ease-out duration-700`}
+            isBurgerOpened ? 'right-0' : '-right-96'
+          } top-0 py-14 md:py-0 md:static flex md:flex-row flex-col justify-start md:justify-between items-end md:items-center w-1/2 md:w-2/3 h-full px-3 md:px-0 bg-inherit transition-[right] ease-in-out duration-700`}
         >
           <Link
             to={RouterPage.WELCOME}
