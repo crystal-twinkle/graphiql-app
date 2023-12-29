@@ -65,7 +65,7 @@ export function Docs() {
 
   return schemaTypes ? (
     <>
-      <div className="mr-2 overflow-y-auto overflow-x-hidden sticky top-16">
+      <div className="mr-2 overflow-y-auto overflow-x-hidden sticky">
         {prevSteps.length ? (
           <Button
             type="button"
@@ -80,7 +80,9 @@ export function Docs() {
         )}
         <DocsTitle title={(currentStep?.value as IName)?.name || translate.docs} />
         <div className="my-4 border-t-2 border-text"></div>
-        <div className="overflow-auto h-[79vh]">{getDocsContent(currentStep?.contentType)}</div>
+        <div className="overflow-auto h-[30vh] sm:h-[79vh]">
+          {getDocsContent(currentStep?.contentType)}
+        </div>
       </div>
       <div />
     </>

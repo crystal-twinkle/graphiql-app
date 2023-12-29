@@ -50,14 +50,14 @@ function Header() {
 
   return (
     <header
-      className={`sticky top-0 left-0 z-20 py-2 px-5 bg-dark transition-all duration-500 ease-in-out ${
+      className={`sticky top-0 left-0 z-20 bg-dark transition-all duration-500 ease-in-out ${
         isPageScrolled && 'bg-light'
       }`}
     >
-      <div className="max-w-screen-xl mx-auto flex justify-between items-center bg-inherit">
+      <div className="max-w-screen-xl mx-auto py-2 px-5 flex justify-between items-center bg-inherit">
         <div className="flex items-center w-1/2 md:w-1/3 gap-2">
-          <img src={graphQLLogo} alt="App Logo" />
-          <h1 className="font-semibold text-3xl align-middle">GraphiQL</h1>
+          <img src={graphQLLogo} alt="App Logo" className="w-8 sm:w-10 h-8 sm:h-10" />
+          <h1 className="font-semibold text-2xl sm:text-3xl align-middle">GraphiQL</h1>
         </div>
         <BurgerButton
           onClick={() => setIsBurgerOpened(!isBurgerOpened)}
@@ -66,15 +66,15 @@ function Header() {
         />
         <div
           onClick={() => setIsBurgerOpened(false)}
-          className={`w-1/2 md:w-0 fixed top-0 left-0 right-0 bottom-0 bg-dark-50 transition-all ease-out duration-700 ${
+          className={`w-1/2 md:w-0 fixed top-0 left-0 right-0 bottom-0 bg-dark-50 transition-all ease-in-out duration-500 ${
             isBurgerOpened ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
           }`}
         ></div>
 
         <div
           className={`fixed ${
-            isBurgerOpened ? 'right-0 z-20' : '-right-96'
-          } top-14 md:static flex md:flex-row flex-col justify-start md:justify-between items-end md:items-center w-1/2 md:w-2/3 h-full px-3 md:px-0 bg-inherit transition-[right] ease-out duration-700`}
+            isBurgerOpened ? 'right-0' : '-right-96'
+          } top-0 py-14 md:py-0 md:static flex md:flex-row flex-col justify-start md:justify-between items-end md:items-center w-1/2 md:w-2/3 h-full px-3 md:px-0 bg-inherit transition-[right] ease-in-out duration-500`}
         >
           <Link
             to={RouterPage.WELCOME}
@@ -82,7 +82,7 @@ function Header() {
           >
             {translate.welcomePageText}
           </Link>
-          <div className="w-full md:w-1/2 flex md:flex-row flex-col items-start justify-end  md:items-center md:gap-5">
+          <div className="w-full md:w-1/2 flex md:flex-row flex-col items-start justify-end  md:items-center md:gap-5 bg-inherit">
             {loading ? (
               <Loader className="w-8 h-8" />
             ) : user ? (
@@ -92,13 +92,14 @@ function Header() {
                   icon={signOutIcon}
                   text={translate.signOut}
                   onclick={logout}
+                  className="w-full md:w-auto"
                   dataTestid="signOut-button"
                 />
               </div>
             ) : (
               <></>
             )}
-            <div className="py-2 md:py-0">
+            <div className="py-2 md:py-0 w-full md:w-auto bg-inherit">
               <LanguageSwitcher />
             </div>
           </div>

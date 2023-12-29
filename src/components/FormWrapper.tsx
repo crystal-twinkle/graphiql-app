@@ -14,8 +14,8 @@ export function FormWrapper({ children, title, loading, onSubmit, dataTestid }: 
   const { translate } = useLocalization();
 
   return (
-    <div className="flex justify-center items-center">
-      <div className="p-4 border-2 border-solid rounded-md border-text w-[320px]">
+    <div className="flex justify-center items-center py-2">
+      <div className="p-4 border-2 border-solid rounded-md border-text">
         <span className="block w-full text-center font-bold text-2xl">{title}</span>
         <form autoComplete="on" onSubmit={onSubmit} data-testid={dataTestid}>
           {children}

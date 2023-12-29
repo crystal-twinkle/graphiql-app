@@ -32,6 +32,7 @@ function QueryEditor() {
   const [isFocused, setIsFocused] = useState(true);
   const [query, setQuery] = useState(window.localStorage.getItem('query') || '');
   const [docsVisible, setDocsVisible] = useState(false);
+  const [docsStyles, setDocsStyles] = useState('w-full h-0 sm:h-auto sm:w-0');
   const [loading, setLoading] = useState(false);
 
   const endpoint = useSelector((state: RootState) => state.endpoint.endpoint);
@@ -53,6 +54,20 @@ function QueryEditor() {
     setActiveTab(tab);
   };
 
+  const toggleDocs = () => {
+    if (!docsVisible) {
+      setDocsVisible(true);
+      setTimeout(() => {
+        setDocsStyles('w-full h-[45vh] sm:h-auto sm:w-1/3 md:w-1/4');
+      });
+    } else {
+      setDocsStyles('w-full h-0 sm:h-auto sm:w-0');
+      setTimeout(() => {
+        setDocsVisible(false);
+      }, 500);
+    }
+  };
+
   async function sendRequest(endpoint: string, query: string, variables: object, headers: object) {
     setLoading(true);
 
@@ -72,7 +87,7 @@ function QueryEditor() {
 
       dispatch(
         setPopupData({
-          messages: errors.map((e) => `Status: ${e.status}. ${e.message}`),
+          messages: errors.map((e) => `${e.message}`),
           submitText: translate.ok,
           submitClick: () => dispatch(setPopupData(null)),
         })
@@ -88,7 +103,7 @@ function QueryEditor() {
   return (
     <>
       {docsVisible && schemaTypes?.size ? (
-        <section className="w-3/12">
+        <section className={`overflow-hidden transition-all ease-out duration-500 ${docsStyles}`}>
           <Suspense
             fallback={
               <div className="h-16 w-full flex justify-center items-center">
@@ -102,39 +117,44 @@ function QueryEditor() {
       ) : (
         <></>
       )}
-      <section className="flex flex-col grow rounded-md">
-        <div className="sticky top-[58px] z-10 flex gap-6 p-3 justify-between items-center bg-medium rounded-t-md border-b-2 border-light">
-          <Button
-            disabled={!schemaTypes}
-            type="button"
-            icon={docsIcon}
-            onclick={() => setDocsVisible((prevState) => !prevState)}
-            dataTestid="docs-button"
-          />
-          <div className="flex gap-5 w-1/4">
+      <section className="w-auto sm:w-2/3 md:w-3/4 flex flex-col grow rounded-md">
+        <div
+          className={`sticky top-[48px] sm:top-[56px] z-10 flex flex-wrap lg:flex-nowrap gap-6 p-3 justify-between items-center bg-medium rounded-t-md ${
+            activeTab === Tabs.EDITOR && 'border-b-2 border-light'
+          }`}
+        >
+          <div className="flex w-1/4 sm:w-auto order-2 lg:order-1 justify-start gap-2">
+            <Button
+              disabled={!schemaTypes}
+              type="button"
+              icon={docsIcon}
+              onclick={toggleDocs}
+              dataTestid="docs-button"
+            />
             <div
-              className={`pb-4 pt-1 -mb-[15px] w-24 flex justify-center items-center ${
+              className={`pb-4 pt-1 px-1 -mb-[14px] w-24 flex justify-center items-center ${
                 activeTab === Tabs.EDITOR &&
                 'underline border-2 border-light bg-medium border-b-0 rounded-t'
               }`}
             >
               <Button onclick={() => changeActiveTab(Tabs.EDITOR)} text="Editor" />
             </div>
-
             <div
-              className={`pb-4 pt-1 -mb-[15px] w-24 flex justify-center ${
+              className={`pb-4 pt-1 px-1 -mb-[14px] w-24 flex justify-center ${
                 activeTab === Tabs.RESPONSE && 'underline bg-light rounded-t'
               } `}
             >
               <Button onclick={() => changeActiveTab(Tabs.RESPONSE)} text="Response" />
             </div>
           </div>
+
+          <EndpointInput />
+
           <div
-            className={`flex justify-between w-3/4 ${
+            className={`flex justify-end order-3 ${
               activeTab === Tabs.RESPONSE && 'pointer-events-none brightness-75'
             }`}
           >
-            <EndpointInput />
             <div className="flex gap-5 items-center">
               <Button
                 icon={prettifyIcon}
@@ -166,7 +186,7 @@ function QueryEditor() {
                 onChange={handleChange}
                 onKeyDown={(event) => manageCursor(event, isFocused, setQuery)}
                 value={query}
-                className="grow px-2 bg-medium outline-none whitespace-pre-wrap resize-none"
+                className="grow px-2 bg-medium outline-none whitespace-pre-wrap overflow-auto resize-none"
                 data-testid="textarea-query"
               ></textarea>
             </div>
@@ -175,7 +195,11 @@ function QueryEditor() {
         )}
 
         {activeTab === Tabs.RESPONSE && (
-          <div className="border-b-2 border-x-2 h-full rounded-b-md border-medium px-5 pb-1 whitespace-pre-wrap text-gray-300 font-mono">
+          <div
+            className={`${
+              docsVisible && 'sm:border-l-2 sm:border-medium'
+            } h-full pl-3 -my-2 py-3 whitespace-pre-wrap break-words text-gray-300 font-mono`}
+          >
             {result}
           </div>
         )}

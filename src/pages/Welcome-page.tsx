@@ -54,7 +54,7 @@ export function WelcomePage() {
       </section>
       <section className="py-7">
         <h2 className="text-2xl font-semibold py-4">{translate.team.text}</h2>
-        <div className="flex justify-evenly flex-wrap gap-5">
+        <div className="flex justify-evenly xl:justify-between flex-wrap gap-5">
           <DeveloperCard
             name={translate.team.Roman}
             avatarLink={avatar1}

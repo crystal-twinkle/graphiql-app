@@ -6,7 +6,7 @@ export function FormInput({ type, id, label, placeholder, formKey, error, regist
   const { translate } = useLocalization();
 
   return (
-    <div className="relative mb-2">
+    <div className="w-[75vw] max-w-[400px] relative mb-2">
       <div className="flex flex-col">
         <label
           className="text-base cursor-pointer after:content-['*'] after:ml-0.5 after:text-red-500 after:font-bold after:text-base"
