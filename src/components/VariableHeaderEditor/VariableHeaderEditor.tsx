@@ -49,7 +49,7 @@ function VariableHeaderEditor() {
 
   return (
     <section className="flex flex-col py-2">
-      <div className="flex justify-between gap-10 px-5 pt-2 border-t-2 bg-medium border-light">
+      <div className="flex justify-between px-3 pt-2 border-t-2 bg-medium border-light">
         <div className="flex items-center gap-5">
           <div className={`${activeTab === Tabs.VARIABLES && 'underline'}`}>
             <Button onclick={() => changeActiveTab(Tabs.VARIABLES)} text="Variables" />
