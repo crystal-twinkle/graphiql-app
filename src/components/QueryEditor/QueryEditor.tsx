@@ -87,7 +87,7 @@ function QueryEditor() {
 
       dispatch(
         setPopupData({
-          messages: errors.map((e) => `Status: ${e.status}. ${e.message}`),
+          messages: errors.map((e) => `${e.message}`),
           submitText: translate.ok,
           submitClick: () => dispatch(setPopupData(null)),
         })
@@ -119,11 +119,11 @@ function QueryEditor() {
       )}
       <section className="w-auto sm:w-2/3 md:w-3/4 flex flex-col grow rounded-md">
         <div
-          className={`sticky top-[58px] z-10 flex flex-wrap min-[990px]:flex-nowrap gap-6 p-3 justify-between items-center bg-medium rounded-t-md ${
+          className={`sticky top-[48px] sm:top-[56px] z-10 flex flex-wrap lg:flex-nowrap gap-6 p-3 justify-between items-center bg-medium rounded-t-md ${
             activeTab === Tabs.EDITOR && 'border-b-2 border-light'
           }`}
         >
-          <div className="flex w-1/4 sm:w-auto order-2 min-[990px]:order-1 justify-start gap-2">
+          <div className="flex w-1/4 sm:w-auto order-2 lg:order-1 justify-start gap-2">
             <Button
               disabled={!schemaTypes}
               type="button"

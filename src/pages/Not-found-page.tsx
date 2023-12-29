@@ -7,7 +7,7 @@ export function NotFoundPage() {
   return (
     <section className="flex flex-col items-center justify-center gap-10">
       <img src={notFound} alt="Not found" />
-      <div className="flex justify-center bg-amber-50 rounded-2xl p-3 mt-3 no-data">
+      <div className="flex justify-center bg-dark text-xl sm:text-2xl rounded-md p-3 mt-3 no-data">
         {translate.noSuchPage}
       </div>
     </section>

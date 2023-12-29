@@ -1,9 +1,12 @@
+import { Loader } from '../Loader/Loader';
+
 interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
   icon?: string;
   text?: string;
   prefix?: string;
   disabled?: boolean;
+  loading?: boolean;
   className?: string;
   onclick?: () => void;
   dataTestid?: string;
@@ -14,6 +17,7 @@ function Button({
   icon,
   text,
   disabled,
+  loading,
   className,
   prefix,
   onclick,
@@ -31,10 +35,14 @@ function Button({
         (disabled ? 'pointer-events-none opacity-50' : '')
       }
     >
-      {icon && (
-        <div className="w-[28px] h-[28px] sm:w-[32px] sm:h-[32px]">
-          <img src={icon} alt="local-icon" />
-        </div>
+      {loading ? (
+        <Loader className="w-8 h-8 p-2" />
+      ) : (
+        icon && (
+          <div className="w-[28px] h-[28px] sm:w-[32px] sm:h-[32px]">
+            <img src={icon} alt="local-icon" />
+          </div>
+        )
       )}
       {prefix ? <span className="mr-1">{prefix}</span> : <></>}
       <span>{text}</span>

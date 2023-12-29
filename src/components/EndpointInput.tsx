@@ -9,7 +9,6 @@ import { setSchema } from '../store/schema-slice';
 import { setPopupData } from '../store/popup-slice';
 import { useLocalization } from '../context/localization-context';
 import { SCHEMA_QUERY } from '../data/schema-query';
-import { Loader } from './Loader/Loader';
 
 export function EndpointInput() {
   const endpoint = useSelector((state: RootState) => state.endpoint.endpoint);
@@ -63,7 +62,7 @@ export function EndpointInput() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex gap-5 justify-between w-full min-[990px]:w-1/2 order-1 min-[990px]:order-2 items-center"
+      className="flex gap-2 justify-between w-full lg:w-1/2 order-1 lg:order-2 items-center"
       data-testid="endpoint-form"
     >
       <input
@@ -73,14 +72,10 @@ export function EndpointInput() {
         onChange={handleChange}
         className="grow bg-light outline-none rounded py-1 px-2"
       />
-      <div className="flex justify-end items-center">
-        {loading ? (
-          <Loader className="w-8 h-8 p-2" />
-        ) : (
-          <div className="w-8 sm:w-auto overflow-hidden sm:overflow-visible">
-            <Button type="submit" text={translate.apply} icon={applyIcon} />
-          </div>
-        )}
+      <div className="flex justify-start items-center">
+        <div className="w-8 sm:w-auto overflow-hidden sm:overflow-visible">
+          <Button type="submit" text={translate.apply} loading={loading} icon={applyIcon} />
+        </div>
       </div>
     </form>
   );
