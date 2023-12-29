@@ -9,8 +9,8 @@ export function Popup() {
       className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center z-50 bg-dark-50"
       data-testid="popup-wrap"
     >
-      <div className="max-w-[600px] min-h-[200px] rounded-lg m-4 p-4 flex flex-col justify-between items-center bg-light">
-        <div className="flex flex-col items-center justify-center px-4 min-h-[160px] overflow-auto">
+      <div className="w-[600px] min-h-[200px] rounded-lg m-4 p-4 flex flex-col justify-between items-center bg-light">
+        <div className="flex flex-col items-center justify-center px-4 min-h-[160px] overflow-auto text-center">
           {data?.messages.map((message: string) => (
             <div key={message} className="py-1">
               {message}

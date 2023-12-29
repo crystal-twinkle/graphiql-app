@@ -123,7 +123,7 @@ function QueryEditor() {
             activeTab === Tabs.EDITOR && 'border-b-2 border-light'
           }`}
         >
-          <div className="flex w-1/4 sm:w-auto order-2 lg:order-1 justify-start gap-2">
+          <div className="flex w-1/5 sm:w-auto order-2 lg:order-1 justify-start gap-0 sm:gap-2">
             <Button
               disabled={!schemaTypes}
               type="button"
@@ -132,7 +132,7 @@ function QueryEditor() {
               dataTestid="docs-button"
             />
             <div
-              className={`pb-4 pt-1 px-1 -mb-[14px] w-24 flex justify-center items-center ${
+              className={`pb-4 pt-1 px-2 -mb-[14px] w-24 flex justify-center items-center ${
                 activeTab === Tabs.EDITOR &&
                 'underline border-2 border-light bg-medium border-b-0 rounded-t'
               }`}
@@ -140,7 +140,7 @@ function QueryEditor() {
               <Button onclick={() => changeActiveTab(Tabs.EDITOR)} text="Editor" />
             </div>
             <div
-              className={`pb-4 pt-1 px-1 -mb-[14px] w-24 flex justify-center ${
+              className={`pb-4 pt-1 px-2 -mb-[14px] w-24 flex justify-center ${
                 activeTab === Tabs.RESPONSE && 'underline bg-light rounded-t'
               } `}
             >
@@ -151,28 +151,26 @@ function QueryEditor() {
           <EndpointInput />
 
           <div
-            className={`flex justify-end order-3 ${
+            className={`flex justify-end order-3 gap-2 items-center ${
               activeTab === Tabs.RESPONSE && 'pointer-events-none brightness-75'
             }`}
           >
-            <div className="flex gap-5 items-center">
+            <Button
+              icon={prettifyIcon}
+              onclick={() => setQuery(prettify(query))}
+              dataTestid="prettify-button"
+            />
+            {loading ? (
+              <div className="w-9 flex justify-center items-center">
+                <Loader className="w-6 h-6" />
+              </div>
+            ) : (
               <Button
-                icon={prettifyIcon}
-                onclick={() => setQuery(prettify(query))}
-                dataTestid="prettify-button"
+                icon={playIcon}
+                onclick={() => sendRequest(endpoint, query, variables, headers)}
+                dataTestid="play-button"
               />
-              {loading ? (
-                <div className="w-9 flex justify-center items-center">
-                  <Loader className="w-6 h-6" />
-                </div>
-              ) : (
-                <Button
-                  icon={playIcon}
-                  onclick={() => sendRequest(endpoint, query, variables, headers)}
-                  dataTestid="play-button"
-                />
-              )}
-            </div>
+            )}
           </div>
         </div>
         {activeTab === Tabs.EDITOR && (
