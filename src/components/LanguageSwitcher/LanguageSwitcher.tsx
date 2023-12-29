@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useState } from 'react';
 import Button from '../UI/Button';
 import localIcon from '../../assets/icons/local-icon.svg';
 import { useLocalization } from '../../context/localization-context';
@@ -8,7 +8,6 @@ const LanguageSwitcher = () => {
   const { translate, language, changeLanguage } = useLocalization();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [dropdownStyles, setDropdownStyles] = useState('-top-16 -z-50');
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const toggleDropdown = () => {
     if (!isDropdownOpen) {
@@ -45,7 +44,6 @@ const LanguageSwitcher = () => {
       />
       {isDropdownOpen ? (
         <div
-          ref={dropdownRef}
           className={`absolute md:right-1 px-1 bg-inherit transition-all ease-out duration-500 ${dropdownStyles}`}
         >
           <ul className="flex flex-col items-start max-w-[150px] overflow-hidden">
