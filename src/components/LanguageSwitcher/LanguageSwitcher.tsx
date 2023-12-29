@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Button from '../UI/Button';
 import localIcon from '../../assets/icons/local-icon.svg';
 import { useLocalization } from '../../context/localization-context';
@@ -7,9 +7,21 @@ import { Language } from '../../models/localization';
 const LanguageSwitcher = () => {
   const { translate, language, changeLanguage } = useLocalization();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [dropdownStyles, setDropdownStyles] = useState('-top-16 -z-50');
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+    if (!isDropdownOpen) {
+      setIsDropdownOpen(true);
+      setTimeout(() => {
+        setDropdownStyles('top-10 z-10');
+      });
+    } else {
+      setDropdownStyles('-top-16 -z-50');
+      setTimeout(() => {
+        setIsDropdownOpen(false);
+      }, 500);
+    }
   };
 
   const handleLanguage = (languageCode: Language) => {
@@ -24,14 +36,22 @@ const LanguageSwitcher = () => {
   ];
 
   return (
-    <div className="relative">
-      <Button icon={localIcon} text={language} onclick={toggleDropdown} />
+    <div className="relative bg-inherit">
+      <Button
+        icon={localIcon}
+        text={language}
+        onclick={toggleDropdown}
+        className="w-full md:w-auto"
+      />
       {isDropdownOpen ? (
-        <div className="absolute z-10 bg-light p-2 cursor-default md:right-0">
-          <ul className="flex flex-col items-start gap-2 max-w-[150px] overflow-hidden">
+        <div
+          ref={dropdownRef}
+          className={`absolute md:right-1 px-1 bg-inherit transition-all ease-out duration-500 ${dropdownStyles}`}
+        >
+          <ul className="flex flex-col items-start max-w-[150px] overflow-hidden">
             {languages.map((language) => (
               <li
-                className="cursor-pointer truncate w-full"
+                className="w-full p-1 border-b-2 last:border-b-0 border-medium hover:brightness-125 cursor-pointer truncate hover:scale-[1.02] ransition-all duration-300 ease-out"
                 key={language.code}
                 onClick={() => handleLanguage(language.code as Language)}
               >
