@@ -11,9 +11,9 @@ describe('manageCursor function', () => {
         selectionStart: 0,
         value: '',
       },
-    };
+    } as unknown as React.KeyboardEvent<HTMLTextAreaElement>;
 
-    manageCursor(event as React.KeyboardEvent<HTMLTextAreaElement>, true, vi.fn());
+    manageCursor(event, true, vi.fn());
   });
 
   it('should call handleEnterPress on Enter key press', () => {
@@ -24,9 +24,9 @@ describe('manageCursor function', () => {
         selectionStart: 0,
         value: '',
       },
-    };
+    } as unknown as React.KeyboardEvent<HTMLTextAreaElement>;
 
-    manageCursor(event as React.KeyboardEvent<HTMLTextAreaElement>, true, vi.fn());
+    manageCursor(event, true, vi.fn());
   });
 
   it('should call completePairChars on specific key press', () => {
@@ -37,8 +37,8 @@ describe('manageCursor function', () => {
         selectionStart: 0,
         value: '',
       },
-    };
+    } as unknown as React.KeyboardEvent<HTMLTextAreaElement>;
 
-    manageCursor(event as React.KeyboardEvent<HTMLTextAreaElement>, true, vi.fn());
+    manageCursor(event, true, vi.fn());
   });
 });

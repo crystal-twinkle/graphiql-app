@@ -1,6 +1,6 @@
 import { ISchemaType } from '../../models/schema';
 
-const rawData = [
+const rawData: unknown = [
   {
     kind: 'OBJECT',
     name: 'Root',
@@ -382,6 +382,6 @@ const rawData = [
     enumValues: null,
     possibleTypes: null,
   },
-] as ISchemaType[];
-
-export default rawData;
+];
+const schemaTypes: ISchemaType[] = rawData as ISchemaType[];
+export default schemaTypes;

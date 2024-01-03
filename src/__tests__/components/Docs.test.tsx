@@ -3,17 +3,17 @@ import { renderWithProviders } from '../tests-utils/renderWithProviders';
 import { Docs } from '../../components/Docs/Docs';
 import { ISchemaType } from '../../models/schema';
 import { fireEvent, screen } from '@testing-library/react';
-import rawData from '../tests-utils/rawDataDocs';
+import schemaTypes from '../tests-utils/rawDataDocs';
 
 const typesMap = new Map<string, ISchemaType>();
-rawData.forEach((item) => {
+schemaTypes.forEach((item) => {
   if (!item.name.includes('__')) {
     typesMap.set(item.name, item);
   }
 });
 
 const docsRender = () => {
-  const initialSearchState = {
+  const initialState = {
     schema: {
       data: {
         types: typesMap,
@@ -22,7 +22,7 @@ const docsRender = () => {
   };
   renderWithProviders(<Docs />, {
     preloadedState: {
-      schema: initialSearchState.schema,
+      schema: initialState.schema,
     },
   });
 };
