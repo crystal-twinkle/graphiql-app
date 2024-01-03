@@ -5,6 +5,7 @@ interface ButtonProps {
   icon?: string;
   text?: string;
   prefix?: string;
+  buttonRef?: React.MutableRefObject<HTMLButtonElement | null>;
   disabled?: boolean;
   loading?: boolean;
   className?: string;
@@ -17,6 +18,7 @@ function Button({
   icon,
   text,
   disabled,
+  buttonRef,
   loading,
   className,
   prefix,
@@ -25,6 +27,7 @@ function Button({
 }: ButtonProps) {
   return (
     <button
+      ref={buttonRef}
       title={text}
       type={type}
       onClick={onclick}
