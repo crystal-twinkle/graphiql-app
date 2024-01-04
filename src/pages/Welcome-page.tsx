@@ -11,6 +11,7 @@ import { useLocalization } from '../context/localization-context';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../utils/firebaseModule';
 import { Loader } from '../components/Loader/Loader';
+import React from 'react';
 
 export function WelcomePage() {
   const [user, loading] = useAuthState(auth);

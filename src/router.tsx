@@ -8,6 +8,8 @@ import { SignUpPage } from './pages/Sign-up-page';
 import { Layout } from './components/Layout';
 import { PrivateOnlyPageWrapper } from './components/PrivateOnlyPageWrapper';
 import { AnonymousOnlyPageWrapper } from './components/AnonymousOnlyPageWrapper';
+import { ErrorBoundary } from 'react-error-boundary';
+import ErrorComponent from './components/ErrorComponent';
 
 export enum RouterPage {
   WELCOME = '/',
@@ -15,11 +17,16 @@ export enum RouterPage {
   SIGN_IN = '/sign-in',
   SIGN_UP = '/sign-up',
 }
+const ErrorBoundaryLayout = () => (
+  <ErrorBoundary FallbackComponent={ErrorComponent}>
+    <Layout />
+  </ErrorBoundary>
+);
 
 export const routes: RouteObject[] = [
   {
     path: '/',
-    element: <Layout />,
+    element: <ErrorBoundaryLayout />,
     children: [
       {
         path: RouterPage.WELCOME,
