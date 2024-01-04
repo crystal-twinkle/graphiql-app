@@ -6,7 +6,7 @@ import VariableHeaderEditor from '../../components/VariableHeaderEditor/Variable
 describe('variable header editor component', () => {
   it('updates textarea editor query state on input change', () => {
     renderWithProviders(<VariableHeaderEditor />);
-    const textarea = screen.getByRole('textbox');
+    const textarea: HTMLTextAreaElement = screen.getByRole('textbox');
 
     fireEvent.change(textarea, { target: { value: 'some string' } });
     expect(textarea.value).toBe('some string');
@@ -16,7 +16,7 @@ describe('variable header editor component', () => {
     renderWithProviders(<VariableHeaderEditor />);
     const variablesBtn = screen.getByText('Variables');
     fireEvent.click(variablesBtn);
-    const textarea = screen.getByRole('textbox');
+    const textarea: HTMLTextAreaElement = screen.getByRole('textbox');
     fireEvent.change(textarea, { target: { value: 'New Variables' } });
     expect(textarea.value).toBe('New Variables');
   });
@@ -25,7 +25,7 @@ describe('variable header editor component', () => {
     renderWithProviders(<VariableHeaderEditor />);
     const headersBtn = screen.getByText('Headers');
     fireEvent.click(headersBtn);
-    const textarea = screen.getByRole('textbox');
+    const textarea: HTMLTextAreaElement = screen.getByRole('textbox');
     fireEvent.change(textarea, { target: { value: 'New Headers' } });
     expect(textarea.value).toBe('New Headers');
   });

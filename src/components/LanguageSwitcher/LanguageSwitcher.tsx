@@ -36,6 +36,7 @@ const LanguageSwitcher = () => {
   }, []);
 
   const handleLanguage = (languageCode: Language) => {
+    window.localStorage.setItem('lang', languageCode);
     changeLanguage(languageCode);
     closeDropdown();
   };
@@ -62,7 +63,7 @@ const LanguageSwitcher = () => {
           <ul className="flex flex-col items-start max-w-[150px] overflow-hidden">
             {languages.map((language) => (
               <li
-                className="w-full p-1 border-b-2 last:border-b-0 border-medium hover:brightness-125 cursor-pointer truncate hover:scale-[1.02] ransition-all duration-300 ease-out"
+                className="w-full p-1 border-b-2 last:border-b-0 border-medium hover:brightness-125 cursor-pointer truncate hover:scale-[1.02] transition-all duration-300 ease-out"
                 key={language.code}
                 onClick={() => handleLanguage(language.code as Language)}
               >
