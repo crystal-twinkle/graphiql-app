@@ -47,8 +47,18 @@ export function SignInPage() {
       onSubmit={handleSubmit(onSubmitForm)}
       dataTestid="signIn-form"
     >
-      <FormInput {...FormFieldsData.email} register={register} error={errors.email} />
-      <FormInput {...FormFieldsData.password} register={register} error={errors.password} />
+      <FormInput
+        {...FormFieldsData.email}
+        register={register}
+        error={errors.email}
+        dataTestid="signIn-email-input"
+      />
+      <FormInput
+        {...FormFieldsData.password}
+        register={register}
+        error={errors.password}
+        dataTestid="signIn-password-input"
+      />
       <p
         title={translate.invalidEmailOrPassword}
         className={

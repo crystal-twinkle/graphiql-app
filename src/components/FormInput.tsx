@@ -2,7 +2,16 @@ import React from 'react';
 import { FieldProps } from '../models/common';
 import { useLocalization } from '../context/localization-context';
 
-export function FormInput({ type, id, label, placeholder, formKey, error, register }: FieldProps) {
+export function FormInput({
+  type,
+  id,
+  label,
+  placeholder,
+  formKey,
+  error,
+  register,
+  dataTestid,
+}: FieldProps) {
   const { translate } = useLocalization();
 
   return (
@@ -21,6 +30,7 @@ export function FormInput({ type, id, label, placeholder, formKey, error, regist
           autoComplete="on"
           placeholder={translate[placeholder] as string}
           {...register(formKey)}
+          data-testid={dataTestid}
         />
       </div>
       <p
