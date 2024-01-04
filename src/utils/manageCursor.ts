@@ -17,10 +17,10 @@ function handleEnterPress(
     let indent = 0;
     const chars = value.split('');
     for (let i = 0; i < cursorPosition; i += 1) {
-      if (chars[i] === '{' || chars[i] === '(') {
+      if (chars[i] === '{' || chars[i] === '(' || chars[i] === '[') {
         indent += 1;
       }
-      if (chars[i] === '}' || chars[i] === ')') {
+      if (chars[i] === '}' || chars[i] === ')' || chars[i] === ']') {
         indent -= 1;
       }
     }
@@ -36,7 +36,8 @@ function handleEnterPress(
 
     const isCursorBetweenBrackets =
       event.currentTarget.value[cursorPosition] === '}' ||
-      event.currentTarget.value[cursorPosition] === ')';
+      event.currentTarget.value[cursorPosition] === ')' ||
+      event.currentTarget.value[cursorPosition] === ']';
 
     event.currentTarget.value =
       event.currentTarget.value.substring(0, cursorPosition) +

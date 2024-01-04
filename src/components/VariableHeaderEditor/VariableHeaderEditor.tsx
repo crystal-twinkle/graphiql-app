@@ -3,37 +3,60 @@ import LineCounter from '../LineCounter/LineCounter';
 import Button from '../UI/Button';
 import chevronIcon from '../../assets/icons/chevron-icon.svg';
 import { manageCursor } from '../../utils/manageCursor';
+import { AppDispatch, RootState } from '../../store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { setVariables } from '../../store/variables-slice';
+import { setHeaders } from '../../store/headers-slice';
 
 function VariableHeaderEditor() {
   enum Tabs {
-    NONE = '',
-    VARIABLES = 'variables',
-    HEADERS = 'headers',
+    NONE,
+    VARIABLES,
+    HEADERS,
   }
 
-  const [headersValue, setHeadersValue] = useState('');
-  const [variablesValue, setVariablesValue] = useState('');
-  const [activeTab, setActiveTab] = useState(Tabs.NONE);
+  const headers = useSelector((state: RootState) => state.headers.headers);
+  const [headersCurrentValue, setHeadersCurrentValue] = useState(headers);
+
+  const variables = useSelector((state: RootState) => state.variables.variables);
+  const [variablesCurrentValue, setVariablesCurrentValue] = useState(variables);
+
+  const [activeTab, setActiveTab] = useState(
+    Number(window.localStorage.getItem('headersVariablesActiveTab')) || Tabs.NONE
+  );
   const [isFocused, setIsFocused] = useState(true);
 
+  const dispatch = useDispatch<AppDispatch>();
+
   const handleHeadersChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setHeadersValue(event.target.value);
+    const { value } = event.target;
+    setHeadersCurrentValue(value);
+    dispatch(setHeaders(value));
+    window.localStorage.setItem('headers', value);
   };
 
   const handleVariablesChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setVariablesValue(event.target.value);
+    const { value } = event.target;
+    setVariablesCurrentValue(value);
+    dispatch(setVariables(value));
+    window.localStorage.setItem('variables', value);
+  };
+
+  const changeActiveTab = (tab: Tabs) => {
+    window.localStorage.setItem('headersVariablesActiveTab', tab.toString());
+    setActiveTab(tab);
   };
 
   return (
-    <>
-      <div className="relative z-10 flex justify-between gap-10 px-5 pt-2 pb-0 border-t-2 bg-medium border-light">
+    <section className="flex flex-col py-2">
+      <div className="flex justify-between px-3 pt-2 border-t-2 bg-medium border-light">
         <div className="flex items-center gap-5">
-          <div className={`${activeTab === 'variables' && 'underline'}`}>
-            <Button onclick={() => setActiveTab(Tabs.VARIABLES)} text="Variables" />
+          <div className={`${activeTab === Tabs.VARIABLES && 'underline'}`}>
+            <Button onclick={() => changeActiveTab(Tabs.VARIABLES)} text="Variables" />
           </div>
 
-          <div className={` ${activeTab === 'headers' && 'underline'}`}>
-            <Button onclick={() => setActiveTab(Tabs.HEADERS)} text="Headers" />
+          <div className={` ${activeTab === Tabs.HEADERS && 'underline'}`}>
+            <Button onclick={() => changeActiveTab(Tabs.HEADERS)} text="Headers" />
           </div>
         </div>
         <div
@@ -42,18 +65,20 @@ function VariableHeaderEditor() {
           }`}
         >
           <Button
-            onclick={() => setActiveTab(activeTab === Tabs.NONE ? Tabs.VARIABLES : Tabs.NONE)}
+            onclick={() => changeActiveTab(activeTab === Tabs.NONE ? Tabs.VARIABLES : Tabs.NONE)}
             icon={chevronIcon}
           />
         </div>
       </div>
       <div
-        className={`flex scale-y-0 -my-6 p-0 transition-scale duration-500 ease-in-out overflow-hidden ${
+        className={`flex scale-y-0 -my-6 p-0 transition-scale duration-500 ease-in-out overflow-hidden text-gray-400 font-mono ${
           activeTab !== Tabs.NONE && 'my-0 scale-y-100'
         }`}
       >
         <div className={`${activeTab === Tabs.NONE && 'h-0 overflow-hidden'}`}>
-          <LineCounter value={activeTab === Tabs.HEADERS ? headersValue : variablesValue} />
+          <LineCounter
+            value={activeTab === Tabs.HEADERS ? headersCurrentValue : variablesCurrentValue}
+          />
         </div>
         <textarea
           autoFocus
@@ -64,15 +89,15 @@ function VariableHeaderEditor() {
             manageCursor(
               event,
               isFocused,
-              activeTab === Tabs.HEADERS ? setHeadersValue : setVariablesValue
+              activeTab === Tabs.HEADERS ? setHeadersCurrentValue : setVariablesCurrentValue
             )
           }
           name="editor"
-          value={activeTab === Tabs.HEADERS ? headersValue : variablesValue}
-          className="w-full px-2 overflow-hidden bg-medium outline-none resize-none"
+          value={activeTab === Tabs.HEADERS ? headersCurrentValue : variablesCurrentValue}
+          className="w-full px-2 overflow-hidden bg-medium outline-none resize-none font-mono"
         ></textarea>
       </div>
-    </>
+    </section>
   );
 }
 

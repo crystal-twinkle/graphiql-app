@@ -1,11 +1,13 @@
 import React from 'react';
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
-import { WelcomePage } from './pages/welcome.page';
-import { GqlPage } from './pages/gql.page';
-import { SignInPage } from './pages/sign-in.page';
-import { NotFoundPage } from './pages/not-found.page';
-import { SignUpPage } from './pages/sign-up.page';
-import { Layout } from './components/layout';
+import { WelcomePage } from './pages/Welcome-page';
+import { GqlPage } from './pages/Gql-page';
+import { SignInPage } from './pages/Sign-in-page';
+import { NotFoundPage } from './pages/Not-found-page';
+import { SignUpPage } from './pages/Sign-up-page';
+import { Layout } from './components/Layout';
+import { PrivateOnlyPageWrapper } from './components/PrivateOnlyPageWrapper';
+import { AnonymousOnlyPageWrapper } from './components/AnonymousOnlyPageWrapper';
 
 export enum RouterPage {
   WELCOME = '/',
@@ -25,15 +27,27 @@ export const routes: RouteObject[] = [
       },
       {
         path: RouterPage.GQL,
-        element: <GqlPage />,
+        element: (
+          <PrivateOnlyPageWrapper>
+            <GqlPage />
+          </PrivateOnlyPageWrapper>
+        ),
       },
       {
         path: RouterPage.SIGN_IN,
-        element: <SignInPage />,
+        element: (
+          <AnonymousOnlyPageWrapper>
+            <SignInPage />
+          </AnonymousOnlyPageWrapper>
+        ),
       },
       {
         path: RouterPage.SIGN_UP,
-        element: <SignUpPage />,
+        element: (
+          <AnonymousOnlyPageWrapper>
+            <SignUpPage />
+          </AnonymousOnlyPageWrapper>
+        ),
       },
       {
         path: '*',
