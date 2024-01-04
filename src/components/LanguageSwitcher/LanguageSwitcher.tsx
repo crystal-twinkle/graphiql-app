@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Button from '../UI/Button';
 import localIcon from '../../assets/icons/local-icon.svg';
 import { useLocalization } from '../../context/localization-context';
@@ -8,25 +8,37 @@ const LanguageSwitcher = () => {
   const { translate, language, changeLanguage } = useLocalization();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [dropdownStyles, setDropdownStyles] = useState('-top-16 -z-50');
+  const switsherRef = useRef<HTMLButtonElement | null>(null);
 
-  const toggleDropdown = () => {
-    if (!isDropdownOpen) {
-      setIsDropdownOpen(true);
-      setTimeout(() => {
-        setDropdownStyles('top-10 z-10');
-      });
-    } else {
-      setDropdownStyles('-top-16 -z-50');
-      setTimeout(() => {
-        setIsDropdownOpen(false);
-      }, 500);
-    }
+  const openDropdown = () => {
+    setIsDropdownOpen(true);
+    setTimeout(() => {
+      setDropdownStyles('top-10 z-10');
+    });
   };
+
+  const closeDropdown = () => {
+    setDropdownStyles('-top-16 -z-50');
+    setTimeout(() => {
+      setIsDropdownOpen(false);
+    }, 500);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (switsherRef.current && !switsherRef.current.contains(event.target as Node)) {
+        closeDropdown();
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
 
   const handleLanguage = (languageCode: Language) => {
     window.localStorage.setItem('lang', languageCode);
     changeLanguage(languageCode);
-    toggleDropdown();
+    closeDropdown();
   };
 
   const languages = [
@@ -40,7 +52,8 @@ const LanguageSwitcher = () => {
       <Button
         icon={localIcon}
         text={language}
-        onclick={toggleDropdown}
+        buttonRef={switsherRef}
+        onclick={isDropdownOpen ? closeDropdown : openDropdown}
         className="w-full md:w-auto"
       />
       {isDropdownOpen ? (
