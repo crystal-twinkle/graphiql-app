@@ -7,6 +7,7 @@ import { AppDispatch, RootState } from '../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { setVariables } from '../../store/variables-slice';
 import { setHeaders } from '../../store/headers-slice';
+import { useLocalization } from '../../context/localization-context';
 
 function VariableHeaderEditor() {
   enum Tabs {
@@ -15,6 +16,7 @@ function VariableHeaderEditor() {
     HEADERS,
   }
 
+  const { translate } = useLocalization();
   const headers = useSelector((state: RootState) => state.headers.headers);
   const [headersCurrentValue, setHeadersCurrentValue] = useState(headers);
 
@@ -52,11 +54,11 @@ function VariableHeaderEditor() {
       <div className="flex justify-between px-3 pt-2 border-t-2 bg-medium border-light">
         <div className="flex items-center gap-5">
           <div className={`${activeTab === Tabs.VARIABLES && 'underline'}`}>
-            <Button onclick={() => changeActiveTab(Tabs.VARIABLES)} text="Variables" />
+            <Button onclick={() => changeActiveTab(Tabs.VARIABLES)} text={translate.variables} />
           </div>
 
           <div className={` ${activeTab === Tabs.HEADERS && 'underline'}`}>
-            <Button onclick={() => changeActiveTab(Tabs.HEADERS)} text="Headers" />
+            <Button onclick={() => changeActiveTab(Tabs.HEADERS)} text={translate.headers} />
           </div>
         </div>
         <div

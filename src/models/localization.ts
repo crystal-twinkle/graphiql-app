@@ -11,6 +11,12 @@ export interface ILocalizationContext {
       invalidEndpoint: string;
       ok: string;
       docs: string;
+      editor: string;
+      response: string;
+      prettify: string;
+      sendQuery: string;
+      variables: string;
+      headers: string;
       noSuchPage: string;
       somethingWentWrong: string;
       passwordValidHint: string;
