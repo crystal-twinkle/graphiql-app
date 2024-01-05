@@ -129,6 +129,7 @@ function QueryEditor() {
               type="button"
               icon={docsIcon}
               onclick={toggleDocs}
+              tooltip={translate.docs}
               dataTestid="docs-button"
             />
             <div
@@ -137,14 +138,14 @@ function QueryEditor() {
                 'underline border-2 border-light bg-medium border-b-0 rounded-t'
               }`}
             >
-              <Button onclick={() => changeActiveTab(Tabs.EDITOR)} text="Editor" />
+              <Button onclick={() => changeActiveTab(Tabs.EDITOR)} text={translate.editor} />
             </div>
             <div
               className={`pb-4 pt-1 px-2 -mb-[14px] w-24 flex justify-center ${
                 activeTab === Tabs.RESPONSE && 'underline bg-light rounded-t'
               } `}
             >
-              <Button onclick={() => changeActiveTab(Tabs.RESPONSE)} text="Response" />
+              <Button onclick={() => changeActiveTab(Tabs.RESPONSE)} text={translate.response} />
             </div>
           </div>
 
@@ -158,6 +159,7 @@ function QueryEditor() {
             <Button
               icon={prettifyIcon}
               onclick={() => setQuery(prettify(query))}
+              tooltip={translate.prettify}
               dataTestid="prettify-button"
             />
             {loading ? (
@@ -168,6 +170,7 @@ function QueryEditor() {
               <Button
                 icon={playIcon}
                 onclick={() => sendRequest(endpoint, query, variables, headers)}
+                tooltip={translate.sendQuery}
                 dataTestid="play-button"
               />
             )}

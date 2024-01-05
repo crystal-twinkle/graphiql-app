@@ -4,6 +4,7 @@ interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
   icon?: string;
   text?: string;
+  tooltip?: string;
   prefix?: string;
   buttonRef?: React.MutableRefObject<HTMLButtonElement | null>;
   disabled?: boolean;
@@ -17,6 +18,7 @@ function Button({
   type = 'button',
   icon,
   text,
+  tooltip,
   disabled,
   buttonRef,
   loading,
@@ -28,7 +30,7 @@ function Button({
   return (
     <button
       ref={buttonRef}
-      title={text}
+      title={tooltip}
       type={type}
       onClick={onclick}
       data-testid={dataTestid}
