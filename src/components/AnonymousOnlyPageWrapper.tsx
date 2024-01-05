@@ -11,7 +11,7 @@ export function AnonymousOnlyPageWrapper({ children }: CommonReactProps) {
   return loading ? (
     <Loader className="w-20 h-20 m-auto" />
   ) : user ? (
-    <Navigate to={RouterPage.WELCOME} />
+    <Navigate to={RouterPage.GQL} />
   ) : (
     children
   );
