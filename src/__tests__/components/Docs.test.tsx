@@ -4,6 +4,7 @@ import { Docs } from '../../components/Docs/Docs';
 import { ISchemaType } from '../../models/schema';
 import { fireEvent, screen } from '@testing-library/react';
 import schemaTypes from '../tests-utils/rawDataDocs';
+import { schemaReducer, initialState, setSchema } from '../../store/schema-slice';
 
 const typesMap = new Map<string, ISchemaType>();
 schemaTypes.forEach((item) => {
@@ -46,5 +47,11 @@ describe('docs component', () => {
 
     const allFilms = screen.getByText('allPlanets');
     fireEvent.click(allFilms);
+    fireEvent.click(screen.getByText('PlanetsConnection'));
+  });
+
+  it('check schemaSlice', () => {
+    const schema = { types: schemaTypes };
+    schemaReducer(initialState, setSchema(schema));
   });
 });

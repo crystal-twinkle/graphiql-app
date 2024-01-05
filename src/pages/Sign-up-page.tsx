@@ -61,14 +61,35 @@ export function SignUpPage() {
       onSubmit={handleSubmit(onSubmitForm)}
       dataTestid={'signUp-form'}
     >
-      <FormInput {...FormFieldsData.firstName} register={register} error={errors.firstName} />
-      <FormInput {...FormFieldsData.lastName} register={register} error={errors.lastName} />
-      <FormInput {...FormFieldsData.email} register={register} error={errors.email} />
-      <FormInput {...FormFieldsData.password} register={register} error={errors.password} />
+      <FormInput
+        {...FormFieldsData.firstName}
+        register={register}
+        error={errors.firstName}
+        dataTestid="signUp-firstName-input"
+      />
+      <FormInput
+        {...FormFieldsData.lastName}
+        register={register}
+        error={errors.lastName}
+        dataTestid="signUp-lastName-input"
+      />
+      <FormInput
+        {...FormFieldsData.email}
+        register={register}
+        error={errors.email}
+        dataTestid="signUp-email-input"
+      />
+      <FormInput
+        {...FormFieldsData.password}
+        register={register}
+        error={errors.password}
+        dataTestid="signUp-password-input"
+      />
       <FormInput
         {...FormFieldsData.passwordRepeat}
         register={register}
         error={errors.passwordRepeat}
+        dataTestid="signUp-passwordRepeat-input"
       />
       <p
         title={translate.somethingWentWrong}
