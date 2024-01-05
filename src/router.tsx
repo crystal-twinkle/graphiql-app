@@ -17,7 +17,7 @@ export enum RouterPage {
   SIGN_IN = '/sign-in',
   SIGN_UP = '/sign-up',
 }
-const ErrorBoundaryLayout = () => (
+export const ErrorBoundaryLayout = () => (
   <ErrorBoundary FallbackComponent={ErrorComponent}>
     <Layout />
   </ErrorBoundary>
