@@ -2,6 +2,10 @@ import React from 'react';
 import { FieldProps } from '../models/common';
 import { useLocalization } from '../context/localization-context';
 
+interface IFormInput extends FieldProps {
+  dataTestid: string;
+}
+
 export function FormInput({
   type,
   id,
@@ -11,7 +15,7 @@ export function FormInput({
   error,
   register,
   dataTestid,
-}: FieldProps) {
+}: IFormInput) {
   const { translate } = useLocalization();
 
   return (

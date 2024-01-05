@@ -23,7 +23,6 @@ export interface CommonFieldProps {
 }
 
 export interface FieldProps extends CommonFieldProps {
-  [key: string]: string;
   formKey: FormKeys;
   error?: FieldError | undefined;
   register: (

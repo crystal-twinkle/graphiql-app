@@ -7,7 +7,7 @@ export interface ISchemaState {
   };
 }
 
-const initialState: ISchemaState = {
+export const initialState: ISchemaState = {
   data: {
     types: null,
   },

@@ -10,7 +10,7 @@ import { LocalizationProvider } from './context/localization-context';
 const store = setupStore();
 const router = createBrowserRouter(routes);
 
-const App = () => (
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider store={store}>
       <LocalizationProvider>
@@ -19,5 +19,3 @@ const App = () => (
     </Provider>
   </React.StrictMode>
 );
-
-ReactDOM.createRoot(document.getElementById('root')!).render(<App />);
