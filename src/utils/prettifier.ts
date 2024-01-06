@@ -22,7 +22,7 @@ export function prettify(value: string, isResponse: boolean = false) {
     .replace(/ '/g, "'")
     .replace(/' /g, "'")
     .replace(/([^ ]):([^ ])/g, '$1: $2')
-    .replace(/\b[a-zA-Z_]+\b(?![ ]*[-:'(){[])/g, (match) => {
+    .replace(/\b(?!query\b)[a-zA-Z_]+\b(?![ ]*[!-:'(){[])/g, (match) => {
       if (isResponse) {
         return match;
       }
