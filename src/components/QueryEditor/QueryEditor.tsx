@@ -1,6 +1,6 @@
 import playIcon from '../../assets/icons/play-icon.svg';
 import prettifyIcon from '../../assets/icons/pretify-icon.svg';
-import React, { lazy, Suspense, useState } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import Button from '../UI/Button';
 import LineCounter from '../LineCounter/LineCounter';
 import VariableHeaderEditor from '../VariableHeaderEditor/VariableHeaderEditor';
@@ -46,8 +46,11 @@ function QueryEditor() {
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = event.target;
     setQuery(value);
-    window.localStorage.setItem('query', value);
   };
+
+  useEffect(() => {
+    window.localStorage.setItem('query', query);
+  }, [query]);
 
   const changeActiveTab = (tab: Tabs) => {
     window.localStorage.setItem('editorActiveTab', tab.toString());
