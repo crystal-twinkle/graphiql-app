@@ -82,6 +82,7 @@ function QueryEditor() {
   ) {
     setLoading(true);
     const contentTypeKey = Object.keys(headers).find((key) => key.toLowerCase() === 'content-type');
+
     const contentType = contentTypeKey ? headers[contentTypeKey] : undefined;
 
     if (contentType && contentType !== 'application/json') {
@@ -95,12 +96,14 @@ function QueryEditor() {
         })
       );
     } else {
+      const requestHeaders = {
+        'Content-Type': 'application/json',
+        ...headers,
+      };
+
       const response = await fetch(endpoint, {
         method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-          ...headers,
-        },
+        headers: requestHeaders,
         body: JSON.stringify({ query, variables }),
       });
 
