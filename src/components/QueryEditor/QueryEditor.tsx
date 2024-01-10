@@ -16,6 +16,7 @@ import { setPopupData } from '../../store/popup-slice';
 import { useLocalization } from '../../context/localization-context';
 import { IErrorsGQL, IErrorsGQLResult } from '../../models/common';
 import { Loader } from '../Loader/Loader';
+import { HeadersType, prettifyHeaders } from '../../utils/prettifyHeaders';
 
 enum Tabs {
   EDITOR,
@@ -37,7 +38,9 @@ function QueryEditor() {
 
   const endpoint = useSelector((state: RootState) => state.endpoint.endpoint);
   const variables = safelyParseJson(useSelector((state: RootState) => state.variables.variables));
-  const headers = safelyParseJson(useSelector((state: RootState) => state.headers.headers));
+  const headers: HeadersType = prettifyHeaders(
+    safelyParseJson(useSelector((state: RootState) => state.headers.headers))
+  );
   const result = useSelector((state: RootState) => state.result.result);
   const schemaTypes = useAppSelector((state) => state.schema.data?.types);
 
@@ -47,7 +50,7 @@ function QueryEditor() {
     const { value } = event.target;
     setQuery(value);
   };
-
+  prettifyHeaders(headers);
   useEffect(() => {
     window.localStorage.setItem('query', query);
   }, [query]);
@@ -71,35 +74,52 @@ function QueryEditor() {
     }
   };
 
-  async function sendRequest(endpoint: string, query: string, variables: object, headers: object) {
+  async function sendRequest(
+    endpoint: string,
+    query: string,
+    variables: object,
+    headers: HeadersType
+  ) {
     setLoading(true);
+    const contentTypeKey = Object.keys(headers).find((key) => key.toLowerCase() === 'content-type');
+    const contentType = contentTypeKey ? headers[contentTypeKey] : undefined;
 
-    const response = await fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-        ...headers,
-      },
-      body: JSON.stringify({ query, variables }),
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      const errors: IErrorsGQL[] = (data as IErrorsGQLResult).errors;
-
+    if (contentType && contentType !== 'application/json') {
       dispatch(
         setPopupData({
-          messages: errors.map((e) => `${e.message}`),
+          messages: [
+            'Error: GraphQL only supports Content-Type: application/json for headers. Please update your request',
+          ],
           submitText: translate.ok,
           submitClick: () => dispatch(setPopupData(null)),
         })
       );
-    }
-    const prettifiedData = prettify(JSON.stringify(data), true);
-    dispatch(setResult(prettifiedData));
-    window.localStorage.setItem('result', prettifiedData);
+    } else {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          ...headers,
+        },
+        body: JSON.stringify({ query, variables }),
+      });
 
+      const data = await response.json();
+      if (!response.ok) {
+        const errors: IErrorsGQL[] = (data as IErrorsGQLResult).errors;
+
+        dispatch(
+          setPopupData({
+            messages: errors.map((e) => `${e.message}`),
+            submitText: translate.ok,
+            submitClick: () => dispatch(setPopupData(null)),
+          })
+        );
+      }
+      const prettifiedData = prettify(JSON.stringify(data), true);
+      dispatch(setResult(prettifiedData));
+      window.localStorage.setItem('result', prettifiedData);
+    }
     setLoading(false);
   }
 
@@ -171,6 +191,7 @@ function QueryEditor() {
               </div>
             ) : (
               <Button
+                disabled={!schemaTypes}
                 icon={playIcon}
                 onclick={() => sendRequest(endpoint, query, variables, headers)}
                 tooltip={translate.sendQuery}
