@@ -82,6 +82,7 @@ function QueryEditor() {
   ) {
     setLoading(true);
     const contentTypeKey = Object.keys(headers).find((key) => key.toLowerCase() === 'content-type');
+
     const contentType = contentTypeKey ? headers[contentTypeKey] : undefined;
 
     if (contentType && contentType !== 'application/json') {
