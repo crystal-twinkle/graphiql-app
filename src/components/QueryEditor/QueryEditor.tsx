@@ -10,13 +10,11 @@ import { EndpointInput } from '../EndpointInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { setResult } from '../../store/result-slice';
 import { AppDispatch, RootState, useAppSelector } from '../../store/store';
-import { safelyParseJson } from '../../utils/safelyParseJson';
 import docsIcon from '../../assets/icons/docs-icon.svg';
 import { setPopupData } from '../../store/popup-slice';
 import { useLocalization } from '../../context/localization-context';
 import { IErrorsGQL, IErrorsGQLResult } from '../../models/common';
 import { Loader } from '../Loader/Loader';
-import { HeadersType, prettifyHeaders } from '../../utils/prettifyHeaders';
 
 enum Tabs {
   EDITOR,
@@ -37,10 +35,8 @@ function QueryEditor() {
   const [loading, setLoading] = useState(false);
 
   const endpoint = useSelector((state: RootState) => state.endpoint.endpoint);
-  const variables = safelyParseJson(useSelector((state: RootState) => state.variables.variables));
-  const headers: HeadersType = prettifyHeaders(
-    safelyParseJson(useSelector((state: RootState) => state.headers.headers))
-  );
+  const variables = useSelector((state: RootState) => state.variables.variables);
+  const headers = useSelector((state: RootState) => state.headers.headers);
   const result = useSelector((state: RootState) => state.result.result);
   const schemaTypes = useAppSelector((state) => state.schema.data?.types);
 
@@ -50,7 +46,7 @@ function QueryEditor() {
     const { value } = event.target;
     setQuery(value);
   };
-  prettifyHeaders(headers);
+
   useEffect(() => {
     window.localStorage.setItem('query', query);
   }, [query]);
@@ -74,40 +70,30 @@ function QueryEditor() {
     }
   };
 
-  async function sendRequest(
-    endpoint: string,
-    query: string,
-    variables: object,
-    headers: HeadersType
-  ) {
+  async function sendRequest(endpoint: string, query: string, variables: string, headers: string) {
     setLoading(true);
-    const contentTypeKey = Object.keys(headers).find((key) => key.toLowerCase() === 'content-type');
 
-    const contentType = contentTypeKey ? headers[contentTypeKey] : undefined;
+    try {
+      let parsedVariables = {};
+      if (variables) {
+        parsedVariables = JSON.parse(variables);
+      }
 
-    if (contentType && contentType !== 'application/json') {
-      dispatch(
-        setPopupData({
-          messages: [
-            'Error: GraphQL only supports Content-Type: application/json for headers. Please update your request',
-          ],
-          submitText: translate.ok,
-          submitClick: () => dispatch(setPopupData(null)),
-        })
-      );
-    } else {
-      const requestHeaders = {
-        'Content-Type': 'application/json',
-        ...headers,
-      };
+      let parsedHeaders = new Headers();
+      if (headers) {
+        parsedHeaders = new Headers(JSON.parse(headers));
+      }
+
+      parsedHeaders.set('Content-type', 'application/json');
 
       const response = await fetch(endpoint, {
         method: 'POST',
-        headers: requestHeaders,
-        body: JSON.stringify({ query, variables }),
+        headers: parsedHeaders,
+        body: JSON.stringify({ query, parsedVariables }),
       });
 
       const data = await response.json();
+
       if (!response.ok) {
         const errors: IErrorsGQL[] = (data as IErrorsGQLResult).errors;
 
@@ -119,9 +105,18 @@ function QueryEditor() {
           })
         );
       }
+
       const prettifiedData = prettify(JSON.stringify(data), true);
       dispatch(setResult(prettifiedData));
       window.localStorage.setItem('result', prettifiedData);
+    } catch (error) {
+      dispatch(
+        setPopupData({
+          messages: [(error as Error).message],
+          submitText: translate.ok,
+          submitClick: () => dispatch(setPopupData(null)),
+        })
+      );
     }
     setLoading(false);
   }
