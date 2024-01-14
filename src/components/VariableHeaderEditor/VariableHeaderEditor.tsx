@@ -26,6 +26,9 @@ function VariableHeaderEditor() {
   const [activeTab, setActiveTab] = useState(
     Number(window.localStorage.getItem('headersVariablesActiveTab')) || Tabs.NONE
   );
+  const [prevTab, setPrevTab] = useState(
+    Number(window.localStorage.getItem('headersVariablesActiveTab')) || Tabs.NONE
+  );
   const [isFocused, setIsFocused] = useState(true);
 
   const dispatch = useDispatch<AppDispatch>();
@@ -54,11 +57,23 @@ function VariableHeaderEditor() {
       <div className="flex justify-between px-3 pt-2 border-t-2 bg-medium border-light">
         <div className="flex items-center gap-5">
           <div className={`${activeTab === Tabs.VARIABLES && 'underline'}`}>
-            <Button onclick={() => changeActiveTab(Tabs.VARIABLES)} text={translate.variables} />
+            <Button
+              onclick={() => {
+                changeActiveTab(Tabs.VARIABLES);
+                setPrevTab(Tabs.VARIABLES);
+              }}
+              text={translate.variables}
+            />
           </div>
 
           <div className={` ${activeTab === Tabs.HEADERS && 'underline'}`}>
-            <Button onclick={() => changeActiveTab(Tabs.HEADERS)} text={translate.headers} />
+            <Button
+              onclick={() => {
+                changeActiveTab(Tabs.HEADERS);
+                setPrevTab(Tabs.HEADERS);
+              }}
+              text={translate.headers}
+            />
           </div>
         </div>
         <div
@@ -67,13 +82,13 @@ function VariableHeaderEditor() {
           }`}
         >
           <Button
-            onclick={() => changeActiveTab(activeTab === Tabs.NONE ? Tabs.VARIABLES : Tabs.NONE)}
+            onclick={() => changeActiveTab(activeTab === Tabs.NONE ? prevTab : Tabs.NONE)}
             icon={chevronIcon}
           />
         </div>
       </div>
       <div
-        className={`flex scale-y-0 -my-6 p-0 transition-scale duration-500 ease-in-out overflow-hidden text-gray-400 font-mono ${
+        className={`flex grow scale-y-0 -my-6 p-0 transition-scale duration-500 ease-in-out overflow-hidden text-gray-400 font-mono ${
           activeTab !== Tabs.NONE && 'my-0 scale-y-100'
         }`}
       >
