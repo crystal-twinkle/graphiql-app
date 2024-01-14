@@ -27,7 +27,7 @@ function VariableHeaderEditor() {
     Number(window.localStorage.getItem('headersVariablesActiveTab')) || Tabs.NONE
   );
   const [prevTab, setPrevTab] = useState(
-    Number(window.localStorage.getItem('headersVariablesActiveTab')) || Tabs.NONE
+    Number(window.localStorage.getItem('headersVariablesActiveTab')) || Tabs.VARIABLES
   );
   const [isFocused, setIsFocused] = useState(true);
 
