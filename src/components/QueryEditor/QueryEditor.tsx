@@ -74,9 +74,8 @@ function QueryEditor() {
     setLoading(true);
 
     try {
-      let parsedVariables = {};
       if (variables) {
-        parsedVariables = JSON.parse(variables);
+        variables = JSON.parse(variables);
       }
 
       let parsedHeaders = new Headers();
@@ -89,7 +88,7 @@ function QueryEditor() {
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: parsedHeaders,
-        body: JSON.stringify({ query, parsedVariables }),
+        body: JSON.stringify({ query, variables }),
       });
 
       const data = await response.json();
